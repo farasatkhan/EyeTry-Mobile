@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Text, View ,StyleSheet,Image} from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -15,8 +14,10 @@ const Tab = createBottomTabNavigator();
 const HomeTabScreen = () =>{
     return(
         <Tab.Navigator  
+        initialRouteName='ProfileStackScreen'
         screenOptions={({ route }) => ({
             headerTitleAlign:'center',
+            headerShown:false,
             tabBarShowLabel:false,
             tabBarIcon: ({ focused, color, size }) => {
               let iconName;

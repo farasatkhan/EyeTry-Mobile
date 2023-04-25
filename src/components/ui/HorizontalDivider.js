@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const Divider = ({ text,style }) => {
+const Divider = ({ text,style,lineStyle }) => {
   return (
     <View style={[styles.container,style]}>
-      <View style={styles.line} />
+      <View style={[styles.line,lineStyle]} />
       <Text style={styles.text}>{text}</Text>
-      <View style={styles.line} />
+      <View style={[styles.line,lineStyle]} />
     </View>
   );
 };

@@ -20,22 +20,16 @@ const SignInScreen = () =>{
     const handleCheckBoxChange = () => {
       setChecked(!checked);
     };
-
     // Methods
     const goToSignUp= () =>{
         navigation.navigate('SignUp')
     }
-
     const goToForgotPassword = () =>{
         navigation.navigate('ForgotPassword')
     }
-
     const handleSignIn = () =>{
         navigation.navigate('HomeTabScreen')
     }
-
-    
-
     return(
         <Container>
             <View style={sign_in_styles.sec_container}>
