@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { View, Text,StyleSheet,Alert,Dimensions, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import axios from 'axios';
+import { registerUser } from '../api/authapi';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -13,11 +14,8 @@ import Divider from '../components/ui/HorizontalDivider';
 import SocialSignIn from '../components/forms/Social';
 import MyCheckBox from '../components/forms/CheckBox';
 
-
 const SignUpScreen = () =>{
-    // const {height,width} = Dimensions.get('screen')
 
-    // Alert.alert(height+" "+width)
     const navigation = useNavigation();
 
     const [firstName, setFirstName] = React.useState('');
@@ -25,6 +23,9 @@ const SignUpScreen = () =>{
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [confirmPassword, setConfirmPassword] = React.useState('');
+
+    const [errorVisible,setErrorVisible] = React.useState(false)
+    const [errorMsg,setErrorMsg] = React.useState('')
     // handling checkbox 
     const [checked, setChecked] = React.useState(true);
 
@@ -32,80 +33,81 @@ const SignUpScreen = () =>{
       setChecked(!checked);
     };
 
-    const handleSubmit = () => {
+    // Form Validation
+    const validateForm = () =>{
         // Validating user input
         if (!firstName || !lastName || !email || !password || !confirmPassword) {
-          Alert.alert('Please fill out all fields');
-          return;
+            setErrorVisible(true)
+            setErrorMsg('Please fill out all fields');
+            return false;
         }
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-          Alert.alert('Error', 'Please enter a valid email address.');
-          return;
+            setErrorVisible(true)
+            setErrorMsg('Please enter a valid email address.');
+            return false;
         }
         if (password !== confirmPassword) {
-          Alert.alert('Passwords do not match');
-          return;
+            setErrorVisible(true)
+            setErrorMsg('Passwords do not match');
+            return false;
         }
         if (!checked) {
-          Alert.alert('Please agree to terms and conditions');
-          return;
+            setErrorVisible(true)
+            setErrorMsg('Please agree to terms and conditions');
+            return false;
         }
-    /*
+        return true
+    }
 
-    axios.post('http://localhost:3000/auth/register', {
-        firstname: firstName,
-        lastname: lastName,
-        email: email,
-        password: password,
-        confirmpassword: confirmPassword,
-    })
-    .then(response => {
-        Alert.alert("Inside Then")
-        console.log('Success Sign up');
-        console.log(response.data)
+    const handleSignUp = async () => {
+
+    if (!validateForm()){
+        return
+    }
+        // ApI Request const { user, accessToken, refreshToken,message }
+    try {
+        Alert.alert("Inside Try")
+        const response = await registerUser(firstName, lastName, email, password, confirmPassword);
+        
+        const { user, accessToken, refreshToken } = response.data 
+
+        // Saving to Async Storage
+        AsyncStorage.setItem('user',JSON.stringify(user))
+        AsyncStorage.setItem('accessToken',accessToken)
+        AsyncStorage.setItem('refreshToken',refreshToken)
+
+        console.log(user)
+        console.log(accessToken)
+        console.log(refreshToken)
         navigation.navigate('HomeTabScreen');
-      })
-      .catch(error => {
-        Alert.alert("Inside Catch")
-        console.log(error.message)
-        throw error;
-    });
-    */
-      fetch('http://127.0.0.1:3000/auth/register', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                firstname: firstName,
-                lastname: lastName,
-                email: email,
-                password: password,
-                confirmpassword: confirmPassword,
-            }),
-        }).then(response => response.json())
-        .then(response => {
-            console.log('Success Sign up');
-            console.log(response.data)
-            navigation.navigate('HomeTabScreen');
-        })
-        .catch(error => {
-            console.log(error.message);
-            Alert.alert('Error', error.message);
-        });
-     
+        } 
+        catch (error) {
+            console.error(error.response.status)
+            if(error.response.status == 400){
+                console.log("YOu May navigate to signin")
+            }
+            setErrorVisible(true)
+            setErrorMsg(error.response.data.message)
+            throw error
+        }   
   };
     const goToSignIn= () =>{
         navigation.navigate('SignIn')
     }
 
     return(
-        <Container>
-            <ScrollView contentContainerStyle={sign_up_styles.sec_container}>
+        <Container >
+            <ScrollView contentContainerStyle={sign_up_styles.sec_container} onFocus={()=>setErrorVisible(false)}>
                 <Text style={sign_up_styles.title_txt}>
                     SignUp
                 </Text>
+               {errorVisible &&  
+               <Text style={{color:'red',fontSize:16,alignSelf:'flex-start',padding:'4%'}}>
+                    {errorMsg}
+                </Text>
+                }                    
+                
                 <InputField name={'First Name'} style={sign_up_styles.text_input}  onChangeText={setFirstName}/>
                 <InputField name={'Last Name'} style={sign_up_styles.text_input} onChangeText={setLastName}/>
                 <InputField name={'Email'} style={sign_up_styles.text_input} onChangeText={setEmail}/>
@@ -119,7 +121,7 @@ const SignUpScreen = () =>{
                 style={sign_up_styles.checkbox}
                 />
                  
-                <PrimaryButton title={'Sign Up'}  onPress={handleSubmit}/>
+                <PrimaryButton title={'Sign Up'}  onPress={handleSignUp}/>
 
                 <Divider text="SIGN UP WITH" style={sign_up_styles.divider_style}/>
 

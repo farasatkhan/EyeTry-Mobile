@@ -49,7 +49,7 @@ const EditDetails = ({navigation}) =>{
 
 const styles = StyleSheet.create({
     btn_style:{alignSelf:'center',marginTop:10},
-    sec_cont:{padding:'4%'}
+    sec_cont:{padding:'4%',}
 })
 
 export default EditDetails;

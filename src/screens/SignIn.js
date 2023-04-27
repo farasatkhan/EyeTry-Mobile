@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { ScrollView, Text,StyleSheet,Alert,Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { signInUser } from '../api/authapi';
 
 // importing form components
 import { InputField } from '../components/forms/InputField';
@@ -12,7 +15,10 @@ import MyCheckBox from '../components/forms/CheckBox';
 
 const SignInScreen = () =>{
     const navigation = useNavigation();
-    const [text,setText] = React.useState('');
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const [errorVisible,setErrorVisible] = React.useState(false)
+    const [errorMsg,setErrorMsg] = React.useState('')
     
     // handling checkbox 
     const [checked, setChecked] = React.useState(true);
@@ -27,20 +33,65 @@ const SignInScreen = () =>{
     const goToForgotPassword = () =>{
         navigation.navigate('ForgotPassword')
     }
-    const handleSignIn = () =>{
-        navigation.navigate('HomeTabScreen')
+
+     const validateForm = () =>{
+        // Validating user input
+        if (!email || !password) {
+            setErrorVisible(true)
+            setErrorMsg('Please fill out all fields');
+            return false;
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setErrorVisible(true)
+            setErrorMsg('Please enter a valid email address.');
+            return false;
+        }
+        return true
     }
+
+    const handleSignIn = async () =>{
+        if(!validateForm()){
+            return
+        }
+        try {
+            const response = await signInUser(email, password);
+            console.log(response.data);
+            const {user,accessToken,refreshToken} = response.data
+            try{
+                AsyncStorage.setItem('user',JSON.stringify(user))
+                AsyncStorage.setItem('accessToken',accessToken)
+                AsyncStorage.setItem('refreshToken',refreshToken)
+            } catch (e) {throw e}
+            navigation.navigate('HomeTabScreen');
+          } 
+        catch (error) {
+            console.log(error.response.data.message);
+            setErrorVisible(true);
+            setErrorMsg(error.response.data.message);
+            throw error
+          }
+          
+
+    }
+
     return(
         <Container>
-            <ScrollView contentContainerStyle={sign_in_styles.sec_container}>
+            <ScrollView contentContainerStyle={sign_in_styles.sec_container} onFocus={()=>setErrorVisible(false)}>
                 <Text style={sign_in_styles.title_txt}>
                     Welcome to<Text style={sign_in_styles.title_txt1}> Eye</Text>Try
                 </Text>
                 <Text style={sign_in_styles.subtitle_txt}> 
                     Enjoy exclusive rewards and features by signing in
                 </Text>
-                <InputField name={'Email'}  onChangeText={setText} style={sign_in_styles.input}/>
-                <InputField name={'Password'} value={text} style={sign_in_styles.input}/>
+                {errorVisible &&  
+               <Text style={{color:'red',fontSize:16,alignSelf:'flex-start',paddingBottom:'4%'}}>
+                    {errorMsg}
+                </Text>
+                } 
+                <InputField name={'Email'} value={email} onChangeText={setEmail} style={sign_in_styles.input}/>
+                <InputField name={'Password'} value={password} onChangeText={setPassword} secureTextEntry={true} style={sign_in_styles.input}/>
+                
                 <MyCheckBox
                 label="Remember Me"
                 value={checked}
@@ -85,7 +136,7 @@ const sign_in_styles = StyleSheet.create({
         marginBottom:Dimensions.get('window').height*0.04,
     },
     subtitle_txt:{
-        marginVertical:Dimensions.get('window').height*0.04,
+        marginVertical:'7%',
         fontSize:16,
         color:'#637381',
         textAlign:'center'

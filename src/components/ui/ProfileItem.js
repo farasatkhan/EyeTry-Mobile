@@ -22,10 +22,10 @@ const styles = {
     alignItems: 'center',
     paddingVertical: 10,
     paddingHorizontal: 16,
-    marginBottom:11,
+    marginBottom:10,
     // Shadow
     backgroundColor:'#fff',
-      elevation: 3,
+    elevation: 3,
     shadowColor: '#000',
     shadowOffset:
     {
