@@ -14,8 +14,8 @@ const PaymentMethodItem = ({ handleEditPaymentMethod, handleDeletePaymentMethod,
         <Text style={styles.txt_normal}>{expDate}</Text>
         <Text style={styles.txt_normal}>{cvv}</Text>
         <View style={styles.btn_container}>
-            <MediumButtonOutline title='Edit' onPress={handleEditPaymentMethod}   />
-            <MediumButton title='Delete' color='#ff0000' onPress={handleDeletePaymentMethod} />
+            <MediumButtonOutline title='Edit' onPress={handleEditPaymentMethod} style={{width:'45%'}}  />
+            <MediumButton title='Delete' color='#ff0000' onPress={handleDeletePaymentMethod} style={{width:'45%'}}/>
         </View>
     </View>
   );
@@ -46,7 +46,7 @@ btn_container:{
     flexDirection:'row',
     width:'100%',
     marginTop:15,
-    justifyContent:'space-evenly',
+    justifyContent:'space-between',
 
 },
 txt_bld:{

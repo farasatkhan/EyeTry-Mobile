@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
 import MediumButton from './MediumButton';
 import MediumButtonOutline from './MediumButtonOutline';
-import MediumButtonOutlineIcon from './MediumButtonOutlineIcon';
 
 const AddressItem = ({ handleEditAddress, handleDeleteAddress, addressLine, name,city,phoneNumber, isDefaultAddress }) => {
   
@@ -17,8 +16,8 @@ const AddressItem = ({ handleEditAddress, handleDeleteAddress, addressLine, name
         }
         
       <View style={styles.btn_container}>
-        <MediumButtonOutline title='Edit' onPress={handleEditAddress}   />
-        <MediumButton title='Delete' color='#ff0000' onPress={handleDeleteAddress} />
+        <MediumButtonOutline title='Edit' onPress={handleEditAddress} style={{width:'45%'}}   />
+        <MediumButton title='Delete' color='#ff0000' onPress={handleDeleteAddress} style={{width:'45%'}}/>
       </View>
     </View>
   );
@@ -49,7 +48,7 @@ btn_container:{
     flexDirection:'row',
     width:'100%',
     marginTop:15,
-    justifyContent:'space-evenly',
+    justifyContent:'space-between',
 
 },
 txt_bld:{

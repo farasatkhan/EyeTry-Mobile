@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View,StyleSheet, Alert} from 'react-native';
+import { View,StyleSheet, Alert, ScrollView} from 'react-native';
 
 // importing form components
 import Container from '../../components/ui/Container';
@@ -16,12 +16,12 @@ const ChangePassword = ({navigation}) =>{
     handleChangePassword = () => {Alert.alert("Changed Password");navigation.navigate('ProfileScreenMain')};
     return(
         <Container >
-            <View style={styles.sec_cont}>
-                <EditableUserDetailItem iconName="lock-closed" label="Current Password" secureTextEntry={true}  onChangeText={setPass} value={pass}/>
+            <ScrollView contentContainerStyle={styles.sec_cont}>
+                <EditableUserDetailItem iconName="lock-closed" label="Current Password"  secureTextEntry={true}  onChangeText={setPass} value={pass}/>
                 <EditableUserDetailItem iconName="lock-closed" label="New Password" secureTextEntry={true}  onChangeText={setNewPass} value={newPass}/>
                 <EditableUserDetailItem iconName="lock-closed" label="Confirm Password" secureTextEntry={true}  onChangeText={setConfirmNewPass} value={confirmNewPass}/>
                 <PrimaryButton title='Change Password' color='#3056D3'  onPress={handleChangePassword} style={styles.btn_style}/>
-            </View>
+            </ScrollView>
         </Container>
     )
 
@@ -29,7 +29,9 @@ const ChangePassword = ({navigation}) =>{
 
 const styles = StyleSheet.create({
     btn_style:{alignSelf:'center',marginTop:32},
-    sec_cont:{marginTop:25}
+    sec_cont:{
+        padding:'4%'
+    }
 })
 
 export default ChangePassword;

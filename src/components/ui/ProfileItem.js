@@ -16,18 +16,16 @@ const ProfileItem = ({ iconName, name ,iconSize, onPress}) => {
 
 const styles = {
   container: {
-    height:52,
+    height:48,
     borderRadius:8,
-    // borderWidth:1,
-    // broderColor:'#000',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 8,
+    paddingVertical: 10,
     paddingHorizontal: 16,
-    marginBottom:13,
+    marginBottom:11,
     // Shadow
     backgroundColor:'#fff',
-      elevation: 5,
+      elevation: 3,
     shadowColor: '#000',
     shadowOffset:
     {
@@ -46,7 +44,7 @@ const styles = {
     alignItems: 'center',
   },
   settingName: {
-    fontSize: 20,
+    fontSize: 18,
     color: '#000',
     fontWeight:'500'
   },

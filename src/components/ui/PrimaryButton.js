@@ -1,10 +1,11 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, Dimensions, Alert } from 'react-native';
 
 const PrimaryButton = ({ onPress, title,style,color }) => {
+  
   const buttonStyle = {
     height: 40,
-    width: 315,
+    width: '90%',
     backgroundColor: color  || '#000',
     borderRadius: 6,
     justifyContent: 'center',

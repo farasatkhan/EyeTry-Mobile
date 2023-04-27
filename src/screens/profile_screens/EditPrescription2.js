@@ -52,7 +52,6 @@ const EditPrescription2 = ({ navigation }) => {
 
   return (
 <Container>
-    <KeyboardAvoidingView style={{ flex:1 }} behavior="height">
     <ScrollView contentContainerStyle={styles.sec_container}>
       <SelectInput
         label="Prescription Type"
@@ -60,7 +59,9 @@ const EditPrescription2 = ({ navigation }) => {
         selectedValue={selectedType}
         setSelectedValue={setSelectedType}
         labelStyle={{ alignSelf:'flex-start' }}
-        pickerStyle={styles.pickerStyle}
+        pickerStyle={{width:'100%'}}
+        style={{width:'100%',height:57}}
+        containerStyle={{width:'100%'}}
       />
       {/* Righ Eye OD Sections */}
       <Text style={styles.txt}>
@@ -73,7 +74,9 @@ const EditPrescription2 = ({ navigation }) => {
           selectedValue={REsph}
           setSelectedValue={setREsph}
           labelStyle={styles.label2}
-          pickerStyle={{width:100}}
+          style={{width:'100%',height:57}}
+          pickerStyle={{width:99}}
+          containerStyle={{width:'30%'}}
         />
         <SelectInput
           label="CYL"
@@ -81,7 +84,9 @@ const EditPrescription2 = ({ navigation }) => {
           selectedValue={REcyl}
           setSelectedValue={setREcyl}
           labelStyle={styles.label2}
-          pickerStyle={{width:100}}
+          style={{width:'100%',height:57}}
+          pickerStyle={{width:99}}
+          containerStyle={{width:'30%'}}
         />
         <SelectInput
           label="Axis"
@@ -89,7 +94,9 @@ const EditPrescription2 = ({ navigation }) => {
           selectedValue={REaxis}
           setSelectedValue={setREaxis}
           labelStyle={styles.label2}
-          pickerStyle={{width:100}}
+          style={{width:'100%',height:57}}
+          pickerStyle={{width:99}}
+          containerStyle={{width:'30%'}}
         />
       </View>
       {/* Left Eye OS Sections */}
@@ -103,7 +110,9 @@ const EditPrescription2 = ({ navigation }) => {
           selectedValue={LEsph}
           setSelectedValue={setLEsph}
           labelStyle={styles.label2}
-          pickerStyle={{width:100}}
+          style={{width:'100%',height:57}}
+          pickerStyle={{width:99}}
+          containerStyle={{width:'30%'}}
         />
         <SelectInput
           label="CYL"
@@ -111,7 +120,9 @@ const EditPrescription2 = ({ navigation }) => {
           selectedValue={LEcyl}
           setSelectedValue={setLEcyl}
           labelStyle={styles.label2}
-          pickerStyle={{width:100}}
+          style={{width:'100%',height:57}}
+          pickerStyle={{width:99}}
+          containerStyle={{width:'30%'}}
         />
         <SelectInput
           label="Axis"
@@ -119,7 +130,9 @@ const EditPrescription2 = ({ navigation }) => {
           selectedValue={LEaxis}
           setSelectedValue={setLEaxis}
           labelStyle={styles.label2}
-          pickerStyle={{width:100}}
+          style={{width:'100%',height:57}}
+          pickerStyle={{width:99}}
+          containerStyle={{width:'30%'}}
         />
       </View>
 
@@ -158,9 +171,10 @@ const EditPrescription2 = ({ navigation }) => {
               array={points}
               selectedValue={REph}
               setSelectedValue={setREph}
-              style={{marginRight:40}}
               labelStyle={styles.label2}
-              pickerStyle={{width:140}}
+              style={{width:'100%',height:57}}
+              pickerStyle={{width:'100%'}}
+              containerStyle={{width:'45%'}}
             />
             <SelectInput
               label="Base Direction"
@@ -168,7 +182,9 @@ const EditPrescription2 = ({ navigation }) => {
               selectedValue={REphBase}
               setSelectedValue={setREphBase}
               labelStyle={styles.label2}
-              pickerStyle={{width:140}}
+              style={{width:'100%',height:57}}
+              pickerStyle={{width:'100%'}}
+              containerStyle={{width:'45%'}}
             />
           </View>
           <View style={styles.row}>
@@ -177,9 +193,10 @@ const EditPrescription2 = ({ navigation }) => {
               array={points}
               selectedValue={LEph}
               setSelectedValue={setLEph}
-              style={{marginRight:40}}
               labelStyle={styles.label2}
-              pickerStyle={{width:140}}
+              style={{width:'100%',height:57}}
+              pickerStyle={{width:'100%'}}
+              containerStyle={{width:'45%'}}
             />
             <SelectInput
               label="Base Direction"
@@ -187,50 +204,45 @@ const EditPrescription2 = ({ navigation }) => {
               selectedValue={LEphBase}
               setSelectedValue={setLEphBase}
               labelStyle={styles.label2}
-              pickerStyle={{width:140}}
+              style={{width:'100%',height:57}}
+              pickerStyle={{width:'100%'}}
+              containerStyle={{width:'45%'}}
             />
           </View>
         </>
       }
     
       <View style={styles.btn_container}>
-          <MediumButtonOutline title='Cancel' onPress={cancel} color={'#000'} />
-          <MediumButton title='Save' onPress={savePrescription} />
+          <MediumButtonOutline title='Cancel' onPress={cancel} color={'#000'} style={{width:'45%'}}/>
+          <MediumButton title='Save' onPress={savePrescription} style={{width:'45%'}}/>
       </View>
     </ScrollView>
-    </KeyboardAvoidingView>
 </Container>
   );
 };
 
 const styles = StyleSheet.create({
   sec_container: {
-    paddingVertical:17,
+    paddingHorizontal:'4%',
     alignItems:'center',
-    justifyContent:'space-between'
-    
   },
   row: {
       flexDirection: 'row',
       width:'100%',
-      paddingLeft:5,
+      paddingHorizontal:'2%',
       justifyContent:'space-between',
-      alignItems:'baseline',
+      alignItems:'center',
   },
-  pickerStyle:{
-    width:340
-  },  
   label2:{
-    alignSelf:'flex-start',
-    paddingHorizontal:15,
     fontWeight:'400'
   },
   txt:{ 
     alignSelf: 'flex-start',
     fontSize: 16,
     color: '#000',
-    paddingTop:20,
-    paddingHorizontal:5,
+    paddingTop:'6%',
+    paddingHorizontal:'1%',
+    paddingVertical:'1%',
     fontWeight: '500',
 },
 btn_container:{

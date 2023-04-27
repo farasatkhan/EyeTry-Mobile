@@ -24,8 +24,7 @@ export default function EditPaymentMethod({navigation}){
 
     return(
         <Container >
-            <ScrollView>
-                <View style={{paddingVertical:30,alignItems:'center'}}>
+            <ScrollView contentContainerStyle={{backgroundColor:"#fff",padding:'4%'}} >
                     <HorizontalDivider text={'Express Checkout'} lineStyle={{backgroundColor:'#E9EDF4'}} style={styles.express_cont}/>
                     <View style={styles.btn_cont}>
                         <TouchableOpacity style={styles.btn_stripe}>
@@ -42,8 +41,7 @@ export default function EditPaymentMethod({navigation}){
                         <InputField style={styles.input2} name='CVV' value={cvv} onChangeText={setCVV} />
                         <InputField style={styles.input2} name='Expiry Date' value={expDate} onChangeText={setExpDate}/>
                     </View>
-                    <PrimaryButtonOutline title="Next" onPress={next} color={'#3056D3'} style={styles.btn}/>
-                </View>
+                    <PrimaryButtonOutline title="Next" onPress={next} color={'#3056D3'} style={styles.btn}/>   
             </ScrollView>
         </Container>
     )
@@ -52,13 +50,13 @@ export default function EditPaymentMethod({navigation}){
 const styles = StyleSheet.create({
     input:{
         width:'100%',
-        marginBottom:25
+        marginBottom:'8%'
     },
     txt:{
         color:'#000',
         fontSize:16,
         alignSelf:'flex-start',
-        marginVertical:25
+        marginVertical:'8%'
     },
     input2:{
         width:'45%'
@@ -70,34 +68,34 @@ const styles = StyleSheet.create({
     },
     btn:{
         alignSelf:'center',
-        marginVertical:15
+        marginVertical:'5%'
     },
     btn_cont:{
         width:'100%',
         borderWidth:1,
         borderTopWidth:0,
         borderColor:'#E9EDF4',
-        padding:26,
+        padding:'8%',
     },
     btn_stripe:{
         backgroundColor:'#6058F7',
         marginBottom:20,
-        width:'80%',
+        width:'90%',
         alignSelf:'center',
         height:40,
         justifyContent:'center',
         alignItems:'center',
-        paddingVertical:20,
+        paddingVertical:22,
         borderRadius:5
     },
     btn_paypal:{
         backgroundColor:'#FFC439',
-        width:'80%',
+        width:'90%',
         alignSelf:'center',
         height:40,
         justifyContent:'center',
         alignItems:'center',
-        paddingVertical:20,
+        paddingVertical:22,
         borderRadius:5
     },
     img:{

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text,StyleSheet,Alert } from 'react-native';
+import { ScrollView, Text,StyleSheet,Alert,Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 // importing form components
@@ -32,15 +32,15 @@ const SignInScreen = () =>{
     }
     return(
         <Container>
-            <View style={sign_in_styles.sec_container}>
+            <ScrollView contentContainerStyle={sign_in_styles.sec_container}>
                 <Text style={sign_in_styles.title_txt}>
                     Welcome to<Text style={sign_in_styles.title_txt1}> Eye</Text>Try
                 </Text>
                 <Text style={sign_in_styles.subtitle_txt}> 
                     Enjoy exclusive rewards and features by signing in
                 </Text>
-                <InputField name={'Email'}  onChangeText={setText}/>
-                <InputField name={'Password'} value={text}/>
+                <InputField name={'Email'}  onChangeText={setText} style={sign_in_styles.input}/>
+                <InputField name={'Password'} value={text} style={sign_in_styles.input}/>
                 <MyCheckBox
                 label="Remember Me"
                 value={checked}
@@ -60,7 +60,7 @@ const SignInScreen = () =>{
                  />
                  <Text style={sign_in_styles.account_txt}>Don't have an account? <Text style={sign_in_styles.sigup_txt} onPress={()=>goToSignUp()}>Sign Up</Text></Text>
 
-            </View>
+            </ScrollView>
         </Container>
     )
 
@@ -69,37 +69,40 @@ const SignInScreen = () =>{
 const sign_in_styles = StyleSheet.create({
     sec_container:{
         alignItems:'center',
-        paddingHorizontal:12
+        paddingHorizontal:Dimensions.get('window').width*0.025,
+        backgroundColor:"#fff"
     },
     title_txt:{
-        marginTop:55,
+        marginTop:Dimensions.get('window').height*0.03,
         fontSize:26,
         color:'#000',
-        fontFamily:'sans',
-        fontFamily:''
     },
     title_txt1:{
         fontWeight:'700'
     },
+    input:{
+        width:'100%',
+        marginBottom:Dimensions.get('window').height*0.04,
+    },
     subtitle_txt:{
-        marginVertical:32,
+        marginVertical:Dimensions.get('window').height*0.04,
         fontSize:16,
         color:'#637381',
         textAlign:'center'
     },
     divider_style:{
-        marginVertical:32,
+        marginVertical:Dimensions.get('window').height*0.04,
     },
     forgot_pass_txt:{
         alignSelf:'flex-end',
         paddingRight:14,
-        marginTop:32,
+        marginTop:Dimensions.get('window').height*0.04,
         fontSize:16,
         fontWeight:'500',
         color:'#000'
     },
     account_txt:{
-        marginTop:32,
+        marginTop:Dimensions.get('window').height*0.04,
         alignSelf:'flex-end',
         paddingRight:14,
         color:'#637381',
@@ -111,7 +114,7 @@ const sign_in_styles = StyleSheet.create({
         fontSize:16
     },
     checkbox:{
-        marginBottom:32
+        marginBottom:Dimensions.get('window').height*0.04,
     }
 
 })

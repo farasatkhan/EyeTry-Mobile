@@ -14,6 +14,7 @@ const EditableUserDetailItem = ({ iconName, label, secureTextEntry, placeholder,
           onChangeText={onChangeText}
           value={value}
           secureTextEntry={secureTextEntry}
+          placeholderTextColor={'#637381'}
         />
       </View>
     </View>
@@ -22,7 +23,7 @@ const EditableUserDetailItem = ({ iconName, label, secureTextEntry, placeholder,
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10,
+    // marginTop: 10,
   },
   rowContainer: {
     borderWidth:1,
@@ -32,19 +33,20 @@ const styles = StyleSheet.create({
     paddingLeft:20,
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: '3.5%',
   },
   label: {
     fontSize:17,
     fontWeight:'500',
     color:'#212B36',
     marginLeft:5,
-    paddingBottom:10
+    paddingBottom:'3%'
   },
   details: {
     marginLeft: 10,
     fontSize:16,
-    color:'#212B36'
+    color:'#212B36',
+    
   },
 });
 

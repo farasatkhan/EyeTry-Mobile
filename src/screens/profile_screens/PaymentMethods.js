@@ -27,7 +27,13 @@ export default function PaymentMethods({navigation}){
             <ScrollView contentContainerStyle={styles.sec_container}>
                 <PaymentMethodItem name='Abdul Sammi' cardType='Visa' cardNo='4599350720135209' expDate='12/26' cvv="565" 
                     handleEditPaymentMethod={handleEditPaymentMethod} handleDeletePaymentMethod={handleDeletePaymentMethod}/>
-                 <PrimaryButton title='Add New Payment Method' onPress={handleAddNewPaymentMethod} style={{marginVertical:15}}/>
+                <PaymentMethodItem name='Abdul Sammi' cardType='Visa' cardNo='4599350720135209' expDate='12/26' cvv="565" 
+                    handleEditPaymentMethod={handleEditPaymentMethod} handleDeletePaymentMethod={handleDeletePaymentMethod}/>
+                <PaymentMethodItem name='Abdul Sammi' cardType='Visa' cardNo='4599350720135209' expDate='12/26' cvv="565" 
+                    handleEditPaymentMethod={handleEditPaymentMethod} handleDeletePaymentMethod={handleDeletePaymentMethod}/>
+                <PaymentMethodItem name='Abdul Sammi' cardType='Visa' cardNo='4599350720135209' expDate='12/26' cvv="565" 
+                    handleEditPaymentMethod={handleEditPaymentMethod} handleDeletePaymentMethod={handleDeletePaymentMethod}/>
+                 <PrimaryButton title='Add New Payment Method' onPress={handleAddNewPaymentMethod} style={styles.primary_btn}/>
             </ScrollView>
         </Container>
     )
@@ -35,7 +41,10 @@ export default function PaymentMethods({navigation}){
 
 const styles = StyleSheet.create({
     sec_container:{
-        alignItems:'center',
-        padding:5
+        padding:'4%'
     },
+    primary_btn:{
+        marginVertical:'5%',
+        alignSelf:'center'
+    }
 })

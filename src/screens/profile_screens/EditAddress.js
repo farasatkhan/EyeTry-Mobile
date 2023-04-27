@@ -16,15 +16,13 @@ export default function EditAddress({navigation}){
 
 
     const next = () => {
-        Alert.alert("Go to Edit Address Screen 2")
+        Alert.alert("Go to Add Address Screen 2")
         navigation.navigate("EditAddress2")
     }
 
-    const showItemDetails = () => {Alert.alert('Show Details')}
-    
     return(
-        <Container style={{paddingVertical:30}}>
-            <ScrollView>
+        <Container >
+            <ScrollView contentContainerStyle={{padding:'5%',}}>
                 <LabelledTextInput label="First Name" placeholder="Abdul Sammi" value={fName} onChangeText={setFName} style={styles.input}/>
                 <LabelledTextInput label="Last Name" placeholder="Gul" value={lName} onChangeText={setLName} style={styles.input}/>
                 <LabelledTextInput label="Address" placeholder="City abc" value={address} onChangeText={setAddress} style={styles.input}/>
@@ -38,10 +36,10 @@ export default function EditAddress({navigation}){
 const styles = StyleSheet.create({
     input:{
         width:'100%',
-        marginBottom:25
+        marginBottom:'5%'
     },
     btn:{
         alignSelf:'center',
-        marginVertical:15
+        marginVertical:'4%'
     }
 })

@@ -54,6 +54,7 @@ const PrescriptionsList = ({navigation}) =>{
 const styles = StyleSheet.create({
     sec_container:{
         alignItems:'center',
+        padding:'2%'
     },
     table: {
         width:'100%',

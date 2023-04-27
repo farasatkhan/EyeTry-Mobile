@@ -34,7 +34,7 @@ export default function AddressBook({navigation}){
                 <AddressItem name='Abdul Sammi' addressLine='4 Allen Street, Hostel City' city='Islamabad, 11000' phoneNumber='+92300-0000000' isDefaultAddress={true}
                     handleEditAddress={handleEditAddress} handleDeleteAddress={handleDeleteAddress}
                 />
-                <PrimaryButton title='Add New Address' onPress={handleAddNewAddress} style={{marginVertical:15}}/>
+                <PrimaryButton title='Add New Address' onPress={handleAddNewAddress} style={{marginVertical:'5%',alignSelf:'center'}}/>
             </ScrollView>
         </Container>
     )
@@ -42,7 +42,6 @@ export default function AddressBook({navigation}){
 
 const styles = StyleSheet.create({
     sec_container:{
-        alignItems:'center',
-        padding:5
+        padding:'4%',
     },
 })

@@ -4,7 +4,7 @@ import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 const PrimaryButtonOutline = ({ onPress, title,style,color }) => {
     const buttonStyle = {
         height: 40,
-        width: 315,
+        width: '90%',
         backgroundColor: '#fff',
         borderWidth:1,
         borderColor: color  ||  '#000',

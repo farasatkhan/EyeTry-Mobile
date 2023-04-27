@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { View, Text,StyleSheet,Alert } from 'react-native';
+import { View, Text,StyleSheet,Alert,Dimensions, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
+
 
 
 // importing form components
@@ -10,13 +12,19 @@ import Container from '../components/ui/Container';
 import Divider from '../components/ui/HorizontalDivider';
 import SocialSignIn from '../components/forms/Social';
 import MyCheckBox from '../components/forms/CheckBox';
-import SignIn from './SignIn';
+
 
 const SignUpScreen = () =>{
+    // const {height,width} = Dimensions.get('screen')
+
+    // Alert.alert(height+" "+width)
     const navigation = useNavigation();
 
-    const [text,setText] = React.useState('');
-    
+    const [firstName, setFirstName] = React.useState('');
+    const [lastName, setLastName] = React.useState('');
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const [confirmPassword, setConfirmPassword] = React.useState('');
     // handling checkbox 
     const [checked, setChecked] = React.useState(true);
 
@@ -24,21 +32,85 @@ const SignUpScreen = () =>{
       setChecked(!checked);
     };
 
+    const handleSubmit = () => {
+        // Validating user input
+        if (!firstName || !lastName || !email || !password || !confirmPassword) {
+          Alert.alert('Please fill out all fields');
+          return;
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          Alert.alert('Error', 'Please enter a valid email address.');
+          return;
+        }
+        if (password !== confirmPassword) {
+          Alert.alert('Passwords do not match');
+          return;
+        }
+        if (!checked) {
+          Alert.alert('Please agree to terms and conditions');
+          return;
+        }
+    /*
+
+    axios.post('http://localhost:3000/auth/register', {
+        firstname: firstName,
+        lastname: lastName,
+        email: email,
+        password: password,
+        confirmpassword: confirmPassword,
+    })
+    .then(response => {
+        Alert.alert("Inside Then")
+        console.log('Success Sign up');
+        console.log(response.data)
+        navigation.navigate('HomeTabScreen');
+      })
+      .catch(error => {
+        Alert.alert("Inside Catch")
+        console.log(error.message)
+        throw error;
+    });
+    */
+      fetch('http://127.0.0.1:3000/auth/register', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                firstname: firstName,
+                lastname: lastName,
+                email: email,
+                password: password,
+                confirmpassword: confirmPassword,
+            }),
+        }).then(response => response.json())
+        .then(response => {
+            console.log('Success Sign up');
+            console.log(response.data)
+            navigation.navigate('HomeTabScreen');
+        })
+        .catch(error => {
+            console.log(error.message);
+            Alert.alert('Error', error.message);
+        });
+     
+  };
     const goToSignIn= () =>{
         navigation.navigate('SignIn')
     }
 
     return(
         <Container>
-            <View style={sign_up_styles.sec_container}>
+            <ScrollView contentContainerStyle={sign_up_styles.sec_container}>
                 <Text style={sign_up_styles.title_txt}>
                     SignUp
                 </Text>
-                <InputField name={'First Name'} style={sign_up_styles.text_input}  onChangeText={setText}/>
-                <InputField name={'Last Name'} style={sign_up_styles.text_input} />
-                <InputField name={'Email'} style={sign_up_styles.text_input}/>
-                <InputField name={'Password'} style={sign_up_styles.text_input} secureTextEntry={true}/>
-                <InputField name={'Confirm Password'} style={sign_up_styles.text_input} secureTextEntry={true}/>
+                <InputField name={'First Name'} style={sign_up_styles.text_input}  onChangeText={setFirstName}/>
+                <InputField name={'Last Name'} style={sign_up_styles.text_input} onChangeText={setLastName}/>
+                <InputField name={'Email'} style={sign_up_styles.text_input} onChangeText={setEmail}/>
+                <InputField name={'Password'} style={sign_up_styles.text_input} secureTextEntry={true} onChangeText={setPassword}/>
+                <InputField name={'Confirm Password'} style={sign_up_styles.text_input} secureTextEntry={true} onChangeText={setConfirmPassword}/>
                 <MyCheckBox
                 label="Agree With"
                 label1='Terms and Conditions'
@@ -47,8 +119,7 @@ const SignUpScreen = () =>{
                 style={sign_up_styles.checkbox}
                 />
                  
-                
-                <PrimaryButton title={'Sign Up'}  onPress={()=>Alert.alert("Hi")}/>
+                <PrimaryButton title={'Sign Up'}  onPress={handleSubmit}/>
 
                 <Divider text="SIGN UP WITH" style={sign_up_styles.divider_style}/>
 
@@ -59,7 +130,7 @@ const SignUpScreen = () =>{
                  />
                  <Text style={sign_up_styles.account_txt}>Already a member? <Text style={sign_up_styles.signin_txt} onPress={()=>goToSignIn()}>Sign In</Text></Text>
 
-            </View>
+            </ScrollView>
         </Container>
     )
 
@@ -68,24 +139,26 @@ const SignUpScreen = () =>{
 const sign_up_styles = StyleSheet.create({
     sec_container:{
         alignItems:'center',
-        paddingHorizontal:12
+        paddingHorizontal:(Dimensions.get('window').width*2/100),
     },
     title_txt:{
-        marginTop:30,
-        marginBottom:35,
+        marginVertical:Dimensions.get('window').height*2.5/100,
         fontWeight:'700',
         fontSize:26,
         color:'#000',
         fontFamily:'sans-serif'
     },
-    text_input:{marginBottom:25},
+    text_input:{
+        marginBottom:Dimensions.get('window').height*2.5/100,
+        width:'100%'
+    },
     divider_style:{
-        marginVertical:20,
+        marginVertical:Dimensions.get('window').height*3/100,
+        width:'100%'
     },
     account_txt:{
-        marginTop:32,
+        marginVertical:Dimensions.get('window').height*3/100,
         alignSelf:'flex-end',
-        paddingRight:14,
         color:'#637381',
         fontSize:16
     },
@@ -95,7 +168,8 @@ const sign_up_styles = StyleSheet.create({
         fontSize:16
     },
     checkbox:{
-        marginBottom:25
+        marginBottom:Dimensions.get('window').height*2.5/100,
+        width:'100%'
     }
 
 })

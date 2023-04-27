@@ -8,8 +8,8 @@ export default function TryOnImageItem({imgSource,handleEdit,handeRemove,}){
             <View style={styles.sec_cont}>
                 <Image source={imgSource} style={styles.img}/>
                 <View style={styles.btn_cont}>
-                    <MediumButtonOutline title='Edit' color='#3056D3'  onPress={handleEdit}/>
-                    <MediumButtonOutline  title='Remove' color='red'  onPress={handeRemove}/>
+                    <MediumButtonOutline title='Edit' color='#3056D3'  onPress={handleEdit} style={{width:'42%'}}/>
+                    <MediumButtonOutline  title='Remove' color='red'  onPress={handeRemove} style={{width:'42%'}}/>
                 </View>
             </View>
     )
@@ -17,7 +17,7 @@ export default function TryOnImageItem({imgSource,handleEdit,handeRemove,}){
 
 const styles = StyleSheet.create({
     sec_cont:{
-        marginVertical:10
+        alignItems:'center'
     },
     img:{
         height:315,
@@ -25,7 +25,8 @@ const styles = StyleSheet.create({
     },
     btn_cont:{
         flexDirection:'row',
-        justifyContent:'space-between',
+        width:'100%',
+        justifyContent:'space-evenly',
         marginVertical:15
     }
 })

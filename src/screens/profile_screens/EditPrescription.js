@@ -40,8 +40,7 @@ const EditPrescription = ({ navigation }) => {
   };
 
   return (
-<Container >
-    <KeyboardAvoidingView style={{ flex:1 }} behavior="height">
+<Container>
     <ScrollView contentContainerStyle={styles.sec_container}>
             <LabelledTextInput
                 label={'Prescription Name'}
@@ -49,6 +48,7 @@ const EditPrescription = ({ navigation }) => {
                 value={prescriptionName}
                 placeholder="My Prescription"
                 style={[styles.labelledInput]}
+                containerStyle={{width:'100%'}}
             />
             <View style={styles.row}>
             <LabelledTextInput
@@ -56,14 +56,17 @@ const EditPrescription = ({ navigation }) => {
                 onChangeText={setIssueDate}
                 value={issueDate}
                 placeholder="DD-MM-YY"
-                style={[styles.issueDate,styles.labelledInput]}
+                style={[styles.issueDate,styles.labelledInput1]}
+                containerStyle={{width:'45%'}}
             />
             <SelectInput
                 label="Birth Year"
                 array={years}
                 selectedValue={selectedYear}
                 setSelectedValue={setSelectedYear}
+                pickerStyle={{width:'100%'}}
                 style={styles.yearSelect}
+                containerStyle={{width:'45%'}}
                 labelStyle={{ alignSelf:'flex-start'}}
            />
             </View>
@@ -96,46 +99,49 @@ const EditPrescription = ({ navigation }) => {
                 Don't know your Pupillary Distance (PD)?
             </Text>
             <View style={styles.btn_container}>
-                <MediumButtonOutline title='Find your IPD' onPress={calculateIPD} color={'#000'} style={styles.btn1}/>
-                <MediumButtonOutline title='Next' onPress={next} />
+                <MediumButtonOutline title='Find your IPD' onPress={calculateIPD} color={'#000'} style={{width:'45%'}}/>
+                <MediumButtonOutline title='Next' onPress={next} style={{width:'45%'}}/>
             </View>
         </ScrollView>
-    </KeyboardAvoidingView>
 </Container>
   );
 };
 
 const styles = StyleSheet.create({
   sec_container: {
-    alignItems: 'center',
-    // paddingVertical:20,
-    paddingHorizontal:17
+    // alignItems: 'center',
+    padding:'4%'
   },
   row: {
       width:'100%',
       justifyContent:'space-between',
       alignItems:'baseline',
       flexDirection: 'row',
-      marginBottom:10
+      marginBottom:'5%'
   },
   radioBtn1:{
     marginRight:40,
   },
   issueDate: {
     height: 55,
-    width: 120,
+    width:'100%'
   },
   yearSelect: {
-    // marginLeft: 75,
+    width:'100%',
+    height:55
   },
   labelledInput:{
-    marginBottom:15
+    marginBottom:'5%',
+    width:'100%'
+},
+  labelledInput1:{
+    marginBottom:'5%'
 },
   txt:{ 
     alignSelf: 'flex-start',
     fontSize: 16,
     color: '#000',
-    paddingBottom:15,
+    paddingBottom:'5%',
     fontWeight: '500' 
 },
 btn_container:{
@@ -143,29 +149,26 @@ btn_container:{
   width:'100%',
   justifyContent:'space-between',
   paddingHorizontal:10,
-  marginVertical:25
+  marginVertical:'8%'
 },
-btn1:{marginRight:30},
 rightPD:{
-    width:136,
-    marginRight:20,
-    marginTop:15,
-    marginBottom:15
+    width:'45%',
+    marginTop:'3%',
 },
 leftPD:{
-    width:136,
-    marginLeft:20,
-    marginTop:15,
-    marginBottom:20
+    width:'45%',
+    marginTop:'3%',
 },
 med_txt:{
     fontSize:16,
     color:"#000",
-    alignSelf:'flex-start',
-    paddingLeft:20},
+    alignSelf:'center',
+  },
+
 pd:{
-    marginBottom:30,
-    marginTop:15
+    width:'100%',
+    marginTop:'3%',
+    marginBottom:'5%',
 }
 });
 

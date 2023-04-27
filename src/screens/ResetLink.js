@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text,StyleSheet,Alert,Image } from 'react-native';
+import { ScrollView, Text,StyleSheet,Alert,Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 // importing form components
@@ -20,7 +20,7 @@ const ResetLinkScreen = () =>{
 
     return(
         <Container>
-            <View style={reset_link_styles.sec_container}>
+            <ScrollView contentContainerStyle={reset_link_styles.sec_container}>
                 <Text style={reset_link_styles.title_txt}>
                     Email Sent !
                 </Text>
@@ -30,7 +30,7 @@ const ResetLinkScreen = () =>{
                 <Image source={require('../assets/images/mailsent.png')} style={reset_link_styles.logo} />
                 <PrimaryButton title={'Back to Login'}  onPress={()=>goToSignIn()}/>
                  <Text style={reset_link_styles.remember_txt}>Didn't Receive Email? <Text onPress={()=>resendResetLink()} style={reset_link_styles.login_txt} >Resend Email</Text></Text>
-            </View>
+            </ScrollView>
         </Container>
     )
 
@@ -39,10 +39,11 @@ const ResetLinkScreen = () =>{
 const reset_link_styles = StyleSheet.create({
     sec_container:{
         alignItems:'center',
-        paddingHorizontal:12
+        paddingHorizontal:'2%',
+        paddingVertical:'4%'
     },
     title_txt:{
-        marginTop:55,
+        marginTop:'10%',
         fontSize:26,
         color:'#000',
         fontWeight:'600'
@@ -55,10 +56,10 @@ const reset_link_styles = StyleSheet.create({
         fontSize: 16,
         lineHeight: 24,
         textAlign: 'center',
-        marginTop:23,
+        marginTop:'7%',
     },
     remember_txt:{
-        marginTop:32,
+        marginTop:'9%',
         alignSelf:'flex-end',
         paddingRight:14,
         color:'#637381',
@@ -72,7 +73,7 @@ const reset_link_styles = StyleSheet.create({
     logo:{
         height:256,
         width:256,
-        marginVertical:40
+        marginVertical:'10%'
     }
 
 

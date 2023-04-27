@@ -32,6 +32,15 @@ import EditPaymentMethod2 from './EditPaymentMethod2';
 // TryOnImages
 import TryOnImages from './TryOnImages';
 import UploadTryOnImage from './UploadTryOnImage';
+import EditTryOnImage from './EditTryOnImage';
+
+// User Image
+import UserImage from './UserImage';
+
+// GiftCards
+import GiftCard from './GiftCard';
+import BuyGiftCard from './BuyGiftCard';
+import ManageGiftCard from './ManageGiftCard';
 
 const ProfileStack = createNativeStackNavigator();
 
@@ -61,6 +70,11 @@ export default function ProfileStackScreen() {
         <ProfileStack.Screen name='EditPaymentMethod2' component={EditPaymentMethod2} />
         <ProfileStack.Screen name='TryOnImages' component={TryOnImages} />
         <ProfileStack.Screen name='UploadTryOnImage' component={UploadTryOnImage} />
+        <ProfileStack.Screen name='EditTryOnImage' component={EditTryOnImage} />
+        <ProfileStack.Screen name='UserImage' component={UserImage} />
+        <ProfileStack.Screen name='GiftCard' component={GiftCard} />
+        <ProfileStack.Screen name='BuyGiftCard' component={BuyGiftCard} />
+        <ProfileStack.Screen name='ManageGiftCard' component={ManageGiftCard} />
       </ProfileStack.Navigator>
     );
   }

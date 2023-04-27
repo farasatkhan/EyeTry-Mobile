@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text,StyleSheet,Alert, Touchable, TouchableOpacity,Image } from 'react-native';
+import { View, Text,StyleSheet,Alert, Touchable, TouchableOpacity,Image, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 // importing form components
@@ -23,7 +23,7 @@ const PrescriptionDetails = () =>{
 
     return(
     <Container >
-        <View style={styles.sec_container}>
+        <ScrollView style={styles.sec_container}>
             <RowText label='Prescription Name' value='MyPrescription' />
             <RowText label='Prescription Type' value='Single Vision' />
             <RowText label='PD-Right' value='35' />
@@ -33,10 +33,10 @@ const PrescriptionDetails = () =>{
             <PrescriptionDetailsRow label='OD-Right' value1='-0.25' value2='+0.25' value3='1.0'/>
             <PrescriptionDetailsRow label='OS-Left' value1='0.25' value2='-0.25' value3='1.0'/>
             <View style={styles.btn_container}>
-                <MediumButton title='Delete' onPress={deletePrescription} color={'#ff0000'} />
-                <MediumButton title='Edit' onPress={editPrescription} />
+                <MediumButton title='Delete' onPress={deletePrescription} color={'#ff0000'} style={{width:'45%'}} />
+                <MediumButton title='Edit' onPress={editPrescription} style={{width:'45%'}}/>
             </View>
-        </View>
+        </ScrollView>
     </Container>
     )
 }
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     sec_container:{
         flex:1,
         backgroundColor:"#fff",
-        padding:16
+        padding:'3%'
     },
     row:{
         flexDirection:'row',
@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
     btn_container:{
         flexDirection:'row',
         justifyContent:'space-between',
+        padding:'2%',
         marginVertical:25
     },
 

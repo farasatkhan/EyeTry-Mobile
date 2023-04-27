@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View,StyleSheet} from 'react-native';
+import { View,StyleSheet, ScrollView} from 'react-native';
 
 // importing form components
 import Container from '../../components/ui/Container';
@@ -23,8 +23,8 @@ const EditDetails = ({navigation}) =>{
 
     return(
         <Container >
-            <View style={styles.sec_cont}>
-                <EditableUserDetailItem iconName="person" label="First Name" secureTextEntry={false} placeholder="Abdul Sammi" onChangeText={setFirstName} value={firstName}/>
+            <ScrollView contentContainerStyle={styles.sec_cont}>
+                <EditableUserDetailItem iconName="person" label="First Name"  secureTextEntry={false} placeholder="Abdul Sammi" onChangeText={setFirstName} value={firstName}/>
                 <EditableUserDetailItem iconName="person" label="Last Name" secureTextEntry={false} placeholder="Gul" onChangeText={setLastName} value={lastName}/>
                 <EditableUserDetailItem iconName="mail" label="Email" secureTextEntry={false} placeholder="gulsammi@protonmail.com" onChangeText={setEmai} value={email}/>
                 <ImageWithDetails
@@ -35,21 +35,21 @@ const EditDetails = ({navigation}) =>{
                     subtitle1="Update"
                     subtitle2="Delete"
                 />
-                <PrimaryButton title='Save' color='#3056D3' style={{alignSelf:'center',marginVertical:26}}/>
+                <PrimaryButton title='Save' color='#3056D3' style={{alignSelf:'center',marginVertical:'5%'}}/>
                 <HorizontalDivider text='OR'/>
-                <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:26}}>
-                    <MediumButtonOutline title='Change Password' color='#000' style={{width:160}} onPress={handleChangePassword}/>
-                    <MediumButtonOutline title='Delete Account' color='red' style={{width:150}} onPress={handleDeleteAccount}/>
+                <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',marginTop:'4%'}}>
+                    <MediumButtonOutline title='Change Password' color='#000' style={{width:'45%'}} onPress={handleChangePassword}/>
+                    <MediumButtonOutline title='Delete Account' color='red' style={{width:'45%'}} onPress={handleDeleteAccount}/>
                 </View>
-            </View>
+            </ScrollView>
         </Container>
     )
 
 }
 
 const styles = StyleSheet.create({
-    btn_style:{alignSelf:'center',marginTop:39},
-    sec_cont:{marginTop:25}
+    btn_style:{alignSelf:'center',marginTop:10},
+    sec_cont:{padding:'4%'}
 })
 
 export default EditDetails;

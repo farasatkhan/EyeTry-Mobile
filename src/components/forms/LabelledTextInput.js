@@ -6,13 +6,13 @@ import { View, Text,StyleSheet,Alert, Touchable, TouchableOpacity,Image } from '
 
 import { InputField } from '../../components/forms/InputField';
 
-const LabelledTextInput = ({label,onChangeText,value,placeholder,secureTextEntry,style}) =>{
+const LabelledTextInput = ({label,onChangeText,value,placeholder,containerStyle,style}) =>{
 
 
     
 
     return(
-        <View style={[styles.sec_container]}>
+        <View style={[styles.sec_container,containerStyle]}>
             <Text style={styles.label}>{label}</Text>
             <InputField name={placeholder} onChangeText={onChangeText} value={value} style={style} />
        </View>

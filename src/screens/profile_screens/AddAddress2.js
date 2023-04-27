@@ -24,15 +24,16 @@ export default function AddAddress2({navigation}){
         navigation.navigate("AddressBook")
     }
 
-    const showItemDetails = () => {Alert.alert('Show Details')}
     return(
-        <Container style={{paddingVertical:30}}>
-            <LabelledTextInput label="City" placeholder="Islamabad" value={city} onChangeText={setCity} style={styles.input}/>
-            <LabelledTextInput label="Postal Code" placeholder="11000" value={postalCode} onChangeText={setPostalCode} style={styles.input}/>
-            <LabelledTextInput label="Phone" placeholder="+92300000000" value={phone} onChangeText={setPhone} style={styles.input}/>
-            {/* <LabelledTextInput label="Country" placeholder="Pakistan" value={country} onChangeText={setCountry} style={styles.input}/> */}
-            <SelectInput array={countries} label={'Select Country'} selectedValue={selectedCountry} setSelectedValue={setSelectedCountry} labelStyle={{alignSelf:'flex-start',}} pickerStyle={{width:350,height:48}} style={{width:'100%',justifyContent:'center'}}/>
-            <PrimaryButton title="Save" onPress={saveAddress} color={'#3056D3'} style={styles.btn}/>
+        <Container >
+            <ScrollView contentContainerStyle={{padding:'5%',}}>
+                <LabelledTextInput label="City" placeholder="Islamabad" value={city} onChangeText={setCity} style={styles.input}/>
+                <LabelledTextInput label="Postal Code" placeholder="11000" value={postalCode} onChangeText={setPostalCode} style={styles.input}/>
+                <LabelledTextInput label="Phone" placeholder="+92300000000" value={phone} onChangeText={setPhone} style={styles.input}/>
+                {/* <LabelledTextInput label="Country" placeholder="Pakistan" value={country} onChangeText={setCountry} style={styles.input}/> */}
+                <SelectInput array={countries} label={'Select Country'} selectedValue={selectedCountry} setSelectedValue={setSelectedCountry} labelStyle={{alignSelf:'flex-start',}} pickerStyle={{width:'100%',height:'auto'}} style={{width:'100%',justifyContent:'center',height:57}} containerStyle={{width:'100%'}}/>
+                <PrimaryButton title="Save" onPress={saveAddress} color={'#3056D3'} style={styles.btn}/>
+            </ScrollView>
         </Container>
     )
 }
@@ -40,10 +41,11 @@ export default function AddAddress2({navigation}){
 const styles = StyleSheet.create({
     input:{
         width:'100%',
-        marginBottom:25
+        marginBottom:'5%',
+        height:'auto'
     },
     btn:{
         alignSelf:'center',
-        marginVertical:40
+        marginVertical:'10%'
     }
 })

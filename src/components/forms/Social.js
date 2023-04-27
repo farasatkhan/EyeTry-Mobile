@@ -11,7 +11,7 @@ const SocialSignIn = ({ onFacebookPress, onTwitterPress, onGooglePress }) => {
         <Image source={require('../../assets/images/twitter.png')} style={styles.logo} />
       </TouchableOpacity>
       <TouchableOpacity  onPress={onGooglePress}>
-        <Image source={require('../../assets/images/google.png')} style={[styles.logo,{marginRight:0}]} />
+        <Image source={require('../../assets/images/google.png')} style={[styles.logo,]} />
       </TouchableOpacity>
     </View>
   );
@@ -19,14 +19,14 @@ const SocialSignIn = ({ onFacebookPress, onTwitterPress, onGooglePress }) => {
 
 const styles = StyleSheet.create({
   container: {
+    width:'100%',
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
   logo: {
     width: 85,
     height: 45,
-    marginRight:38
   },
 });
 

@@ -9,6 +9,7 @@ const MyCheckBox = ({ label, label1,value, onChange,style }) => {
         disabled={false}
         value={value}
         onValueChange={onChange}
+        tintColors={ true?'blue': 'red' }
       />
       <Text style={styles.label}>{label} <Text style={styles.label1}>{label1}</Text></Text>
       

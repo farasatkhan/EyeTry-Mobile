@@ -1,9 +1,8 @@
 
 import * as React from 'react';
-import { View, Text,StyleSheet,Alert, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { View, Text,StyleSheet,Alert,  ScrollView } from 'react-native';
 import PrimaryButton from '../../components/ui/PrimaryButton';
 import Container from '../../components/ui/Container';
-import LabelledTextInput from '../../components/forms/LabelledTextInput';
 import SelectInput from '../../components/forms/SelectInput';
 import { InputField } from '../../components/forms/InputField';
 
@@ -30,7 +29,7 @@ export default function AddPaymentMethod2({navigation}){
 
     return(
     <Container >
-        <ScrollView >
+        <ScrollView style={{padding:'4%'}}>
             <View >
                 <Text style={styles.txt}>Billing Address </Text>
                 <InputField style={styles.input} name='Address' value={address} onChangeText={setAddress}/>
@@ -38,7 +37,7 @@ export default function AddPaymentMethod2({navigation}){
                 <InputField style={styles.input} name='City' value={city} onChangeText={setCity}/>
                 <InputField style={styles.input} name='Postal' value={postal} onChangeText={setPostal}/>
                 <InputField style={styles.input} name='Phone' value={phone} onChangeText={setPhone}/>
-                <SelectInput array={countries} labelVisible={false}  selectedValue={selectedCountry} setSelectedValue={setSelectedCountry}  pickerStyle={styles.pickerStyle} style={styles.selectInput}/>
+                <SelectInput array={countries} labelVisible={false}  selectedValue={selectedCountry} setSelectedValue={setSelectedCountry}  pickerStyle={styles.pickerStyle} style={styles.selectInput} containerStyle={{width:'100%'}}/>
                 <PrimaryButton title="Save" onPress={savePaymentMethod} color={'#3056D3'} style={styles.btn}/>
             </View>
         </ScrollView>
@@ -51,16 +50,17 @@ const styles = StyleSheet.create({
         color:'#000',
         fontSize:16,
         alignSelf:'flex-start',
-        marginVertical:25
+        marginBottom:'8%'
     },
     input:{
         width:'100%',
-        marginBottom:25
+        marginBottom:'8%',
+        height:'auto',
     },
     pickerStyle:{
-        width:350,
-        height:48,
-        color:'#ACB6BE'
+        width:'100%',
+        height:'auto',
+        // color:'#ACB6BE'
     },
     selectInput:{
         width:'100%',
@@ -68,6 +68,6 @@ const styles = StyleSheet.create({
     },
     btn:{
         alignSelf:'center',
-        marginVertical:40
+        marginVertical:'8%'
     }
 })

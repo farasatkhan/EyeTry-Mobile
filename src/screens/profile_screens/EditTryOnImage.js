@@ -20,7 +20,7 @@ import MediumButtonOutlineIcon from '../../components/ui/MediumButtonOutlineIcon
 import HorizontalDivider from '../../components/ui/HorizontalDivider';
 
 
-const UploadTryOnImage = ({ navigation }) => {
+const EditTryOnImage = ({ navigation }) => {
   // State Variables
      const [selectedValue, setSelectedValue] = React.useState('singleNumber');
 
@@ -178,4 +178,4 @@ pd:{
 }
 });
 
-export default UploadTryOnImage;
+export default EditTryOnImage;

@@ -53,8 +53,9 @@ btn_container:{
     flexDirection:'row',
 },
 txt_container:{
+    
     width:'100%',
-    paddingVertical:10,
+    paddingBottom:10,
     flexDirection:'row',
     justifyContent:'space-between',
     alignItems:'center'
@@ -62,7 +63,7 @@ txt_container:{
 img:{
     width:276,
     height:155,
-    margin:10
+    marginTop:10
 },
 med_outline_btn:{
     marginLeft:7,
@@ -71,6 +72,7 @@ med_btn:{
     marginRight:7,
 },
 txt_bld:{
+    
     color:'#000',
     fontSize:20,
     fontWeight:'600',
