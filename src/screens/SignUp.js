@@ -67,7 +67,6 @@ const SignUpScreen = () =>{
     }
         // ApI Request const { user, accessToken, refreshToken,message }
     try {
-        Alert.alert("Inside Try")
         const response = await registerUser(firstName, lastName, email, password, confirmPassword);
         
         const { user, accessToken, refreshToken } = response.data 
@@ -85,7 +84,7 @@ const SignUpScreen = () =>{
         catch (error) {
             console.error(error.response.status)
             if(error.response.status == 400){
-                console.log("YOu May navigate to signin")
+                console.log("You May navigate to signin")
             }
             setErrorVisible(true)
             setErrorMsg(error.response.data.message)
@@ -141,7 +140,7 @@ const SignUpScreen = () =>{
 const sign_up_styles = StyleSheet.create({
     sec_container:{
         alignItems:'center',
-        paddingHorizontal:(Dimensions.get('window').width*2/100),
+        paddingHorizontal:'4%',
     },
     title_txt:{
         marginVertical:Dimensions.get('window').height*2.5/100,

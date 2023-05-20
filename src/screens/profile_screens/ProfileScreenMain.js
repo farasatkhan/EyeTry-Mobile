@@ -1,9 +1,11 @@
 import * as React from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 // Importing UI Components
 import Container from '../../components/ui/Container';
 import ProfileItem from '../../components/ui/ProfileItem';
 import ImageWithText from '../../components/ui/ImageWithText';
-import { ScrollView,Dimensions, View, Alert } from 'react-native';
+import { ScrollView, } from 'react-native';
+
 
 
 export default function ProfileScreenMain({navigation}) {
@@ -18,14 +20,21 @@ export default function ProfileScreenMain({navigation}) {
   const goToTryOnImages = () => {navigation.navigate("TryOnImages")}
   const goToGiftCard = () => {navigation.navigate("GiftCard")}
 
+  const [name,setName] = React.useState(null)
+
   React.useEffect( ()=>{
     getDataFromAsyncStorage = async () => {
       try{
-        const user = AsyncStorage.getItem('user')
-        console.log(user)
+        let user = await AsyncStorage.getItem('user')
+        user = JSON.parse(user)
+        setName(user.firstName)
+
+        
+        console.log("Checking for first Name")
+        console.log(user.firstName)
       }
       catch (e){
-        e
+        console.error(e)
       }
     }
 
@@ -34,10 +43,10 @@ export default function ProfileScreenMain({navigation}) {
 
 
     return (
-      <Container >
+      name && (<Container >
         <ScrollView contentContainerStyle={{paddingHorizontal:'3%',flexDirection:'column',flex:1,justifyContent:'space-evenly'
         }}>
-            <ImageWithText name='Abdul Sammi' onPress={handleUserImage}/>
+            <ImageWithText name={name} onPress={handleUserImage}/>
             <ProfileItem iconName={'md-cart'} name={'My Orders'} iconSize={24} />
             <ProfileItem iconName={'person-outline'} name={'My Details'} iconSize={24} onPress={goToMyDetails}/>
             <ProfileItem iconName={'ios-newspaper-outline'} name={'My Prescriptions'} iconSize={24} onPress={goToMyPrescriptions}/>
@@ -48,6 +57,6 @@ export default function ProfileScreenMain({navigation}) {
             <ProfileItem iconName={'md-help'} name={'Help Center'} iconSize={24}/>
             <ProfileItem iconName={'md-log-out-outline'} name={'Logout'} iconSize={24}/>
         </ScrollView>
-      </Container>
+      </Container>)
     );
   }

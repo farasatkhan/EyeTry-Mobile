@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { err } from 'react-native-svg/lib/typescript/xml';
 const baseURL = 'http://localhost:3000'
 
 export const registerUser = async (firstName, lastName, email, password, confirmPassword) => {
@@ -18,6 +17,7 @@ export const registerUser = async (firstName, lastName, email, password, confirm
     }
   };
   
+
 export const signInUser = async (email,password) =>{
     try{
         const response = await axios.post(`${baseURL}/auth/login`,{
@@ -25,6 +25,7 @@ export const signInUser = async (email,password) =>{
             password:password
         });
         return response;
+        
     }
     catch (error){
         throw error

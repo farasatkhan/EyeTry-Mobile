@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ScrollView, Text,StyleSheet,Alert,Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { storeDataAsyncStorage} from '../utils/asyncStorage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { signInUser } from '../api/authapi';
@@ -56,14 +57,13 @@ const SignInScreen = () =>{
         }
         try {
             const response = await signInUser(email, password);
-            console.log(response.data);
             const {user,accessToken,refreshToken} = response.data
-            try{
+
                 AsyncStorage.setItem('user',JSON.stringify(user))
                 AsyncStorage.setItem('accessToken',accessToken)
                 AsyncStorage.setItem('refreshToken',refreshToken)
-            } catch (e) {throw e}
-            navigation.navigate('HomeTabScreen');
+                navigation.navigate('HomeTabScreen');
+
           } 
         catch (error) {
             console.log(error.response.data.message);
@@ -82,7 +82,7 @@ const SignInScreen = () =>{
                     Welcome to<Text style={sign_in_styles.title_txt1}> Eye</Text>Try
                 </Text>
                 <Text style={sign_in_styles.subtitle_txt}> 
-                    Enjoy exclusive rewards and features by signing in
+                    Enjoy exclusive rewards & features by signing in
                 </Text>
                 {errorVisible &&  
                <Text style={{color:'red',fontSize:16,alignSelf:'flex-start',paddingBottom:'4%'}}>
@@ -120,7 +120,7 @@ const SignInScreen = () =>{
 const sign_in_styles = StyleSheet.create({
     sec_container:{
         alignItems:'center',
-        paddingHorizontal:Dimensions.get('window').width*0.025,
+        paddingHorizontal:'4%',
         backgroundColor:"#fff"
     },
     title_txt:{
