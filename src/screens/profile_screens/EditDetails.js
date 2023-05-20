@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View,StyleSheet, ScrollView,ActivityIndicator,Text} from 'react-native';
+import { View,StyleSheet, Alert,ScrollView,ActivityIndicator,Text} from 'react-native';
 
 // importing form components
 import Container from '../../components/ui/Container';
@@ -12,6 +12,7 @@ import EditableUserDetailItem from '../../components/forms/EditableUserDetailIte
 // Helper methods to fetch retrieve data from API
 import { getUserData } from '../../api/userapi';
 import { updateUserData } from '../../api/userapi';
+import { chooseFile } from '../../utils/imageCapture';
 
 const EditDetails = ({navigation}) =>{
     // State Vars
@@ -26,6 +27,10 @@ const EditDetails = ({navigation}) =>{
     
     const [successVisible,setSuccessVisible] = React.useState(false)
     const [successMessage,setSuccessMessage] = React.useState(null)
+
+    const [filePath,setFilePath] = React.useState({})
+    const [isImageSet,setIsImageSet] = React.useState(false)
+  
 
     // Fetching User Data from the API
     React.useEffect(()=>{
@@ -93,6 +98,31 @@ const EditDetails = ({navigation}) =>{
         }
     } 
 
+    // Image Upload
+    const handleImageUpload =async () => {
+        console.log("INside Handle UImage")
+        try{
+          const response = await chooseFile('photo')
+            if (response){
+              setFilePath(response);
+              setIsImageSet(true)
+            }
+        }catch (e){
+          throw e
+        }
+    };
+
+    const handleImageUpdate = () => {
+        navigation.navigate('UserImage')
+    }
+
+    const handleImageDelete = () => {
+        Alert.alert("Delete User Image")
+        setIsImageSet(false)
+    }
+
+    
+    
     // Methods
     handleDeleteAccount = () => {navigation.navigate('DeleteAccount')}
     handleChangePassword = () => {navigation.navigate('ChangePassword')}
@@ -114,6 +144,8 @@ const EditDetails = ({navigation}) =>{
                     <EditableUserDetailItem iconName="person" label="First Name"  secureTextEntry={false} placeholder={user.firstName} onChangeText={setFirstName} value={firstName}/>
                     <EditableUserDetailItem iconName="person" label="Last Name" secureTextEntry={false} placeholder={user.lastName} onChangeText={setLastName} value={lastName}/>
                     <EditableUserDetailItem iconName="mail" label="Email" secureTextEntry={false} placeholder={user.email} onChangeText={setEmai} value={email}/>
+                    {
+                    !isImageSet ? 
                     <ImageWithDetails
                         label="Your Photo"
                         imageSource={require('../../assets/images/persons/person.png')} 
@@ -121,7 +153,21 @@ const EditDetails = ({navigation}) =>{
                         title="Edit your photo"
                         subtitle1="Update"
                         subtitle2="Delete"
+                        onDeletePress={handleImageDelete}
+                        onUpdatePress={handleImageUpdate}
+                        onUploadPress={handleImageUpload}
+                    />:<ImageWithDetails
+                        label="Your Photo"
+                        imageSource={{uri:filePath.assets[0].uri}} 
+                        iconSource={require('../../assets/images/upload.png')} 
+                        title="Edit your photo"
+                        subtitle1="Update"
+                        subtitle2="Delete"
+                        onDeletePress={handleImageDelete}
+                        onUpdatePress={handleImageUpdate}
+                        onUploadPress={handleImageUpload}
                     />
+                    }
                     <PrimaryButton title='Save' color='#3056D3' style={{alignSelf:'center',marginVertical:'5%'}} onPress={handleUpdate}/>
                     <HorizontalDivider text='OR'/>
                     <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',marginTop:'4%'}}>

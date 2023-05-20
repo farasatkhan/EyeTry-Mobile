@@ -6,9 +6,11 @@ import {
   Text,
   StyleSheet,
   Alert,
-  Pressable,
   TouchableOpacity
 } from 'react-native';
+
+import { captureImage } from '../../utils/imageCapture';
+import { chooseFile } from '../../utils/imageCapture';
 
 // importing form components
 import Container from '../../components/ui/Container';
@@ -28,18 +30,40 @@ const UploadTryOnImage = ({ navigation }) => {
     const [pupillaryDistance,setPupillaryDistance] = React.useState(null) //Single
     const [rightPD,setRightPD] = React.useState(null) //double
     const [leftPD,setLeftPD] = React.useState(null)
+    // for image
+    const [filePath,setFilePath] = React.useState({})
+    const [isImageSet,setIsImageSet] = React.useState(false)
+  
 
 
-  // Methods
+    // Methods
+    const handleImageCapture =async () => {
+        try{
+          const response = await captureImage('photo')
+          console.log("capture res",response)
+          if (response){
+            setFilePath(response);
+            setIsImageSet(true)
+          }
+        }
+        catch (e){
+          throw e
+        }
+      }
+      const handleImageUpload =async () => {
+        try{
+          const response = await chooseFile('photo')
+            if (response){
+              setFilePath(response);
+              setIsImageSet(true)
+            }
+        }catch (e){
+          throw e
+        }
+      };
+
   const calculateIPD = () => {
     Alert.alert("Calculate User's IPD");
-  };
-
-  const handleImageCapture = () => {
-    Alert.alert("Image Capture")
-  }
-  const handleImageUpload = () => {
-    Alert.alert('Upload Image')
   };
 
   const uploadImageToDB = () => {
@@ -50,28 +74,32 @@ const UploadTryOnImage = ({ navigation }) => {
   return (
 <Container>
     <ScrollView contentContainerStyle={styles.sec_container}>
-        <Text style={styles.bld_txt}>
-        Step 1: Select Your PD
-        </Text>
-        <Text style={styles.txt}>
-            Pupillary Distance
-        </Text>
-        <View style={[styles.row,{justifyContent:'space-evenly'}]}>
-            <LabelledRadioBtn
-                style={styles.radioBtn1}
-                label="Single Number"
-                value="singleNumber"
-                checked={selectedValue === 'singleNumber'}
-                setChecked={setSelectedValue}
-            />
-            <LabelledRadioBtn
-                label="Two Numbers"
-                value="twoNumber"
-                checked={selectedValue === 'twoNumber'}
-                setChecked={setSelectedValue}
-            />
-        </View>
-            {/* Conditional Rendering based on user's choice of PD  */}
+        {
+            isImageSet && (<Image source={{uri:filePath.assets[0].uri}} style={styles.img1}/>) 
+        }
+        {
+            !isImageSet && (<>
+            <Text style={styles.bld_txt}>
+                Step 1: Select Your PD
+            </Text>
+            <Text style={styles.txt}>
+                Pupillary Distance
+            </Text>
+            <View style={[styles.row,{justifyContent:'space-evenly'}]}>
+                <LabelledRadioBtn
+                    style={styles.radioBtn1}
+                    label="Single Number"
+                    value="singleNumber"
+                    checked={selectedValue === 'singleNumber'}
+                    setChecked={setSelectedValue}
+                />
+                <LabelledRadioBtn
+                    label="Two Numbers"
+                    value="twoNumber"
+                    checked={selectedValue === 'twoNumber'}
+                    setChecked={setSelectedValue}
+                />
+            </View>
             {selectedValue==='singleNumber' && <InputField name='Enter you pupillary distance' value={pupillaryDistance} onChangeText={setPupillaryDistance} style={styles.pd}/>}
             {selectedValue === 'twoNumber' && 
                 <View style={[styles.row,]}>
@@ -82,6 +110,8 @@ const UploadTryOnImage = ({ navigation }) => {
                 Don't know your Pupillary Distance (PD)?
             </Text>
             <MediumButtonOutline  style={styles.med_btn} title='Find your IPD' onPress={calculateIPD} color={'#000'} />
+            </>)
+        }
             <Text style={styles.bld_txt}>
                 Step 2: Add an Image
             </Text>
@@ -103,6 +133,13 @@ const styles = StyleSheet.create({
   sec_container: {
     paddingHorizontal:'4%',
     paddingVertical:'2%'
+  },
+  img1:{
+    alignSelf:'center',
+    height:200,
+    width:200,
+    borderRadius:200/2,
+    marginBottom:'5%'
   },
   row: {
       width:'100%',

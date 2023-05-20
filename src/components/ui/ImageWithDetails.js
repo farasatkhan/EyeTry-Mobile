@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet,TouchableOpacity } from 'react-native';
 
-const ImageWithDetails = ({ label,imageSource, title, subtitle1, subtitle2,iconSource }) => {
+const ImageWithDetails = ({ label,imageSource, title, subtitle1, subtitle2,iconSource,onUploadPress,onUpdatePress,onDeletePress }) => {
   return (
     <View style={{marginTop: 10,}}>
         <Text style={styles.label}>{label}</Text>
@@ -10,11 +10,13 @@ const ImageWithDetails = ({ label,imageSource, title, subtitle1, subtitle2,iconS
             <View style={styles.detailsContainer}>
                 <Text style={styles.title}>{title}</Text>
                 <View style={styles.subtitleContainer}>
-                <Text style={styles.subtitle1}>{subtitle1}</Text>
-                <Text style={styles.subtitle2}>{subtitle2}</Text>
+                <Text style={styles.subtitle1} onPress={onUpdatePress}>{subtitle1} </Text>
+                <Text style={styles.subtitle2} onPress={onDeletePress}>{subtitle2}</Text>
                 </View>
             </View>
-            <Image source={iconSource} style={styles.image} />
+            <TouchableOpacity onPress={onUploadPress}>
+              <Image source={iconSource} style={styles.image} />
+            </TouchableOpacity>
         </View>
     </View>
   );
