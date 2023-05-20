@@ -215,7 +215,7 @@ export const deleteAddress = async (id) => {
         // Server is returning 403 for expired token
         if (error.response && error.response.status == 403){
         try{
-            console.log("Error Catched")
+            console.log("Access Token Expired Trying to refresh it")
             await reGenerateAccessToken()
             return deleteAddress(addressId)
         }
