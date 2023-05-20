@@ -70,7 +70,7 @@ const SignInScreen = () =>{
             console.log(error.response.data.message);
             setErrorVisible(true);
             setErrorMsg(error.response.data.message);
-            throw error
+            // throw error
           }
           
 
