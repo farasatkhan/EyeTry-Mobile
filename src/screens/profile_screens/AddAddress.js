@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import {StyleSheet,Alert,Text, ScrollView} from 'react-native';
+import {StyleSheet,Text, ScrollView} from 'react-native';
 import PrimaryButtonOutline from '../../components/ui/PrimaryButtonOutline';
 import Container from '../../components/ui/Container';
 import LabelledTextInput from '../../components/forms/LabelledTextInput';

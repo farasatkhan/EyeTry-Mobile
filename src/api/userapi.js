@@ -197,8 +197,79 @@ export const addAddress = async (addressData) => {
     }
   };
 
-// Delete Address
+// Return a specific Address 
+export const getSpecificAddress = async (id) => {
+    const addressId = id
+    try {
+        const accessToken =await getDataAsyncStorage("accessToken")
+        const response = await axios.get(`${baseURL}/users/view_address/${addressId}`, {
+        headers:{
+            Authorization:`Bearer ${accessToken}`
+        },
+        });
+        console.log("View Specific Address :",response.data.addressBook)
+        return response.data.addressBook;
+    } 
+    catch (error) {
+        // Server is returning 403 for expired token
+        if (error.response && error.response.status == 403){
+        try{
+            console.log("Access Token Expired Trying to refresh it")
+            await reGenerateAccessToken()
+            return getSpecificAddress(addressId)
+        }
+        catch (e){
+            console.log("Refresh Error")
+            if(e.response && e.response.status == 403){
+                console.log("Refresh Token is also expired logging out the user")
+                return e.response.status
+            }
+            throw e
+        }
+    }
+      throw error;
+    }
+  };
 
+// Update Address 
+
+export const updateAddress = async (data,id) => {
+    const addressId = id
+    const addressData = data
+    console.log('Data ; ',data)
+    console.log('id ; ',id)
+    try {
+        const accessToken =await getDataAsyncStorage("accessToken")
+        const response = await axios.put(`${baseURL}/users/update_address/${addressId}`, addressData,{
+        headers:{
+            Authorization:`Bearer ${accessToken}`
+        },
+        });
+        console.log("Update Address Response :",response)
+        return response;
+    } 
+    catch (error) {
+        // Server is returning 403 for expired token
+        if (error.response && error.response.status == 403){
+        try{
+            console.log("Access Token Expired Trying to refresh it")
+            await reGenerateAccessToken()
+            return updateAddress(addressData,addressId)
+        }
+        catch (e){
+            console.log("Refresh Error")
+            if(e.response && e.response.status == 403){
+                console.log("Refresh Token is also expired logging out the user")
+                return e.response.status
+            }
+            throw e
+        }
+    }
+      throw error;
+    }
+  };
+
+// Delete Address
 export const deleteAddress = async (id) => {
     const addressId = id
     try {

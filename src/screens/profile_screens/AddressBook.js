@@ -38,12 +38,13 @@ export default function AddressBook({navigation}){
         navigation.navigate('AddAddress')
     }
     const handleEditAddress = (addressId) => {
-        Alert.alert("Edit Address")
-        navigation.navigate('EditAddress')
+        navigation.navigate("EditAddress",{
+            addressId:addressId
+        })
     }
     const handleDeleteAddress =async (addressId) => {
         try{
-            const response = await deleteAddress(addressId);
+            await deleteAddress(addressId);
             setChanged(!changed)
         }
         catch(e){
