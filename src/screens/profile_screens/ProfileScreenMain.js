@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { CommonActions } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { logoutUser } from '../../api/authapi';
 // Importing UI Components
 import Container from '../../components/ui/Container';
 import ProfileItem from '../../components/ui/ProfileItem';
@@ -19,6 +21,17 @@ export default function ProfileScreenMain({navigation}) {
   const goToPaymentMethods = () => {navigation.navigate('PaymentMethods')}
   const goToTryOnImages = () => {navigation.navigate("TryOnImages")}
   const goToGiftCard = () => {navigation.navigate("GiftCard")}
+
+  const logout =async () => {
+      await logoutUser()
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: 'SignIn' }],
+        })
+      );
+  }
+  
 
   const [name,setName] = React.useState(null)
 
@@ -55,7 +68,7 @@ export default function ProfileScreenMain({navigation}) {
             <ProfileItem iconName={'md-image-outline'} name={'Try On Images'} iconSize={24} onPress={goToTryOnImages}/>
             <ProfileItem iconName={'md-gift-outline'} name={'Gift Cards'} iconSize={24} onPress={goToGiftCard}/>
             <ProfileItem iconName={'md-help'} name={'Help Center'} iconSize={24}/>
-            <ProfileItem iconName={'md-log-out-outline'} name={'Logout'} iconSize={24}/>
+            <ProfileItem iconName={'md-log-out-outline'} name={'Logout'} iconSize={24} onPress={logout}/>
         </ScrollView>
       </Container>)
     );

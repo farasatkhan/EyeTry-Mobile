@@ -58,7 +58,8 @@ const SignInScreen = () =>{
         try {
             const response = await signInUser(email, password);
             const {user,accessToken,refreshToken} = response.data
-
+            console.log("Access Token",accessToken)
+            console.log("Refresf Token",refreshToken)
                 AsyncStorage.setItem('user',JSON.stringify(user))
                 AsyncStorage.setItem('accessToken',accessToken)
                 AsyncStorage.setItem('refreshToken',refreshToken)

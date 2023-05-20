@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View,StyleSheet, ScrollView} from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 
 // importing form components
 import Container from '../../components/ui/Container';
@@ -10,6 +11,8 @@ import { getUserData } from '../../api/userapi';
 const MyDetails = ({navigation}) =>{
 
     const [user,setUser] = React.useState(null)
+    const isFocused = useIsFocused()
+
     React.useEffect(()=>{
         const setData = async()=>{
             try{
@@ -17,11 +20,15 @@ const MyDetails = ({navigation}) =>{
                 setUser(user)
             }
             catch(e){
+                // Refresh token also expired so logout the user
+                if(e.response.status == 403){
+                    navigation.navigate("SignIn")
+                }
                 throw e
             }
         }
         setData()
-    },[])
+    },[isFocused])
 
     // Methods 
     const goToEditDetails = () => {navigation.navigate('EditDetails')}

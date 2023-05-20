@@ -20,9 +20,12 @@ const AddPrescription = ({ navigation }) => {
   // State Variables
     const [prescriptionName, setPrescriptionName] = React.useState('');
     const [issueDate, setIssueDate] = React.useState('12-2-22');
-    const [selectedYear, setSelectedYear] = React.useState('');
+    const [renewalReminder, setRenewalReminder] = React.useState('12-2-22');
 
+    const [selectedYear, setSelectedYear] = React.useState('');
     const years = Array.from(new Array(50), (val, index) => `${new Date().getFullYear() - index}`);
+
+    
     const [selectedValue, setSelectedValue] = React.useState('singleNumber');
 
     // Puppillary Distance
@@ -59,7 +62,15 @@ const AddPrescription = ({ navigation }) => {
                 style={[styles.issueDate,styles.labelledInput1]}
                 containerStyle={{width:'45%'}}
             />
-            <SelectInput
+            <LabelledTextInput
+                label={'Renewal Reminder'}
+                onChangeText={setRenewalReminder}
+                value={renewalReminder}
+                placeholder="DD-MM-YY"
+                style={[styles.issueDate,styles.labelledInput1]}
+                containerStyle={{width:'45%'}}
+            />
+            {/* <SelectInput
                 label="Birth Year"
                 array={years}
                 selectedValue={selectedYear}
@@ -68,7 +79,7 @@ const AddPrescription = ({ navigation }) => {
                 pickerStyle={{width:'100%'}}
                 containerStyle={{width:'45%'}}
                 labelStyle={{ alignSelf:'flex-start'}}
-           />
+           /> */}
             </View>
             <Text style={styles.txt}>
                 Pupillary Distance
@@ -89,11 +100,11 @@ const AddPrescription = ({ navigation }) => {
                 />
             </View>
             {/* Conditional Rendering based on user's choice of PD  */}
-            {selectedValue==='singleNumber' && <InputField name='Enter you pupillary distance' value={pupillaryDistance} onChangeText={setPupillaryDistance} style={styles.pd}/>}
+            {selectedValue==='singleNumber' && <InputField name='Enter you pupillary distance' keyboardType={"numeric"} value={pupillaryDistance} onChangeText={setPupillaryDistance} style={styles.pd}/>}
             {selectedValue === 'twoNumber' && 
                 <View style={styles.row}>
-                    <InputField name='Right PD' value={rightPD} onChangeText={setRightPD} style={styles.rightPD} />
-                    <InputField name='Left PD' value={leftPD} onChangeText={setLeftPD} style={styles.leftPD} />
+                    <InputField name='Right PD' value={rightPD} onChangeText={setRightPD} style={styles.rightPD} keyboardType={"numeric"}/>
+                    <InputField name='Left PD' value={leftPD} onChangeText={setLeftPD} style={styles.leftPD} keyboardType={"numeric"}/>
                 </View>}
             <Text style={styles.med_txt}>
                 Don't know your Pupillary Distance (PD)?

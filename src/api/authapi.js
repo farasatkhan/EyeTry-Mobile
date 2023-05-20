@@ -1,5 +1,28 @@
 import axios from 'axios';
+import { getDataAsyncStorage} from '../utils/asyncStorage';
+import { storeDataAsyncStorage } from '../utils/asyncStorage';
+
 const baseURL = 'http://localhost:3000'
+
+// Re Generating Access Token
+export const reGenerateAccessToken = async () => {
+  try {
+    const refreshToken =await getDataAsyncStorage("refreshToken")
+    const response = await axios.post(`${baseURL}/auth/token`, {
+      token: refreshToken,
+    });
+
+    const newAccessToken = response.data.accessToken
+    await storeDataAsyncStorage('accessToken',newAccessToken)
+    console.log('New Access Token',response.data)
+    return response.data.accessToken 
+
+  } 
+  catch (error) {
+    throw error
+  }
+};
+
 
 export const registerUser = async (firstName, lastName, email, password, confirmPassword) => {
     try {
@@ -32,3 +55,16 @@ export const signInUser = async (email,password) =>{
     }
 }
   
+export const logoutUser = async () =>{
+  try{
+      const refreshToken =await getDataAsyncStorage("refreshToken")
+      const response = await axios.delete(`${baseURL}/auth/logout`,{
+          token:refreshToken
+      });
+      console.log("Logging out",response)
+      return response;
+  }
+  catch (error){
+      throw error
+  }
+}

@@ -20,15 +20,22 @@ const ChangePassword = ({navigation}) =>{
     const handleChangePassword =async () => 
         {   
             try{
-                const response = await changePassword(pass,newPass,confirmNewPass);
-                console.log(response)
-
-                setSuccessMessage(response.data.message)
-                setSuccessVisible(true)
-                setTimeout(() => {
-                    navigation.navigate('MyDetails')
-                }, 3000);
-                 
+                const data ={
+                    "currentPassword": pass,
+                    "newPassword": newPass,
+                    "confirmPassword": confirmNewPass
+                }
+                const response = await changePassword(data);
+                
+                if(response.status == 204){
+                    setSuccessMessage("Password Changed Successfully. Redirecting to Profile Screen")
+                    setSuccessVisible(true)
+                    
+                    setTimeout(() => {
+                        navigation.navigate('MyDetails')
+                    }, 3000);
+                     
+                }
             }
             catch (e){
                 setErrorVisible(true)

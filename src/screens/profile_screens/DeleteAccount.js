@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { Text,View,StyleSheet, Alert,} from 'react-native';
+import { Text,View,StyleSheet, ScrollView, } from 'react-native';
+import { CommonActions } from '@react-navigation/native';
+import { deleteAccount } from '../../api/userapi';
 
 // importing form components
 import Container from '../../components/ui/Container';
@@ -10,18 +12,23 @@ import DeleteAccountModal from '../../components/ui/DeleteAccountModal';
 
 const DeleteAccount = ({navigation}) =>{
     const [pass,setPass] = React.useState('');
-    const [confirmNewPass,setConfirmNewPass] = React.useState('');
     const [modalVisible,setModalVisible] = React.useState(false);
-
-
-    
-    // Methods
-
-  
-    const handleConfirmDeleteAccount = () => {
+    const handleConfirmDeleteAccount =async () => {
       // Handle the delete account logic here
-      setModalVisible(false);
-      Alert.alert("Account Deleted");navigation.navigate('ProfileScreenMain')
+      try{
+        await deleteAccount(pass)
+        setModalVisible(false);
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [{ name: 'SignIn' }],
+          })
+        );
+      }
+      catch(e){
+        throw e
+      }
+      
       
     };
   
@@ -33,13 +40,12 @@ const DeleteAccount = ({navigation}) =>{
     
     return(
         <Container >
-            <View style={styles.sec_cont}>
+            <ScrollView contentContainerStyle={styles.sec_cont}>
                 <Text style={styles.txt}>Account can not be recovered once deleted</Text>
                 <EditableUserDetailItem iconName="lock-closed" label="Password" secureTextEntry={true}  onChangeText={setPass} value={pass} />
-                <EditableUserDetailItem iconName="lock-closed" label="Confirm Password" secureTextEntry={true}  onChangeText={setConfirmNewPass} value={confirmNewPass}/>
                 <PrimaryButton title='Delete Account' color='red'  onPress={()=>setModalVisible(true)} style={styles.btn_style}/>
                 <DeleteAccountModal visible={modalVisible} handleCancelDeleteAccount={handleCancelDeleteAccount} handleConfirmDeleteAccount={handleConfirmDeleteAccount}/>
-            </View>
+            </ScrollView>
         </Container>
     )
 
@@ -47,7 +53,7 @@ const DeleteAccount = ({navigation}) =>{
 
 const styles = StyleSheet.create({
     btn_style:{alignSelf:'center',marginTop:32},
-    sec_cont:{marginTop:25},
+    sec_cont:{marginTop:25,padding:'4%'},
     txt:{
         fontSize:16,
         color:"#637381",

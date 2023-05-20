@@ -59,8 +59,8 @@ export default function ProfileStackScreen() {
         <ProfileStack.Screen name='AddPrescription' component={AddPrescription} />
         <ProfileStack.Screen name='AddPrescription2' component={AddPrescription2} />
         <ProfileStack.Screen name='AddressBook' component={AddressBook} />
-        <ProfileStack.Screen name='AddAddress' component={AddAddress} />
-        <ProfileStack.Screen name='AddAddress2' component={AddAddress2} />
+        <ProfileStack.Screen name='AddAddress' component={AddAddress} options={{title:"Add Address"}}/>
+        <ProfileStack.Screen name='AddAddress2' component={AddAddress2} options={{title:"Add Address"}}/>
         <ProfileStack.Screen name='EditAddress' component={EditAddress} />
         <ProfileStack.Screen name='EditAddress2' component={EditAddress2} />
         <ProfileStack.Screen name='PaymentMethods' component={PaymentMethods} />
