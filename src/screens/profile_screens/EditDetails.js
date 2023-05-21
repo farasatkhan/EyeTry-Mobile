@@ -124,7 +124,7 @@ const EditDetails = ({navigation}) =>{
 
     // Image Upload
     const handleImageUpload =async () => {
-        console.log("INside Handle UImage")
+        console.log("Inside Handle Image Upload")
         try{
           const response = await chooseFile('photo')
             if (response){

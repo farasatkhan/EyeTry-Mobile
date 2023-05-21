@@ -14,7 +14,23 @@ export default function AddPaymentMethod({navigation}){
     const [cvv,setCVV] = React.useState('')
 
     // methods
-
+/*
+{
+    "paymentType": "Credit Card",
+    "nameOnCard": "{{$randomFullName}}",
+    "cardNumber": "{{$randomMACAddress}}",
+    "expirationMonth": "{{$randomDateFuture}}",
+    "expirationYear": "{{$randomDateFuture}}",
+    "cvv": "{{$randomPhoneNumberExt}}",
+    "firstName": "{{$randomFirstName}}",
+    "lastName": "{{$randomLastName}}",
+    "country": "{{$randomCountry}}",
+    "city": "{{$randomCity}}",
+    "address": "{{$randomStreetAddress}}",
+    "state": "{{$randomWord}}",
+    "zipCode": "{{$randomWord}}"
+}
+*/
 
     const next = () => {
         Alert.alert("Go to Add Address Screen 2")

@@ -408,3 +408,50 @@ export const deleteProfileImage = async () => {
       throw error;
     }
   };
+
+// Upload Try On Image
+
+// uploading user image to server
+export const uploadTryOnImageToServer = async (file) => {
+    console.log('Uploading Try On Image to server',)
+    const file1 = file
+    const img = file.assets[0]
+    // Create a form data object
+    const formData = new FormData();
+
+    // Append the image data to the form data
+    formData.append('image', {
+    uri: Platform.OS === 'android' ? img.uri : img.uri.replace('file://', ''),
+    type: img.type,
+    name: img.fileName,
+    });
+    try{
+        
+        const accessToken =await getDataAsyncStorage("accessToken")
+        const response = await axios.post(`${baseURL}/users/upload_tryon_image_server`, formData, {
+            headers: { 
+                Authorization:`Bearer ${accessToken}`,
+                'Content-Type': 'multipart/form-data' },
+        })
+        console.log("response of user try on upload", response.data.message)
+        return(response.data.message)
+    }
+    catch (error) {
+        // Server is returning 403 for expired token
+        if (error.response && error.response.status == 403){
+        try{
+            console.log("Access Token Expired Trying to refresh it")
+            await reGenerateAccessToken()
+            return uploadTryOnImageToServer(file1)
+        }
+        catch (e){
+            console.log("Refresh Error")
+            if(e.response && e.response.status == 403){
+                console.log("Refresh Token is also expired logging out the user")
+                return e.response.status
+            }
+            throw e
+        }
+    }
+    }
+}

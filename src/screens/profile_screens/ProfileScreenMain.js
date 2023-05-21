@@ -58,7 +58,8 @@ export default function ProfileScreenMain({navigation}) {
           console.log('No Image is present')
           setImg(null)
         }
-        console.error(e)
+        // console.error(e) // annoying
+        console.log(e)
       }
     }
 
