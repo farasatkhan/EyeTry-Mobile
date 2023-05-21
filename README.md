@@ -6,27 +6,29 @@ The app connects with a REST API to fetch and display data.
 
 To run the app on an Android emulator, follow these steps:
 
-1. Clone the repository:
+### 1. Clone the repository:
 `git clone https://github.com/farasatkhan/EyeTry-Mobile.git`
 
-2. Navigate to the project directory:
+### 2. Navigate to the project directory:
 `cd EyeTry-Mobile`
   
-3. Install dependencies:
+### 3. Install dependencies:
 `npm install`
   
-4. Start the Metro bundler:
+### 4. Start the Metro bundler:
 `npx react-native start`
 
+### 5. Ensure the Android emulator is running.
 
-5. Ensure the Android emulator is running.
-
-6. Run the app on the Android emulator:
+### 6. Run the app on the Android emulator:
 `npx react-native run-android`
 This command will build the app and install it on the Android emulator.
 
-7. EyeTry API should running on your local machine,you need to configure the emulator to connect to your local server.
-Run the following command to map your computer's local server port to same port in device
+### 7. Configuring the emulator to connect to local server.
+
+EyeTry API should running on your local machine,you need to configure
+the emulator to connect to your local server.Run the following command
+to map your computer's local server port to same port in device
 
 ### See list of devices connected. It can be emulator or real device
 `adb devices`                                   
