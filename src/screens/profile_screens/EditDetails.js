@@ -10,11 +10,15 @@ import MediumButtonOutline from '../../components/ui/MediumButtonOutline';
 import EditableUserDetailItem from '../../components/forms/EditableUserDetailItem';
 
 // Helper methods to fetch retrieve data from API
-import { getUserData } from '../../api/userapi';
+import { deleteProfileImage, getUserData } from '../../api/userapi';
 import { updateUserData } from '../../api/userapi';
 import { chooseFile } from '../../utils/imageCapture';
+import { uploadImageToServer,viewProfileImage } from '../../api/userapi';
+
 
 const EditDetails = ({navigation}) =>{
+    
+    const serverURL = 'http://localhost:3000'; 
     // State Vars
     const [firstName,setFirstName] = React.useState(null);
     const [lastName,setLastName] = React.useState(null);
@@ -30,6 +34,8 @@ const EditDetails = ({navigation}) =>{
 
     const [filePath,setFilePath] = React.useState({})
     const [isImageSet,setIsImageSet] = React.useState(false)
+
+    const [imgUri,setImgUri] = React.useState(null)
   
 
     // Fetching User Data from the API
@@ -39,9 +45,15 @@ const EditDetails = ({navigation}) =>{
                 const user = await getUserData();
                 setUser(user)
                 setIsDataFetched(true)
+                const img = await viewProfileImage();
+                console.log(img.location)
+                setImgUri(serverURL+img.location)
             }
             catch(e){
-                throw e
+                if (e.response.status == 400 ){
+                    console.log('No User Image is stored on server')
+                }
+                console.error(e)
             }
         }
         setData()
@@ -69,19 +81,31 @@ const EditDetails = ({navigation}) =>{
 
     }
 
+    // Image Upload
+    const uploadImageToDB = async () => {
+        try{
+            const uploadedImg = await uploadImageToServer(filePath)
+        }
+        catch (err){
+            throw err
+        }
+    }
+
     // Update User Data 
     const handleUpdate =async () => {
 
         if (!validateForm()){
             return
         }
-
         const data = {
             "firstName":firstName,
             "lastName":lastName,
             "email":email
         }
         try{
+            if(filePath){
+                uploadImageToDB()
+            }
             const response =await updateUserData(data)
             if(response == 200){
                 setSuccessMessage("Profile Updated Successfully. Redirecting to Profile Screen")
@@ -94,7 +118,7 @@ const EditDetails = ({navigation}) =>{
             }
         }
         catch (e){
-            throw e
+            console.error(e)
         }
     } 
 
@@ -116,9 +140,20 @@ const EditDetails = ({navigation}) =>{
         navigation.navigate('UserImage')
     }
 
-    const handleImageDelete = () => {
+    const handleImageDelete =async () => {
         Alert.alert("Delete User Image")
-        setIsImageSet(false)
+        try{
+            if(imgUri){
+                const delResponse = await deleteProfileImage()
+                setImgUri(null)
+            }
+            
+        }catch(e){
+            if (e.response.status == 400){
+                Alert.alert("No Image Present to be deleted")
+            }
+        }
+        
     }
 
     
@@ -145,8 +180,8 @@ const EditDetails = ({navigation}) =>{
                     <EditableUserDetailItem iconName="person" label="Last Name" secureTextEntry={false} placeholder={user.lastName} onChangeText={setLastName} value={lastName}/>
                     <EditableUserDetailItem iconName="mail" label="Email" secureTextEntry={false} placeholder={user.email} onChangeText={setEmai} value={email}/>
                     {
-                    !isImageSet ? 
-                    <ImageWithDetails
+                    !isImageSet && !imgUri &&
+                    (<ImageWithDetails
                         label="Your Photo"
                         imageSource={require('../../assets/images/persons/person.png')} 
                         iconSource={require('../../assets/images/upload.png')} 
@@ -156,18 +191,38 @@ const EditDetails = ({navigation}) =>{
                         onDeletePress={handleImageDelete}
                         onUpdatePress={handleImageUpdate}
                         onUploadPress={handleImageUpload}
-                    />:<ImageWithDetails
-                        label="Your Photo"
-                        imageSource={{uri:filePath.assets[0].uri}} 
-                        iconSource={require('../../assets/images/upload.png')} 
-                        title="Edit your photo"
-                        subtitle1="Update"
-                        subtitle2="Delete"
-                        onDeletePress={handleImageDelete}
-                        onUpdatePress={handleImageUpdate}
-                        onUploadPress={handleImageUpload}
-                    />
+                    />)}
+                    {    
+                        isImageSet && 
+                        (<ImageWithDetails
+                            label="Your Photo"
+                            imageSource={{uri:filePath.assets[0].uri}} 
+                            iconSource={require('../../assets/images/upload.png')} 
+                            title="Edit your photo"
+                            subtitle1="Update"
+                            subtitle2="Delete"
+                            onDeletePress={handleImageDelete}
+                            onUpdatePress={handleImageUpdate}
+                            onUploadPress={handleImageUpload}
+                        />)
                     }
+                    {
+                        !isImageSet && imgUri  && (<ImageWithDetails
+                            label="Your Photo"
+                            imageSource={{uri:imgUri}} 
+                            iconSource={require('../../assets/images/upload.png')} 
+                            title="Edit your photo"
+                            subtitle1="Update"
+                            subtitle2="Delete"
+                            onDeletePress={handleImageDelete}
+                            onUpdatePress={handleImageUpdate}
+                            onUploadPress={handleImageUpload}
+                        />)
+
+                    }
+
+                    
+
                     <PrimaryButton title='Save' color='#3056D3' style={{alignSelf:'center',marginVertical:'5%'}} onPress={handleUpdate}/>
                     <HorizontalDivider text='OR'/>
                     <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',marginTop:'4%'}}>
