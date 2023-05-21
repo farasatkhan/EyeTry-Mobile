@@ -378,6 +378,7 @@ export const viewProfileImage = async () => {
       throw error;
     }
   };
+
 // Delete Profile Image
 
 export const deleteProfileImage = async () => {
@@ -411,7 +412,6 @@ export const deleteProfileImage = async () => {
 
 // Upload Try On Image
 
-// uploading user image to server
 export const uploadTryOnImageToServer = async (file) => {
     console.log('Uploading Try On Image to server',)
     const file1 = file
@@ -455,3 +455,67 @@ export const uploadTryOnImageToServer = async (file) => {
     }
     }
 }
+
+// View all try on images 
+
+export const viewTryOnImages = async () => {
+    try {
+        const accessToken =await getDataAsyncStorage("accessToken")
+        const response = await axios.get(`${baseURL}/users/view_tryon_images_server`, {
+        headers:{
+            Authorization:`Bearer ${accessToken}`
+        }
+        });
+        console.log("Response ",response.data)
+        return response.data;
+    } 
+    catch (error) {
+        // Server is returning 403 for expired token
+        if (error.response && error.response.status == 403){
+        try{
+            console.log("Error Catched")
+            await reGenerateAccessToken()
+            return viewTryOnImages()
+        }
+        catch (e){
+            console.error("Error while refreshing token",e)
+            throw e
+        }
+    }
+      throw error;
+    }
+  };
+
+// Delete Try On Image
+
+export const deleteTryOnImageFromServer = async (id) => {
+    console.log("Inside delete try on image")
+    const tryOnImageId = id
+    
+    try {
+        const accessToken =await getDataAsyncStorage("accessToken")
+        const response = await axios.delete(`${baseURL}/users/remove_tryon_image_server/${tryOnImageId}`, {
+        headers:{
+            Authorization:`Bearer ${accessToken}`
+        }
+        });
+        console.log("Response ",response)
+        console.log("Response Data ",response.data)
+        return response.data;
+    } 
+    catch (error) {
+        // Server is returning 403 for expired token
+        if (error.response && error.response.status == 403){
+        try{
+            console.log("Access Token Expired ... Renewing")
+            await reGenerateAccessToken()
+            return deleteTryOnImageFromServer(tryOnImageId)
+        }
+        catch (e){
+            console.error("Error while refreshing token",e)
+            throw e
+        }
+    }
+      throw error;
+    }
+  };
