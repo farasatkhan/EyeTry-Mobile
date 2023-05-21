@@ -48,12 +48,16 @@ export default function ProfileScreenMain({navigation}) {
       try{
         let user = await AsyncStorage.getItem('user')
         user = JSON.parse(user)
+        setName(user.firstName)
 
         const img = await viewProfileImage();
         setImg(serverURL+img.location)
-        setName(user.firstName)
         }
       catch (e){
+        if (e.response.status == 403){
+          console.log('Refreshing Token Failed')
+          navigation.navigate('SignIn')
+        }
         if (e.response.status == 400){
           console.log('No Image is present')
           setImg(null)
