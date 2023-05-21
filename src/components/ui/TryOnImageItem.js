@@ -6,7 +6,7 @@ import MediumButtonOutline from '../../components/ui/MediumButtonOutline';
 export default function TryOnImageItem({imgSource,handleEdit,handeRemove,}){
     return(     
             <View style={styles.sec_cont}>
-                <Image source={imgSource} style={styles.img}/>
+                <Image source={{uri:imgSource}} style={styles.img}/>
                 <View style={styles.btn_cont}>
                     <MediumButtonOutline title='Edit' color='#3056D3'  onPress={handleEdit} style={{width:'42%'}}/>
                     <MediumButtonOutline  title='Remove' color='red'  onPress={handeRemove} style={{width:'42%'}}/>
