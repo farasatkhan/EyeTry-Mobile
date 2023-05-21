@@ -65,6 +65,10 @@ export default function AddressBook({navigation}){
                 )
 
             })}
+            {
+                addresses.length == 0 && (<Text style={{fontWeight:'500',color:'#000' ,fontSize:20,alignSelf:'center',paddingVertical:'3%'}}>No Addresses were added by you</Text>)
+            }
+            
                 <PrimaryButton title='Add New Address' onPress={handleAddNewAddress} style={{marginVertical:'5%',alignSelf:'center'}}/>
             </ScrollView>
         </Container>

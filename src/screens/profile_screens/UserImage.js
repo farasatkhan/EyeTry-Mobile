@@ -3,6 +3,7 @@ import {
   ScrollView,Image,View,Text,StyleSheet,Alert,TouchableOpacity,
 } from 'react-native';
 
+import { getDataAsyncStorage, storeDataAsyncStorage } from '../../utils/asyncStorage';
 import { captureImage } from '../../utils/imageCapture';
 import { chooseFile } from '../../utils/imageCapture';
 
@@ -11,11 +12,19 @@ import Container from '../../components/ui/Container';
 import PrimaryButton from '../../components/ui/PrimaryButton';
 import MediumButtonOutlineIcon from '../../components/ui/MediumButtonOutlineIcon';
 import HorizontalDivider from '../../components/ui/HorizontalDivider';
+import { uploadImageToServer, viewProfileImage } from '../../api/userapi';
 
 
 const UserImage = ({ navigation }) => {
+  const serverURL = 'http://localhost:3000'; 
+
   const [filePath,setFilePath] = React.useState({})
   const [isImageSet,setIsImageSet] = React.useState(false)
+  const [localImage,setLocalImage]= React.useState(false)
+  const [triggerRerender,setTriggerRerender] = React.useState(false)
+  const [imageUri,setImageUri] = React.useState(null)
+  const [successVisible,setSuccessVisible] = React.useState(false)
+  const [successMessage,setSuccessMessage] = React.useState(null)
 
   const handleImageCapture =async () => {
     try{
@@ -23,7 +32,7 @@ const UserImage = ({ navigation }) => {
       console.log("capture res",response)
       if (response){
         setFilePath(response);
-        setIsImageSet(true)
+        setLocalImage(true)
       }
     }
     catch (e){
@@ -34,8 +43,9 @@ const UserImage = ({ navigation }) => {
     try{
       const response = await chooseFile('photo')
         if (response){
+          console.log('URI',response.assets[0].uri)
           setFilePath(response);
-          setIsImageSet(true)
+          setLocalImage(true)
         }
     }catch (e){
       throw e
@@ -43,18 +53,63 @@ const UserImage = ({ navigation }) => {
 
   };
 
-  const uploadImageToDB = () => {
-    Alert.alert("Uploading Image to DB");
-    navigation.navigate("ProfileScreenMain")
+  React.useEffect(()=>{
+    const setData = async()=>{
+        try{
+
+            const img = await viewProfileImage();
+            console.log(img.location)
+            setImageUri(serverURL+img.location)
+            setIsImageSet(true)
+
+        }
+        catch(e){
+          console.log('Error here')
+          if (e.response.status == 400 ){
+            console.log('No User Image Present')
+          }
+          // Refresh token also expired so logout the user
+            if(e.response.status == 403){
+                navigation.navigate("SignIn")
+            }
+            // throw e
+        }
+    }
+    setData()
+},[triggerRerender])
+
+  const uploadImageToDB = async () => {
+    try{
+      const uploadedImg = await uploadImageToServer(filePath)
+      await storeDataAsyncStorage('userimage','true')
+      setSuccessMessage(uploadedImg)
+      setSuccessVisible(true)
+      setTriggerRerender(!triggerRerender)
+      setLocalImage(false)
+      setTimeout(() => {
+        setSuccessVisible(false)
+      }, 5000);
+    }
+    catch (err){
+      throw err
+    }
   }
 
   return (
 <Container>
     <ScrollView contentContainerStyle={styles.sec_container}>
-      {
-        !isImageSet ? (<Image source={require('../../assets/images/persons/person.png')} style={styles.img}/>) 
-        : (<Image source={{uri:filePath.assets[0].uri}} style={styles.img}/>)
+    {successVisible &&  
+                <Text style={{color:'green',fontSize:16,alignSelf:'flex-start',textAlign:'center',alignSelf:'center',paddingBottom:'2%'}}>
+                    {successMessage}
+                </Text>
+                    } 
+      {   localImage && (<Image source={{uri:filePath.assets[0].uri}} style={styles.img}/>)
       }
+
+      {
+        isImageSet && !localImage && <Image source={{uri:imageUri}} style={styles.img}/>
+      }
+
         <MediumButtonOutlineIcon icon={'camera'} title={'Capture Image'} color={'#000'} style={{width:'100%'}} onPress={()=>handleImageCapture()}/>
         <HorizontalDivider text={'OR'} lineStyle={{color:'#ddd'}} style={{marginVertical:20}}/>
         <View style={styles.upload_container}>

@@ -72,13 +72,13 @@ const SignUpScreen = () =>{
         const { user, accessToken, refreshToken } = response.data 
 
         // Saving to Async Storage
-        AsyncStorage.setItem('user',JSON.stringify(user))
-        AsyncStorage.setItem('accessToken',accessToken)
-        AsyncStorage.setItem('refreshToken',refreshToken)
+        await AsyncStorage.setItem('user',JSON.stringify(user))
+        await AsyncStorage.setItem('accessToken',accessToken)
+        await AsyncStorage.setItem('refreshToken',refreshToken)
 
-        console.log(user)
-        console.log(accessToken)
-        console.log(refreshToken)
+        console.log("User ",user)
+        console.log("Access Token ",accessToken)
+        console.log("Refresh Token",refreshToken)
         navigation.navigate('HomeTabScreen');
         } 
         catch (error) {

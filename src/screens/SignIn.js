@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ScrollView, Text,StyleSheet,Alert,Dimensions } from 'react-native';
+import { CommonActions } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { storeDataAsyncStorage} from '../utils/asyncStorage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -63,7 +64,12 @@ const SignInScreen = () =>{
                 AsyncStorage.setItem('user',JSON.stringify(user))
                 AsyncStorage.setItem('accessToken',accessToken)
                 AsyncStorage.setItem('refreshToken',refreshToken)
-                navigation.navigate('HomeTabScreen');
+                navigation.dispatch(
+                    CommonActions.reset({
+                      index: 0,
+                      routes: [{ name: 'HomeTabScreen' }],
+                    })
+                  );
 
           } 
         catch (error) {

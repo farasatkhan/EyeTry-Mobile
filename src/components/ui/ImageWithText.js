@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Image, Text, StyleSheet,TouchableOpacity } from 'react-native';
 
-const ImageWithText = ({ imageSource, name,onPress}) => {
+const ImageWithText = ({ imageSource='http://localhost:3000/uploads/profile_images/4ca697ceaa579c3708f49413a2a81314.jpg', name,onPress}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.name}>{name}</Text>
       <TouchableOpacity onPress={onPress}>
-        <Image source={require('../../assets/images/persons/person.png')} style={styles.image}  />
+        <Image source={{uri:imageSource}} style={styles.image}  />
       </TouchableOpacity>
     </View>
   );

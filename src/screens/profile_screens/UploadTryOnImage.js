@@ -11,6 +11,7 @@ import {
 
 import { captureImage } from '../../utils/imageCapture';
 import { chooseFile } from '../../utils/imageCapture';
+import { uploadTryOnImageToServer } from '../../api/userapi';
 
 // importing form components
 import Container from '../../components/ui/Container';
@@ -33,6 +34,8 @@ const UploadTryOnImage = ({ navigation }) => {
     // for image
     const [filePath,setFilePath] = React.useState({})
     const [isImageSet,setIsImageSet] = React.useState(false)
+    const [successVisible,setSuccessVisible] = React.useState(false)
+    const [successMessage,setSuccessMessage] = React.useState(null)
   
 
 
@@ -66,14 +69,30 @@ const UploadTryOnImage = ({ navigation }) => {
     Alert.alert("Calculate User's IPD");
   };
 
-  const uploadImageToDB = () => {
+  const uploadImageToDB = async () => {
     Alert.alert("Uploading Image to DB");
+    try{
+      const uploadedImg = await uploadTryOnImageToServer(filePath)
+      setSuccessMessage(uploadedImg)
+      setSuccessVisible(true)
+      setTimeout(() => {
+        setSuccessVisible(false)
+      }, 5000);
+    }
+    catch (err){
+      throw err
+    }
     navigation.navigate("TryOnImages")
   }
 
   return (
 <Container>
     <ScrollView contentContainerStyle={styles.sec_container}>
+    {successVisible &&  
+                <Text style={{color:'green',fontSize:16,alignSelf:'flex-start',textAlign:'center',alignSelf:'center',paddingBottom:'2%'}}>
+                    {successMessage}
+                </Text>
+                    } 
         {
             isImageSet && (<Image source={{uri:filePath.assets[0].uri}} style={styles.img1}/>) 
         }

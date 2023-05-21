@@ -1,16 +1,26 @@
 import * as React from 'react';
-import { CommonActions } from '@react-navigation/native';
+import { CommonActions,useIsFocused } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { logoutUser } from '../../api/authapi';
+
+import { uploadImageToServer, viewProfileImage } from '../../api/userapi';
+
 // Importing UI Components
 import Container from '../../components/ui/Container';
 import ProfileItem from '../../components/ui/ProfileItem';
 import ImageWithText from '../../components/ui/ImageWithText';
 import { ScrollView, } from 'react-native';
+import { storeDataAsyncStorage } from '../../utils/asyncStorage';
 
 
 
 export default function ProfileScreenMain({navigation}) {
+  
+  const serverURL = 'http://localhost:3000'; 
+  const [name,setName] = React.useState(null)
+  const [img,setImg] = React.useState(null)
+
+  const isFocused = useIsFocused()
 
 
   // Methods
@@ -33,8 +43,6 @@ export default function ProfileScreenMain({navigation}) {
   }
   
 
-  const [name,setName] = React.useState(null)
-
   React.useEffect( ()=>{
     getDataFromAsyncStorage = async () => {
       try{
@@ -42,24 +50,37 @@ export default function ProfileScreenMain({navigation}) {
         user = JSON.parse(user)
         setName(user.firstName)
 
-        
-        console.log("Checking for first Name")
-        console.log(user.firstName)
-      }
+        const img = await viewProfileImage();
+        setImg(serverURL+img.location)
+        }
       catch (e){
-        console.error(e)
+        if (e.response.status == 403){
+          console.log('Refreshing Token Failed')
+          navigation.navigate('SignIn')
+        }
+        if (e.response.status == 400){
+          console.log('No Image is present')
+          setImg(null)
+        }
+        // console.error(e) // annoying
+        console.log(e)
       }
     }
 
     getDataFromAsyncStorage();
-  },[])
+  },[isFocused])
 
 
     return (
       name && (<Container >
         <ScrollView contentContainerStyle={{paddingHorizontal:'3%',flexDirection:'column',flex:1,justifyContent:'space-evenly'
         }}>
-            <ImageWithText name={name} onPress={handleUserImage}/>
+          {
+          img && 
+            <ImageWithText name={name} onPress={handleUserImage} imageSource={img}/>
+        }{
+          !img && <ImageWithText name={name} onPress={handleUserImage}/>
+        }
             <ProfileItem iconName={'md-cart'} name={'My Orders'} iconSize={24} />
             <ProfileItem iconName={'person-outline'} name={'My Details'} iconSize={24} onPress={goToMyDetails}/>
             <ProfileItem iconName={'ios-newspaper-outline'} name={'My Prescriptions'} iconSize={24} onPress={goToMyPrescriptions}/>
