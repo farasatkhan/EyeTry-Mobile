@@ -23,7 +23,12 @@ import MediumButtonOutlineIcon from '../../components/ui/MediumButtonOutlineIcon
 import HorizontalDivider from '../../components/ui/HorizontalDivider';
 
 
-const UploadTryOnImage = ({ navigation }) => {
+const UploadTryOnImage = ({ navigation,route }) => {
+  const serverURL = 'http://localhost:3000'; 
+  let tryOnImageId = route.params?.imgId
+  console.log('id undefined ',tryOnImageId == undefined)
+  const [existingTryOnImage,setExistingTryOnImage] = React.useState(!(tryOnImageId == undefined))
+   
   // State Variables
      const [selectedValue, setSelectedValue] = React.useState('singleNumber');
 
@@ -36,17 +41,18 @@ const UploadTryOnImage = ({ navigation }) => {
     const [isImageSet,setIsImageSet] = React.useState(false)
     const [successVisible,setSuccessVisible] = React.useState(false)
     const [successMessage,setSuccessMessage] = React.useState(null)
-  
-
+   
 
     // Methods
     const handleImageCapture =async () => {
         try{
           const response = await captureImage('photo')
           console.log("capture res",response)
-          if (response){
+          if (!response?.didCancel && response?.errorCode == undefined){
             setFilePath(response);
+            setExistingTryOnImage(false)
             setIsImageSet(true)
+            
           }
         }
         catch (e){
@@ -56,8 +62,10 @@ const UploadTryOnImage = ({ navigation }) => {
       const handleImageUpload =async () => {
         try{
           const response = await chooseFile('photo')
-            if (response){
+            console.log("Cancel Response ", response)  
+          if (!response?.didCancel && response?.errorCode == undefined ){
               setFilePath(response);
+              setExistingTryOnImage(false) 
               setIsImageSet(true)
             }
         }catch (e){
@@ -70,7 +78,6 @@ const UploadTryOnImage = ({ navigation }) => {
   };
 
   const uploadImageToDB = async () => {
-    Alert.alert("Uploading Image to DB");
     try{
       const uploadedImg = await uploadTryOnImageToServer(filePath)
       setSuccessMessage(uploadedImg)
@@ -78,11 +85,11 @@ const UploadTryOnImage = ({ navigation }) => {
       setTimeout(() => {
         setSuccessVisible(false)
       }, 5000);
+      navigation.navigate("TryOnImages")
     }
     catch (err){
       throw err
     }
-    navigation.navigate("TryOnImages")
   }
 
   return (
@@ -93,13 +100,17 @@ const UploadTryOnImage = ({ navigation }) => {
                     {successMessage}
                 </Text>
                     } 
+
         {
-            isImageSet && (<Image source={{uri:filePath.assets[0].uri}} style={styles.img1}/>) 
+          filePath &&  isImageSet && (<Image source={{uri:filePath?.assets[0].uri}} style={styles.img1}/>) 
         }
         {
-            !isImageSet && (<>
+          existingTryOnImage &&  tryOnImageId && (<Image source={{uri:serverURL + tryOnImageId}} style={styles.img1}/>) 
+        }
+        {
+            !existingTryOnImage && !isImageSet &&  (<>
             <Text style={styles.bld_txt}>
-                Step 1: Select Your PD
+                Step 1: Select Your PD 
             </Text>
             <Text style={styles.txt}>
                 Pupillary Distance
@@ -132,7 +143,7 @@ const UploadTryOnImage = ({ navigation }) => {
             </>)
         }
             <Text style={styles.bld_txt}>
-                Step 2: Add an Image
+                Step 2: Add an Image {existingTryOnImage}
             </Text>
             <MediumButtonOutlineIcon icon={'camera'} title={'Capture Image'} color={'#000'} style={styles.med_btn2} onPress={handleImageCapture}/>
             <HorizontalDivider text={'OR'} lineStyle={{color:'#ddd'}} style={{marginVertical:20}}/>

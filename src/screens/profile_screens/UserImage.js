@@ -30,7 +30,7 @@ const UserImage = ({ navigation }) => {
     try{
       const response = await captureImage('photo')
       console.log("capture res",response)
-      if (response){
+      if (!response?.didCancel && response?.errorCode == undefined){
         setFilePath(response);
         setLocalImage(true)
       }
@@ -42,7 +42,7 @@ const UserImage = ({ navigation }) => {
   const handleImageUpload =async () => {
     try{
       const response = await chooseFile('photo')
-        if (response){
+        if (!response?.didCancel && response?.errorCode == undefined){
           console.log('URI',response.assets[0].uri)
           setFilePath(response);
           setLocalImage(true)

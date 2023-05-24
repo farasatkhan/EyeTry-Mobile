@@ -27,16 +27,16 @@ if (isCameraPermitted && isStoragePermitted) {
         console.log('Camera Response = ', response);
         if (response.didCancel) {
             console.log('User cancelled Camera');
-            return;
+            return null;
         } else if (response.errorCode == 'camera_unavailable') {
             console.log('Camera not available on device');
-            return;
+            return null;
         } else if (response.errorCode == 'permission') {
             console.log('Permission not satisfied');
-            return;
+            return null;
         } else if (response.errorCode == 'others') {
             console.log(response.errorMessage);
-            return;
+            return null;
         }
         else{
             console.log('uri -> ', response.assets[0].uri);
@@ -48,6 +48,9 @@ if (isCameraPermitted && isStoragePermitted) {
 };
 
 // Selecting Image from gallery
+//  returning null incase user cancels tha camera or image upload or some 
+// other error occurs , may change it later and handle it more effectively
+// null is having no effect it .. incase of cancel or error that specific respnonse is returnes
 export const chooseFile =async (type) => {
 let options = {
     mediaType: type,
@@ -61,16 +64,16 @@ try {
     
         if (response.didCancel) {
         console.log('User cancelled the image selection');
-        return;
+        return null;
         } else if (response.errorCode == 'camera_unavailable') {
         console.log('Camera not available on device');
-        return;
+        return null;
         } else if (response.errorCode == 'permission') {
         console.log('Permissions not satisfied');
-        return;
+        return null;
         } else if (response.errorCode == 'others') {
         console.log(response.errorMessage);
-        return;
+        return null;
         }
             console.log('uri -> ', response.assets[0].uri);
             return response

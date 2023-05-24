@@ -42,10 +42,11 @@ export default function TryOnImages({navigation}){
     ,[isFocused,changed])
 
     // Methods
-    const handeEdit = () => {Alert.alert('Edit Image'); navigation.navigate('UploadTryOnImage')}
+    const handeEdit = (tryOnImageID) => { navigation.navigate('UploadTryOnImage',{
+        imgId:tryOnImageID
+    })}
     const handleRemove =async (tryOnImageID) => {
         try{
-            Alert.alert(`Delete Image ${tryOnImageID.split("tryon_images/")[1]}`)
             const response = await deleteTryOnImageFromServer(tryOnImageID.split("tryon_images/")[1])
             console.log(response)
             setChanged(!changed)
@@ -57,7 +58,6 @@ export default function TryOnImages({navigation}){
     }
 
     const goToUploadNewTryOnImage=()=>{
-        Alert.alert("Upload new Try On Image")
         navigation.navigate("UploadTryOnImage")
     }
 
@@ -67,7 +67,7 @@ export default function TryOnImages({navigation}){
             <ScrollView contentContainerStyle={styles.container_style}>
                 {isDataFetched &&    
                     imageIds.map((image,index)=>{
-                    return(<TryOnImageItem key={image}  imgSource={serverURL+image} handeRemove={()=>handleRemove(image)} handleEdit={handeEdit}/>
+                    return(<TryOnImageItem key={image}  imgSource={serverURL+image} handeRemove={()=>handleRemove(image)} handleEdit={()=>handeEdit(image)}/>
                     )
                 })
                     

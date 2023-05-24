@@ -62,9 +62,6 @@ const EditDetails = ({navigation}) =>{
     // form validation 
     const validateForm = () =>{
         // Validating user input
-        console.log(
-        "Inside validation"
-        )
         if (!email || !firstName || !lastName) {
             setErrorVisible(true)
             setErrorMsg('Please fill out all fields');
@@ -76,7 +73,6 @@ const EditDetails = ({navigation}) =>{
             setErrorMsg('Please enter a valid email address.');
             return false;
         }
-        console.log("Returning from validation")
         return true
 
     }
@@ -84,9 +80,12 @@ const EditDetails = ({navigation}) =>{
     // Image Upload
     const uploadImageToDB = async () => {
         try{
-            const uploadedImg = await uploadImageToServer(filePath)
+            console.log('1')
+            await uploadImageToServer(filePath)
+            console.log('2')
         }
         catch (err){
+            console.log('0')
             throw err
         }
     }
@@ -98,12 +97,12 @@ const EditDetails = ({navigation}) =>{
             return
         }
         const data = {
-            "firstName":firstName,
-            "lastName":lastName,
+            "firstname":firstName,
+            "lastname":lastName,
             "email":email
         }
         try{
-            if(filePath){
+            if(isImageSet){
                 uploadImageToDB()
             }
             const response =await updateUserData(data)
@@ -127,7 +126,7 @@ const EditDetails = ({navigation}) =>{
         console.log("Inside Handle Image Upload")
         try{
           const response = await chooseFile('photo')
-            if (response){
+            if (!response?.didCancel && response?.errorCode == undefined){
               setFilePath(response);
               setIsImageSet(true)
             }

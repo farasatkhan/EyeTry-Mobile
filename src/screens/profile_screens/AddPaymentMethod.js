@@ -13,28 +13,19 @@ export default function AddPaymentMethod({navigation}){
     const [expDate,setExpDate] = React.useState('')
     const [cvv,setCVV] = React.useState('')
 
-    // methods
-/*
-{
-    "paymentType": "Credit Card",
-    "nameOnCard": "{{$randomFullName}}",
-    "cardNumber": "{{$randomMACAddress}}",
-    "expirationMonth": "{{$randomDateFuture}}",
-    "expirationYear": "{{$randomDateFuture}}",
-    "cvv": "{{$randomPhoneNumberExt}}",
-    "firstName": "{{$randomFirstName}}",
-    "lastName": "{{$randomLastName}}",
-    "country": "{{$randomCountry}}",
-    "city": "{{$randomCity}}",
-    "address": "{{$randomStreetAddress}}",
-    "state": "{{$randomWord}}",
-    "zipCode": "{{$randomWord}}"
-}
-*/
+
 
     const next = () => {
-        Alert.alert("Go to Add Address Screen 2")
-        navigation.navigate("AddPaymentMethod2")
+        const paymentData = {
+            paymentType : "Credit Card",
+            nameOnCard : name,
+            cardNumber: cardNo,
+            expirationMonth : expDate.split('-')[0],
+            expirationYear : expDate.split('-')[1],
+            cvv : cvv,
+        }
+        console.log(paymentData)
+        navigation.navigate("AddPaymentMethod2",paymentData)
     }
 
 
@@ -50,12 +41,12 @@ export default function AddPaymentMethod({navigation}){
                             <Image source={require('../../assets/images/paypalLogo.png')} style={styles.img}/>
                         </TouchableOpacity>
                     </View>
-                    <Text style={styles.txt}>Credit Card Information {name}</Text>
+                    <Text style={styles.txt}>Credit Card Information</Text>
                     <InputField style={styles.input} name='Legal Name on Credit Card' value={name} onChangeText={setName}/>
-                    <InputField style={styles.input} name='Card Number' value={cardNo} onChangeText={setCardNo}/>
+                    <InputField style={styles.input} name='Card Number' value={cardNo} onChangeText={setCardNo} />
                     <View style={styles.row}>
                         <InputField style={styles.input2} name='CVV' value={cvv} onChangeText={setCVV} />
-                        <InputField style={styles.input2} name='Expiry Date' value={expDate} onChangeText={setExpDate}/>
+                        <InputField style={styles.input2} name='Expiry Date ' value={expDate} onChangeText={setExpDate}/>
                     </View>
                     <PrimaryButtonOutline title="Next" onPress={next} color={'#3056D3'} style={styles.btn}/>   
             </ScrollView>

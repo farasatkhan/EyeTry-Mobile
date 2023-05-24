@@ -17,7 +17,9 @@ export const getUserData = async () => {
             Authorization:`Bearer ${accessToken}`
         }
         });
-        return response.data;
+        console.log('Response data'.response?.data || "Not Modified 304 ")
+        // return response.data != undefined ? response.data : 304;
+        return response?.data
     } 
     catch (error) {
         // Server is returning 403 for expired token
@@ -147,8 +149,8 @@ export const viewAddresses = async () => {
             Authorization:`Bearer ${accessToken}`
         }
         });
-        console.log("Response ",response.data.addressBook)
-        return response.data;
+        console.log("Response ",response?.data.addressBook || "Not Modified 304 ")
+        return response?.data;
     } 
     catch (error) {
         // Server is returning 403 for expired token
@@ -197,8 +199,8 @@ export const addAddress = async (addressData) => {
       throw error;
     }
   };
-
-// Return a specific Address 
+  
+  // Return a specific Address 
 export const getSpecificAddress = async (id) => {
     const addressId = id
     try {
@@ -208,8 +210,8 @@ export const getSpecificAddress = async (id) => {
             Authorization:`Bearer ${accessToken}`
         },
         });
-        console.log("View Specific Address :",response.data.addressBook)
-        return response.data.addressBook;
+        console.log("View Specific Address :",response?.data.addressBook || "Not Modified 304 ")
+        return response?.data.addressBook;
     } 
     catch (error) {
         // Server is returning 403 for expired token
@@ -232,13 +234,48 @@ export const getSpecificAddress = async (id) => {
     }
   };
 
+// Return a specific Address 
+export const viewSpecificPaymentMethod = async (id) => {
+    const paymentMethod = id
+    
+    try {
+        const accessToken =await getDataAsyncStorage("accessToken")
+        const response = await axios.get(`${baseURL}/users/view_payment/${paymentMethod}`, {
+        headers:{
+            Authorization:`Bearer ${accessToken}`
+        },
+        });
+        console.log("View Specific Payment Method  :",response?.data || "Not Modified 304 ")
+        return response?.data;
+    } 
+    catch (error) {
+        // Server is returning 403 for expired token
+        if (error.response && error.response.status == 403){
+        try{
+            console.log("Access Token Expired Trying to refresh it")
+            await reGenerateAccessToken()
+            return viewSpecificPaymentMethod(paymentMethod)
+        }
+        catch (e){
+            console.log("Refresh Error")
+            if(e.response && e.response.status == 403){
+                console.log("Refresh Token is also expired logging out the user")
+                return e.response.status
+            }
+            throw e
+        }
+    }
+      throw error;
+    }
+  };
+
 // Update Address 
 
 export const updateAddress = async (data,id) => {
     const addressId = id
     const addressData = data
-    console.log('Data ; ',data)
-    console.log('id ; ',id)
+    console.log('Data : ',data)
+    console.log('id : ',id)
     try {
         const accessToken =await getDataAsyncStorage("accessToken")
         const response = await axios.put(`${baseURL}/users/update_address/${addressId}`, addressData,{
@@ -290,6 +327,41 @@ export const deleteAddress = async (id) => {
             console.log("Access Token Expired Trying to refresh it")
             await reGenerateAccessToken()
             return deleteAddress(addressId)
+        }
+        catch (e){
+            console.log("Refresh Error")
+            if(e.response && e.response.status == 403){
+                console.log("Refresh Token is also expired logging out the user")
+                return e.response.status
+            }
+            throw e
+        }
+    }
+      throw error;
+    }
+  };
+
+
+// Delete Address
+export const deletePaymentMethod = async (id) => {
+    const paymentId = id
+    try {
+        const accessToken =await getDataAsyncStorage("accessToken")
+        const response = await axios.delete(`${baseURL}/users/delete_payment/${paymentId}`, {
+        headers:{
+            Authorization:`Bearer ${accessToken}`
+        },
+        });
+        console.log("Delete Payment Response :",response)
+        return response;
+    } 
+    catch (error) {
+        // Server is returning 403 for expired token
+        if (error.response && error.response.status == 403){
+        try{
+            console.log("Access Token Expired Trying to refresh it")
+            await reGenerateAccessToken()
+            return deletePaymentMethod(paymentId)
         }
         catch (e){
             console.log("Refresh Error")
@@ -359,8 +431,8 @@ export const viewProfileImage = async () => {
             Authorization:`Bearer ${accessToken}`
         }
         });
-        console.log("Response ",response.data)
-        return response.data;
+        console.log("Response ",response?.data || "Not Modified 304 ")
+        return response?.data;
     } 
     catch (error) {
         // Server is returning 403 for expired token
@@ -466,8 +538,8 @@ export const viewTryOnImages = async () => {
             Authorization:`Bearer ${accessToken}`
         }
         });
-        console.log("Response ",response.data)
-        return response.data;
+        console.log("Response ",response?.data || "Not Modified 304 ")
+        return response?.data;
     } 
     catch (error) {
         // Server is returning 403 for expired token
@@ -499,8 +571,7 @@ export const deleteTryOnImageFromServer = async (id) => {
             Authorization:`Bearer ${accessToken}`
         }
         });
-        console.log("Response ",response)
-        console.log("Response Data ",response.data)
+        console.log("View All Payments Response Data ",response.data)
         return response.data;
     } 
     catch (error) {
@@ -513,6 +584,107 @@ export const deleteTryOnImageFromServer = async (id) => {
         }
         catch (e){
             console.error("Error while refreshing token",e)
+            throw e
+        }
+    }
+      throw error;
+    }
+  };
+
+// View All Payments
+ 
+  export const viewAllPayments = async () => {
+      try {
+          const accessToken =await getDataAsyncStorage("accessToken")
+          const response = await axios.get(`${baseURL}/users/view_payments`,{
+          headers:{
+              Authorization:`Bearer ${accessToken}`
+          },
+          });
+          console.log("All Payments ",response?.data)
+          return response?.data; // incase server return 304 
+      } 
+      catch (error) {
+          // Server is returning 403 for expired token
+          console.log("Access Token Expired ... Renewing")
+          if (error.response && error.response.status == 403){
+          try{
+              console.log("Error Catched")
+              await reGenerateAccessToken()
+              return viewAllPayments()
+          }
+          catch (e){
+              console.error("Error while refreshing token",e)
+              throw e
+          }
+      }
+        throw error;
+      }
+    };
+
+// Add Payment Methods
+ 
+  export const addPaymentMethod = async (paymentMethodData) => {
+      const data = paymentMethodData
+      console.log('data',paymentMethodData)
+      try {
+          const accessToken =await getDataAsyncStorage("accessToken")
+          const response = await axios.post(`${baseURL}/users/add_payment`,data, {
+          headers:{
+              Authorization:`Bearer ${accessToken}`
+          },
+          });
+          console.log("Address Added")
+          return response;
+      } 
+      catch (error) {
+          // Server is returning 403 for expired token
+          if (error.response && error.response.status == 403){
+          try{
+              console.log("Error Catched")
+              await reGenerateAccessToken()
+              return addPaymentMethod(data)
+          }
+          catch (e){
+              console.error("Error while refreshing token",e)
+              throw e
+          }
+      }
+        throw error;
+      }
+    };
+
+// Update Payment Method 
+
+export const updatePaymentMethod = async (data,id) => {
+    const paymentId = id
+    const paymentData = data
+    console.log('Payment Data : ',data)
+    console.log('payment id : ',id)
+    try {
+        const accessToken =await getDataAsyncStorage("accessToken")
+        const response = await axios.put(`${baseURL}/users/update_payment/${paymentId}`, paymentData,{
+        headers:{
+            Authorization:`Bearer ${accessToken}`
+        },
+        });
+        console.log("Update Address Response :",response)
+        return response;
+    } 
+    catch (error) {
+        // Server is returning 403 for expired token
+        if (error.response && error.response.status == 403){
+        try{
+            console.log("Access Token Expired Trying to refresh it")
+            await reGenerateAccessToken()
+            return updatePaymentMethod(paymentData,paymentId)
+        }
+        catch (e){
+            console.log("Refresh Error")
+            if(e.response && e.response.status == 403){
+                console.log("Refresh Token is also expired logging out the user")
+                return e.response.status
+            }
             throw e
         }
     }

@@ -9,6 +9,7 @@ import LabelledTextInput from '../../components/forms/LabelledTextInput';
 
 export default function EditAddress({navigation,route}){
     const addressId = route.params.addressId
+    
     const [fName,setFName] = React.useState('')
     const [lName,setLName] = React.useState('')
     const [address,setAddress] = React.useState('')

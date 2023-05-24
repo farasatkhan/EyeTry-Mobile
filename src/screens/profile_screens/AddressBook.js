@@ -48,7 +48,7 @@ export default function AddressBook({navigation}){
             setChanged(!changed)
         }
         catch(e){
-            console.log("component")
+            console.log("Some Issue occured while deleting address")
             throw e
         }
     }

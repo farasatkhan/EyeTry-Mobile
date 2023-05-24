@@ -21,10 +21,15 @@ const MyDetails = ({navigation}) =>{
             }
             catch(e){
                 // Refresh token also expired so logout the user
+                console.log('e resp status',e)
                 if(e.response.status == 403){
                     navigation.navigate("SignIn")
                 }
-                throw e
+                else if(e.response.status == 304){
+                    console.log('Resource not Modified')
+                }else{
+                    throw e
+                }
             }
         }
         setData()
