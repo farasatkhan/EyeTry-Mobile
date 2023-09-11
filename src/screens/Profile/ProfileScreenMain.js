@@ -33,13 +33,17 @@ export default function ProfileScreenMain({ navigation }) {
   const goToGiftCard = () => { navigation.navigate("GiftCard") }
 
   const logout = async () => {
-    await logoutUser()
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{ name: 'SignIn' }],
-      })
-    );
+    try {
+      await logoutUser()
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: 'SignIn' }],
+        })
+      );
+    } catch (e) {
+      console.error("Some Error Occured while loggin user out ")
+    }
   }
 
 

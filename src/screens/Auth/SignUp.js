@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, Alert, Dimensions, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { registerUser } from '../../services/Authentication/authapi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { registerUser } from '../../services/Authentication/authapi';
 
 
 // importing form components

@@ -1,11 +1,15 @@
 import * as React from 'react';
-import { View, Text,StyleSheet,Alert,Image } from 'react-native';
+import { View, Text, Button } from 'react-native';
 
-export default function CartStackScreen() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>CartScreen!</Text>
-      </View>
-    );
+export default function CartStackScreen({ navigation }) {
+
+  const goToProfile = () => {
+
   }
-  
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>CartScreen!</Text>
+      <Button onPress={goToProfile}>Go to profile</Button>
+    </View>
+  );
+}
