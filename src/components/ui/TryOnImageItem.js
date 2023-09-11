@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
     },
     img:{
         height:315,
-        width:315
+        width:315,
+        borderRadius:10
     },
     btn_cont:{
         flexDirection:'row',
