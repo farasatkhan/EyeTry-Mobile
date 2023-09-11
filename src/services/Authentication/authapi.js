@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getDataAsyncStorage } from '../../utils/AsynchronusStorage/asyncStorage';
+import { getDataAsyncStorage, remvoveItemAsyncStorage } from '../../utils/AsynchronusStorage/asyncStorage';
 import { storeDataAsyncStorage } from '../../utils/AsynchronusStorage/asyncStorage';
 
 const baseURL = 'http://localhost:3000'
@@ -62,6 +62,8 @@ export const logoutUser = async () => {
     const response = await axios.delete(`${baseURL}/auth/logout`, {
       token: refreshToken
     });
+    remvoveItemAsyncStorage("refreshToken")
+    remvoveItemAsyncStorage("accessToken")
     console.log("Logging out", response)
     return response;
   }
