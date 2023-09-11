@@ -11,7 +11,7 @@ import SignInScreen from './src/screens/Auth/SignIn';
 import SignUpScreen from './src/screens/Auth/SignUp';
 import ForgotPasswordScreen from './src/screens/Auth/ForgotPassword';
 import ResetLinkScreen from './src/screens/Auth/ResetLink';
-import HomeTabScreen from './src/screens/HomeTabNavigator/HomeTabScreen'; import { initialWindowMetrics } from 'react-native-safe-area-context';
+import HomeTabScreen from './src/screens/HomeTabNavigator/HomeTabScreen'; 
 {/* Home Component contains the tab navigation */ }
 
 
