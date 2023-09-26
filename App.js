@@ -14,39 +14,54 @@ import ResetLinkScreen from './src/screens/Auth/ResetLink';
 import HomeTabScreen from './src/screens/HomeTabNavigator/HomeTabScreen'; 
 {/* Home Component contains the tab navigation */ }
 
+// Vission Assessments Screens
+import VisionAssessmentHome from './src/screens/VisionAssessments/VisionAssessmentsHome';
+import VisionAcuityInfo from './src/screens/VisionAssessments/VisionAcuityInfo';
+import VisionAcuityTest from './src/screens/VisionAssessments/VisionAcuityTest';
+import ColorBlindInfo from './src/screens/VisionAssessments/ColorBlindInfo';
+import ContrastSensitivityInfo from './src/screens/VisionAssessments/ContrastSensitivityInfo';
+import AstigmatismInfo from './src/screens/VisionAssessments/AstigmatismInfo';
+
 
 
 const Stack = createNativeStackNavigator();
 
 
-
-
 function App() {
-  const [initialRouteName, setInitialRouteName] = React.useState('')
-  const [loading, setIsLoading] = React.useState(true)
+  const [initialRouteName, setInitialRouteName] = React.useState('VisionAssessmentsHome')
+  const [loading, setIsLoading] = React.useState(false)
 
 
 
 
-  React.useEffect(() => {
-    const checkToken = async () => {
-      const token = await getDataAsyncStorage("refreshToken")
-      if (token === null) {
-        setInitialRouteName('SignIn')
-        setIsLoading(false)
-      }
-      else {
-        setInitialRouteName('HomeTabScreen')
-        setIsLoading(false)
-      }
-    }
-    checkToken()
-  }, [])
+  // React.useEffect(() => {
+  //   const checkToken = async () => {
+  //     const token = await getDataAsyncStorage("refreshToken")
+  //     if (token === null) {
+  //       setInitialRouteName('SignIn')
+  //       setIsLoading(false)
+  //     }
+  //     else {
+  //       setInitialRouteName('HomeTabScreen')
+  //       setIsLoading(false)
+  //     }
+  //   }
+  //   checkToken()
+  // }, [])
+
 
   return (
     loading ? <ActivityIndicator size="large" /> : (
       <NavigationContainer>
         <Stack.Navigator initialRouteName={initialRouteName} screenOptions={{ headerShown: false }}>
+          {/* Vission Assessments */}
+          <Stack.Screen name="VisionAssessmentsHome" component={VisionAssessmentHome} />
+          <Stack.Screen name="VisionAcuityInfo" component={VisionAcuityInfo} />
+          <Stack.Screen name="VisionAcuityTest" component={VisionAcuityTest} />
+          <Stack.Screen name="ColorBlindInfo" component={ColorBlindInfo} />
+          <Stack.Screen name="ContrastSensitivityInfo" component={ContrastSensitivityInfo} />
+          <Stack.Screen name="AstigmatismInfo" component={AstigmatismInfo} />
+          
           <Stack.Screen name="SignIn" component={SignInScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
