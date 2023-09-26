@@ -29,8 +29,9 @@ const VisionAcuityInfo = () => {
         <Text style={styles.infoText1}>This quick test will assess your vision and help you understand its current state. 
           Please follow the instructions carefully and answer the questions honestly for accurate
            results.</Text>
-           <Text style={[styles.infoText1, { marginTop: 10 }]}>Visual Acuity Test: Determine how well you can see letters or shapes on the screen.
-             Adjust your device's brightness for optimal visibility.</Text>
+           <Text style={[styles.infoText1, { marginTop: 10 }]}>
+                Astigmatism Test: This test Measure irregularities in your eye's curvature by viewing specific patterns and shapes on the screen.
+            Adjust your device's brightness for the clearest results.</Text>
       </View>
 
       <TouchableOpacity
@@ -90,7 +91,8 @@ const styles = StyleSheet.create({
   bannerInsideHeader: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: "white"
+    color: "white",
+    marginBottom:5
   },
   testSection1: {
     flexDirection: 'row',

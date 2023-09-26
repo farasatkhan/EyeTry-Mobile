@@ -56,8 +56,8 @@ const VisionAssessmentHome = () => {
                         <Text>Color Blind</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.testSection2} onPress={() => handleSensitivityClick()}>
-                    <TouchableOpacity style={styles.contrastSensitivity}>
+                <View style={styles.testSection2}>
+                    <TouchableOpacity style={styles.contrastSensitivity} onPress={() => handleSensitivityClick()}>
                         <View style={styles.circle3}>
                             <Image
                                 source={require('../../assets/images/visionAssessments/contrast.png')}

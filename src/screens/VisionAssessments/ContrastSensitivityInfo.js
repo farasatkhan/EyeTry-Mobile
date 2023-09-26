@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const VisionAcuityInfo = () => {
+const ContrastSensitivityInfo = () => {
   const navigation = useNavigation();
 
 
@@ -14,13 +14,14 @@ const VisionAcuityInfo = () => {
     <View style={styles.container}>
       <View style={styles.section1}>
         <View style={styles.bannerText}>
-          <Text style={styles.bannerInsideHeader}>Visual Acuity Test</Text>
+          <Text style={styles.bannerInsideHeader}>Conrast Sensitivity</Text>
+          <Text style={[styles.bannerInsideHeader, {marginBottom:5}]}>Test</Text>
           <Text style={styles.bannerInsideText}>Visual acuity test: Measures the clarity of vision
            by reading an eye chart.</Text>
         </View>
         <View style={styles.bannerImg}>
           <Image
-            source={require('../../assets/images/visionAssessments/acuity.png')}
+            source={require('../../assets/images/visionAssessments/contrast.png')}
             style={{ height: "100%", width: "100%", resizeMode: 'contain' }}
           />
         </View>
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
   bannerInsideHeader: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: "white"
+    color: "white",
   },
   testSection1: {
     flexDirection: 'row',
@@ -127,4 +128,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default VisionAcuityInfo;
+export default ContrastSensitivityInfo;
