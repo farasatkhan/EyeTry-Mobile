@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-
+import Icon from 'react-native-vector-icons/AntDesign';
 const TumblingETestScreen = () => {
     const [currentMoveIndex, setCurrentMoveIndex] = useState(0);
     const [results, setResults] = useState([]);
     const [moves, setMoves] = useState([]);
     let status;
     const baseURL = 'http://localhost:3000';
+
+
 
     // const submitVisionAssessmentResult = async () => {
     //     const data = {
@@ -126,6 +128,15 @@ const TumblingETestScreen = () => {
                 <Text>{index + 1}</Text>
                 <Text style={result.isCorrect ? styles.greenText : styles.redText}>
                     {result.isCorrect ? 'Correct' : 'Incorrect'}
+                {result.isCorrect ? (
+                    <View style={styles.resultIcon}>
+                        <Icon name="checkcircleo" size={14} color="green" />
+                    </View>
+                ) : (
+                    <View style={styles.resultIcon}>
+                        <Icon name="closecircleo" size={14} color="red" />
+                    </View>
+                )}
                 </Text>
             </View>
         ));
@@ -295,6 +306,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: '#ccc',
         marginBottom: 10,
+        alignItems: 'center',
     },
     greenText: {
         color: 'green',
