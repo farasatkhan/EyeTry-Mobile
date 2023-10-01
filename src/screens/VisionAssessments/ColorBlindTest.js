@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native';
-import { AiOutlineCheckCircle, AiOutlineCloseCircle } from 'react-native-vector-icons/AntDesign'; // Make sure you have the appropriate icons package installed
-import axios from 'axios';
-import { reGenerateAccessToken } from '../../../api/authapi';
+import { View, Text, Image, TextInput, Button, ScrollView, StyleSheet, Alert, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 
-// importing images
+import axios from 'axios';
+
+// Import your images here
 import Image1 from '../../assets/images/visionAssessments/colorblind-test-image1.webp';
 import Image2 from '../../assets/images/visionAssessments/colorblind-test-image2.webp';
 import Image3 from '../../assets/images/visionAssessments/colorblind-test-image3.webp';
@@ -17,42 +17,44 @@ import Image9 from '../../assets/images/visionAssessments/colorblind-test-image9
 import Image10 from '../../assets/images/visionAssessments/colorblind-test-image10.webp';
 import Image11 from '../../assets/images/visionAssessments/colorblind-test-image11.webp';
 import Image12 from '../../assets/images/visionAssessments/colorblind-test-image12.webp';
+// Import other images similarly
 
-const ColorBlindnessTestScreen = () => {
+const ColorBlindTest = () => {
   let status;
-  const baseURL = 'http://localhost:3000'; // Replace with your actual API endpoint
+  // const baseURL = 'http://localhost:3000';
 
-//   const submitVisionAssessmentResult = async () => {
-//     const data = {
-//       testType: 'Color Blind Test',
-//       status: status,
-//     };
+  // const submitVisionAssessmentResult = async () => {
+  //   // Your submitVisionAssessmentResult code remains the same
+  //   const data = {
+  //     testType: "Color Blind Test",
+  //     status: status
+  //   };
 
-//     try {
-//       const accessToken = await AsyncStorage.getItem('accessToken'); // Import AsyncStorage from 'react-native' and use it to get the access token
-//       const response = await axios.post(`${baseURL}/users/submit_vision_assessment_result/`, data, {
-//         headers: {
-//           Authorization: `Bearer ${accessToken}`,
-//         },
-//       });
+  //   try {
+  //     const accessToken = await localStorage.getItem('accessToken');
+  //     const response = await axios.post(`${baseURL}/users/submit_vision_assessment_result/`, data, {
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken}`
+  //       }
+  //     });
 
-//       console.log('Response:', response);
-//       return response;
-//     } catch (error) {
-//       // Server is returning 403 for an expired token
-//       if (error.response && error.response.status === 403) {
-//         try {
-//           console.log('Error Caught');
-//           await reGenerateAccessToken();
-//           return submitVisionAssessmentResult();
-//         } catch (e) {
-//           console.error('Error while refreshing token', e);
-//           throw e;
-//         }
-//       }
-//       throw error;
-//     }
-//   };
+  //     console.log('Response:', response);
+  //     return response;
+  //   } catch (error) {
+  //     // Server is returning 403 for an expired token
+  //     if (error.response && error.response.status === 403) {
+  //       try {
+  //         console.log('Error Caught');
+  //         await reGenerateAccessToken();
+  //         return submitVisionAssessmentResult();
+  //       } catch (e) {
+  //         console.error('Error while refreshing token', e);
+  //         throw e;
+  //       }
+  //     }
+  //     throw error;
+  //   }
+  // };
 
   const [images, setImages] = useState([
     { id: 1, src: Image1, number: 7 },
@@ -116,52 +118,48 @@ const ColorBlindnessTestScreen = () => {
   const renderImage = () => {
     const currentImage = images[currentImageIndex];
     const numberButtons = [1, 2, 3, 4, 5, 6, 7, 8, 9].map((number) => (
-      <TouchableOpacity
-        key={number}
-        style={styles.numberButton}
-        onPress={() => handleNumberButtonClick(number)}
-      >
-        <Text style={styles.numberButtonText}>{number}</Text>
-      </TouchableOpacity>
+      <Button key={number} title={number.toString()} onPress={() => handleNumberButtonClick(number)} />
     ));
 
     return (
-      <View style={styles.imageContainer}>
-<Image source={{ uri: Image1 }} style={styles.image} />
-
-        <View style={styles.textBox}>
-          <Text style={styles.question}>What number do you see in the image?</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter prescription name"
-            value={userInput}
-            editable={false}
-          />
-
-          <View style={styles.numberButtonsContainer}>{numberButtons}</View>
-
-          <TouchableOpacity onPress={handleSubmit} style={styles.submitButton}>
-            <Text style={styles.submitButtonText}>Submit</Text>
-          </TouchableOpacity>
+      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <View>
+          <Image source={currentImage.src} style={{ width: 200, height: 200 }} />
+        </View>
+        <View>
+          <View>
+            <Text>What number do you see in the image?</Text>
+            <TextInput
+              style={{
+                width: '92%',
+                marginLeft: 'auto',
+                marginRight: 'auto',
+                paddingLeft: 10,
+                paddingRight: 3,
+                borderWidth: 1,
+                borderColor: 'blue',
+                borderRadius: 5,
+                marginBottom: 10,
+              }}
+              placeholder="Enter prescription name"
+              value={userInput}
+              onChangeText={handleUserInput}
+              keyboardType="numeric"
+            />
+            <Button title="Submit" onPress={handleSubmit} />
+          </View>
         </View>
       </View>
     );
   };
 
   const renderProgressBar = () => {
-    const progress = ((currentImageIndex + 1) / images.length) * 100;
+    const progress = ((currentImageIndex) / images.length) * 100;
     return (
       <View>
-        <Text style={styles.textBase}>Test Progress</Text>
-        <View style={styles.progressBarContainer}>
-          <View
-            style={{
-              width: `${progress}%`,
-              backgroundColor: '#374151',
-              height: 12,
-              borderRadius: 10,
-            }}
-          />
+        <Text style={{ fontSize: 16, marginTop: 10 }}>Test Progress</Text>
+        <View style={{ width: '100%', backgroundColor: '#ccc', borderRadius: 10 }}>
+          <View style={{ width: `${progress}%`, backgroundColor: '#374151', height: 12, borderRadius: 10 }} />
         </View>
       </View>
     );
@@ -169,7 +167,6 @@ const ColorBlindnessTestScreen = () => {
 
   const getTotalIncorrectResults = () => {
     const incorrectNumbers = results.filter((result) => !result.isCorrect).length;
-
     incorrectNumbers == 0 ? (status = true) : (status = false);
     return incorrectNumbers;
   };
@@ -178,22 +175,24 @@ const ColorBlindnessTestScreen = () => {
     const totalIncorrectResults = getTotalIncorrectResults();
 
     if (totalIncorrectResults === 0) {
-      return <Text style={styles.greenText}>Congrats! Your Eye Sight Is Perfect :)</Text>;
+      return (
+        <Text style={{ color: 'green' }}>Congrats! Your Eye Sight Is Perfect :)</Text>
+      );
     } else if (totalIncorrectResults === 1) {
       return (
-        <Text style={styles.orangeText}>
+        <Text style={{ color: '#E49B0F' }}>
           You have passed the test, but I suggest that you retake the test to ensure that your eyesight is not weak.
         </Text>
       );
     } else if (totalIncorrectResults >= 2 && totalIncorrectResults < 4) {
       return (
-        <Text style={styles.orangeText}>
+        <Text style={{ color: '#E49B0F' }}>
           I suggest that you visit a doctor as it appears that you may be experiencing issues with your vision acuity.
         </Text>
       );
     } else if (totalIncorrectResults >= 4) {
       return (
-        <Text style={styles.redText}>
+        <Text style={{ color: 'red' }}>
           Your test results indicate a significant number of incorrect answers. It is strongly advised to consult with an eye care specialist immediately.
         </Text>
       );
@@ -204,37 +203,36 @@ const ColorBlindnessTestScreen = () => {
 
   const renderResults = () => {
     return results.map((result, index) => (
-      <View key={index} style={styles.row}>
-        <Text style={styles.cell}>{index + 1}</Text>
-        <View style={styles.cell}>
-          {result.isCorrect ? (
-            <AiOutlineCheckCircle style={styles.icon} />
-          ) : (
-            <AiOutlineCloseCircle style={styles.icon} />
-          )}
-        </View>
-        <Text style={styles.cell}>
+      <View key={index} style={styles.tableRow}>
+        <Text>{index + 1}</Text>
+        <Text style={result.isCorrect ? styles.greenText : styles.redText}>
           {result.isCorrect ? 'Correct' : 'Incorrect'}
+          {result.isCorrect ? (
+            <View style={styles.resultIcon}>
+              <Icon name="checkcircleo" size={14} color="green" />
+            </View>
+          ) : (
+            <View style={styles.resultIcon}>
+              <Icon name="closecircleo" size={14} color="red" />
+            </View>
+          )}
         </Text>
+        <Text style={result.isCorrect ? styles.greenText : styles.redText} >{result.isCorrect ? 'Pass' : 'Fail'}</Text>
       </View>
     ));
   };
+  
 
   const DisplayResults = () => {
     return (
       <View>
-        <Text style={styles.heading}>Test Results</Text>
-        <ScrollView style={styles.tableContainer}>
-          <View style={styles.table}>
-            <View style={styles.row}>
-              <Text style={styles.cell}>Move</Text>
-              <Text style={styles.cell}>Result</Text>
-              <Text style={styles.cell}>Status</Text>
-            </View>
-            {renderResults()}
-          </View>
+        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Test Results</Text>
+        <ScrollView>
+          {renderResults()}
         </ScrollView>
-        <Text style={styles.resultMessage}>{getTestResultMessage()}</Text>
+        <Text style={{ fontSize: 18, fontWeight: 'bold', marginTop: 5 }}>
+          {getTestResultMessage()}
+        </Text>
       </View>
     );
   };
@@ -249,200 +247,112 @@ const ColorBlindnessTestScreen = () => {
 
   const renderRetakeButton = () => {
     return (
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={handleRetakeTest} style={styles.retakeButton}>
-          <Text style={styles.buttonText}>Retake Test</Text>
-        </TouchableOpacity>
-        <TouchableOpacity  style={styles.saveButton}>
-          <Text style={styles.buttonText}>Save Results</Text>
-        </TouchableOpacity>
+      <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 8 }}>
+        <Button
+          title="Retake Test"
+          onPress={handleRetakeTest}
+          style={{ backgroundColor: 'red', color: 'white' }}
+        />
+        <Button
+          title="Save Results"
+          onPress={() => Alert.alert('Result Saved Successfully!')}
+          style={{ backgroundColor: 'gray', color: 'white' }}
+        />
       </View>
     );
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Color Blind Test</Text>
-      <Text style={styles.subtitle}>Find out if you're color blind in less than 2 minutes!</Text>
-
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>Take Test Now</Text>
-        <Text style={styles.cardNote}>Note: this test is based on the standard Ishihara color plate test</Text>
-
-        {showResults ? (
-          <View>
-            {DisplayResults()}
-            {renderRetakeButton()}
-          </View>
-        ) : (
-          <View style={styles.imageContainer}>
-            {renderImage()}
-            {renderProgressBar()}
-          </View>
-        )}
+  <ScrollView style={{ flex: 1 }}>
+      <View style={{ padding: 5, marginTop: 10, backgroundColor: 'white', borderWidth: 1, borderColor: '#ccc', borderRadius: 10, width: '90%', alignSelf: 'center', marginBottom: 5 }}>
+        <View style={{ alignItems: 'center' }}>
+          {showResults ? (
+            <View style={styles.resultsContainer}>
+              <Text style={styles.header}>Test Results</Text>
+              <View style={styles.resultsTable}>
+                <View style={styles.tableHeader}>
+                  <Text style={styles.tableHeaderText}>Move</Text>
+                  <Text style={styles.tableHeaderText}>Result</Text>
+                  <Text style={styles.tableHeaderText}>Status</Text>
+                </View>
+                {renderResults()}
+              </View>
+              <Text style={styles.resultMessageContainer}>
+                {getTestResultMessage()}
+              </Text>
+              {renderRetakeButton()}
+            </View>
+          ) : (
+            <View style={{ width: '100%', alignItems: 'center', marginTop: 10 }}>
+              <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#374151', marginTop: 10 }}>Take Test Now</Text>
+              <Text style={{ marginTop: 5, fontWeight: 'bold', marginBottom: 10 }}>Note: this test is based on the standard Ishihara color plate test</Text>
+              <View style={{ marginBottom: 20 }}>
+                {renderImage()}
+                {renderProgressBar()}
+              </View>
+            </View>
+          )}
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
-const styles = {
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    padding: 10,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  subtitle: {
-    fontSize: 16,
-    marginVertical: 8,
-    textAlign: 'center',
-  },
+const styles = StyleSheet.create({
 
-  card: {
-    padding: 20,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    margin: 10,
-    width: '90%',
-  },
-  cardTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  cardNote: {
-    marginTop: 5,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  imageContainer: {
-    marginBottom: 20,
-  },
-  textBox: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 10,
-  },
-  question: {
-    fontSize: 18,
-    marginBottom: 10,
-  },
-  input: {
-    width: '92%',
-    marginVertical: 5,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: 'lightgray',
-    borderRadius: 5,
-  },
-  numberButtonsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    marginBottom: 10,
-  },
-  numberButton: {
-    width: '30%',
-    padding: 10,
-    backgroundColor: '#374151',
-    borderWidth: 4,
-    borderColor: 'white',
-    borderRadius: 10,
-    margin: 5,
-  },
-  numberButtonText: {
-    color: 'white',
-    textAlign: 'center',
-  },
-  submitButton: {
-    width: '100%',
-    backgroundColor: 'red',
-    borderWidth: 4,
-    borderColor: 'white',
-    borderRadius: 10,
-    padding: 10,
-    marginTop: 10,
-  },
-  submitButtonText: {
-    color: 'white',
-    textAlign: 'center',
-  },
-  progressBarContainer: {
-    width: '100%',
-    backgroundColor: '#ccc',
-    borderRadius: 10,
-  },
-  textBase: {
-    fontSize: 16,
-    marginTop: 10,
-  },
   greenText: {
     color: 'green',
-  },
-  orangeText: {
-    color: '#E49B0F',
   },
   redText: {
     color: 'red',
   },
-  heading: {
+
+  header: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginVertical: 10,
-  },
-  tableContainer: {
-    maxHeight: 300,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 10,
-  },
-  table: {
-    flexDirection: 'column',
-  },
-  row: {
-    flexDirection: 'row',
-    backgroundColor: '#f9f9f9',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-    paddingVertical: 8,
-  },
-  cell: {
-    flex: 1,
-    padding: 4,
-    textAlign: 'left',
-  },
-  icon: {
-    fontSize: 24,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginTop: 8,
     marginBottom: 20,
   },
-  retakeButton: {
-    backgroundColor: '#FF0000',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 5,
-    marginRight: 10,
-  },
-  saveButton: {
-    backgroundColor: '#444444',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: '#FFFFFF',
-    fontWeight: 'bold',
-  },
-};
 
-export default ColorBlindnessTestScreen;
+  resultsContainer: {
+    flex: 1,
+    padding: 20,
+    alignItems: 'center',
+  },
+  resultsTable: {
+    width: '90%',
+    marginBottom: 20,
+  },
+  tableHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderBottomWidth: 1,
+    borderColor: '#ccc',
+    marginBottom: 10,
+    alignItems: 'center',
+  },
+  tableHeaderText: {
+    flex: 1,
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center', // Center align the text in headers
+  },
+  tableRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderBottomWidth: 1,
+    borderColor: '#ccc',
+    marginBottom: 10,
+    alignItems: 'center',
+  },
+
+  resultMessageContainer: {
+    marginBottom: 5,
+  },
+
+
+});
+
+export default ColorBlindTest;
+
+
+

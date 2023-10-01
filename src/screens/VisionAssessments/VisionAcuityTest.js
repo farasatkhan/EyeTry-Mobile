@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 const TumblingETestScreen = () => {
     const [currentMoveIndex, setCurrentMoveIndex] = useState(0);
@@ -9,7 +9,7 @@ const TumblingETestScreen = () => {
     const baseURL = 'http://localhost:3000';
 
 
-
+    // to save results
     // const submitVisionAssessmentResult = async () => {
     //     const data = {
     //       testType: "Vision Acuity Test",
@@ -106,6 +106,7 @@ const TumblingETestScreen = () => {
             </View>
         );
     };
+    
 
     const getRotationValue = (direction) => {
         switch (direction) {
@@ -184,7 +185,19 @@ const TumblingETestScreen = () => {
         setCurrentMoveIndex(0);
     };
 
-    const progressPercentage = (currentMoveIndex / (moves.length - 1)) * 100;
+
+          const renderProgressBar = () => {
+            const progress = ((currentMoveIndex) / moves.length) * 100;
+            return (
+              <View>
+                <Text style={{ fontSize: 16, marginTop: 10 }}>Test Progress</Text>
+                <View style={{ width: '100%', backgroundColor: '#ccc', borderRadius: 10 }}>
+                  <View style={{ width: `${progress}%`, backgroundColor: '#374151', height: 12, borderRadius: 10 }} />
+                </View>
+              </View>
+            );
+          };
+      
 
     return (
         <View style={styles.container}>
@@ -207,8 +220,8 @@ const TumblingETestScreen = () => {
                             <Text style={styles.buttonText}>&larr;</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={styles.progressContainer}>
-                        <View style={[styles.progressBar, { width: `${progressPercentage}%` }]}></View>
+                    <View style={{}}>
+                    {renderProgressBar()}
                     </View>
                 </View>
             ) : (
@@ -230,7 +243,7 @@ const TumblingETestScreen = () => {
                             <Text style={styles.buttonText}>Retake Test</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.button}>
-                            <Text style={styles.buttonText}>Save Results</Text>
+                            <Text onPress={() => Alert.alert('Result Saved Successfully!')} style={styles.buttonText}>Save Results</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -274,11 +287,14 @@ const styles = StyleSheet.create({
     progressContainer: {
         width: '90%',
         alignSelf: 'center',
-    },
-    progressBar: {
+        backgroundColor: '#ccc', // Add a background color to the container
+        borderRadius: 10, // Optional: add border radius to match your design
+      },
+      progressBar: {
         height: 10,
-        backgroundColor: '#374151',
-    },
+        backgroundColor: '#374151', // Add a background color to the progress bar
+        borderRadius: 10, // Optional: add border radius to match your design
+      },
     resultsContainer: {
         flex: 1,
         padding: 20,

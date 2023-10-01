@@ -7,7 +7,7 @@ const VisionAcuityInfo = () => {
 
 
   const handleStartTest = () => {
-    navigation.navigate('VisionAcuityTest')
+    navigation.navigate('ColorBlindTest')
   }
 
   return (
