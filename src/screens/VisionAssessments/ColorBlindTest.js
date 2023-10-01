@@ -106,13 +106,18 @@ const ColorBlindTest = () => {
   };
 
   const handleSubmit = () => {
-    const currentImage = images[currentImageIndex];
-    const isCorrect = parseInt(userInput, 10) === currentImage.number;
-    setResults((prevResults) => [
-      ...prevResults,
-      { imageId: currentImage.id, isCorrect },
-    ]);
-    handleNext();
+    if (userInput == ''){
+      Alert.alert('Please Enter The Number!')
+    }
+    else {
+      const currentImage = images[currentImageIndex];
+      const isCorrect = parseInt(userInput, 10) === currentImage.number;
+      setResults((prevResults) => [
+        ...prevResults,
+        { imageId: currentImage.id, isCorrect },
+      ]);
+      handleNext();
+    }
   };
 
   const renderImage = () => {
@@ -128,25 +133,31 @@ const ColorBlindTest = () => {
         </View>
         <View>
           <View>
-            <Text>What number do you see in the image?</Text>
+            <Text style={{ marginTop: 20, marginBottom: 20 }} >What number do you see in the image?</Text>
             <TextInput
               style={{
-                width: '92%',
+                width: '100%',
                 marginLeft: 'auto',
                 marginRight: 'auto',
                 paddingLeft: 10,
                 paddingRight: 3,
-                borderWidth: 1,
-                borderColor: 'blue',
+                borderWidth: 2,
+                borderColor: '#0F97B1',
                 borderRadius: 5,
                 marginBottom: 10,
+                height: 45
               }}
-              placeholder="Enter prescription name"
+              placeholder="Enter Number"
               value={userInput}
               onChangeText={handleUserInput}
               keyboardType="numeric"
             />
-            <Button title="Submit" onPress={handleSubmit} />
+            <View style={{ marginTop: 10 }} >
+              <TouchableOpacity style={{justifyContent:'center', alignItems:'center', 
+              backgroundColor: '#0F97B1', height: 40, borderRadius: 5 }} title="Submit" onPress={handleSubmit}>
+                <Text style={{color: 'white', fontSize: 16}} >Submit</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>
@@ -157,7 +168,7 @@ const ColorBlindTest = () => {
     const progress = ((currentImageIndex + 1) / images.length) * 100;
     return (
       <View>
-        <Text style={{ fontSize: 16, marginTop: 10 }}>Test Progress</Text>
+        <Text style={{ fontSize: 16, marginTop: 30 }}>Test Progress</Text>
         <View style={{ width: '100%', backgroundColor: '#ccc', borderRadius: 10 }}>
           <View style={{ width: `${progress}%`, backgroundColor: '#374151', height: 12, borderRadius: 10 }} />
         </View>
@@ -221,7 +232,7 @@ const ColorBlindTest = () => {
       </View>
     ));
   };
-  
+
 
   const DisplayResults = () => {
     return (
@@ -263,36 +274,34 @@ const ColorBlindTest = () => {
   };
 
   return (
-  <ScrollView style={{ flex: 1 }}>
-      <View style={{ padding: 5, marginTop: 10, backgroundColor: 'white', borderWidth: 1, borderColor: '#ccc', borderRadius: 10, width: '90%', alignSelf: 'center', marginBottom: 5 }}>
-        <View style={{ alignItems: 'center' }}>
-          {showResults ? (
-            <View style={styles.resultsContainer}>
-              <Text style={styles.header}>Test Results</Text>
-              <View style={styles.resultsTable}>
-                <View style={styles.tableHeader}>
-                  <Text style={styles.tableHeaderText}>Move</Text>
-                  <Text style={styles.tableHeaderText}>Result</Text>
-                  <Text style={styles.tableHeaderText}>Status</Text>
-                </View>
-                {renderResults()}
+    <ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
+      <View style={{ alignSelf: 'center', justifyContent: 'center', alignItems: 'center', width: '90%' }}>
+        {showResults ? (
+          <View style={styles.resultsContainer}>
+            <Text style={styles.header}>Test Results</Text>
+            <View style={styles.resultsTable}>
+              <View style={styles.tableHeader}>
+                <Text style={styles.tableHeaderText}>Move</Text>
+                <Text style={styles.tableHeaderText}>Result</Text>
+                <Text style={styles.tableHeaderText}>Status</Text>
               </View>
-              <Text style={styles.resultMessageContainer}>
-                {getTestResultMessage()}
-              </Text>
-              {renderRetakeButton()}
+              {renderResults()}
             </View>
-          ) : (
-            <View style={{ width: '100%', alignItems: 'center', marginTop: 10 }}>
-              <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#374151', marginTop: 10 }}>Take Test Now</Text>
-              <Text style={{ marginTop: 5, fontWeight: 'bold', marginBottom: 10 }}>Note: this test is based on the standard Ishihara color plate test</Text>
-              <View style={{ marginBottom: 20 }}>
-                {renderImage()}
-                {renderProgressBar()}
-              </View>
+            <Text style={styles.resultMessageContainer}>
+              {getTestResultMessage()}
+            </Text>
+            {renderRetakeButton()}
+          </View>
+        ) : (
+          <View style={{ width: '100%', alignItems: 'center', marginTop: 10 }}>
+            <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#374151', marginTop: 20 }}>Take Test Now</Text>
+            <Text style={{ marginTop: 5, fontWeight: 'bold', marginBottom: 10 }}>Note: this test is based on the standard Ishihara color plate test</Text>
+            <View style={{ marginBottom: 20 }}>
+              {renderImage()}
+              {renderProgressBar()}
             </View>
-          )}
-        </View>
+          </View>
+        )}
       </View>
     </ScrollView>
   );
