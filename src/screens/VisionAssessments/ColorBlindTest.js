@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TextInput, Button, ScrollView, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
-import axios from 'axios';
-
 // Import your images here
 import Image1 from '../../assets/images/visionAssessments/colorblind-test-image1.webp';
 import Image2 from '../../assets/images/visionAssessments/colorblind-test-image2.webp';

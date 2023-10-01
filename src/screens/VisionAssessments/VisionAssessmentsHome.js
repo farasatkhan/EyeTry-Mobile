@@ -23,7 +23,7 @@ const VisionAssessmentHome = () => {
         <View style={styles.container}>
             <View style={styles.section1}>
                 <View style={styles.bannerText}>
-                    <Text style={styles.bannerInsideHeader}>Eye Test</Text>
+                    <Text style={styles.bannerInsideHeader}>Vision Assessments</Text>
                     <Text style={styles.bannerInsideText}>This app offers basic vision tests that can measure Vision
                      Acuity Test, Color Blind Test, Contrast Sensitivity Test and the Astigmatism Test</Text>
                 </View>
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     section2: {
         height: "55%",
         width: "90%",
-        backgroundColor: "#F5F5F5",
+        backgroundColor: "#f7f7f7",
         borderRadius: 5,
         padding: 30
     },
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
         fontWeight: '600'
     },
     bannerInsideHeader: {
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 'bold',
         color: "white"
     },
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
         width: "50%",
         backgroundColor: "white",
         marginRight: 5,
-        borderRadius: 3,
+        borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
         elevation: 1
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
         width: "50%",
         backgroundColor: "white",
         marginLeft: 5,
-        borderRadius: 3,
+        borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
         elevation: 1
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
         width: "50%",
         backgroundColor: "white",
         marginRight: 5,
-        borderRadius: 3,
+        borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
         elevation: 1
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
         width: "50%",
         backgroundColor: "white",
         marginLeft: 5,
-        borderRadius: 3,
+        borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
         elevation: 1

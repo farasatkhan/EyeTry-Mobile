@@ -23,6 +23,7 @@ import ColorBlindTest from './src/screens/VisionAssessments/ColorBlindTest';
 import ContrastSensitivityInfo from './src/screens/VisionAssessments/ContrastSensitivityInfo';
 import ContrastSensitivityTest from './src/screens/VisionAssessments/ContrastSensitivityTest';
 import AstigmatismInfo from './src/screens/VisionAssessments/AstigmatismInfo';
+import AstigmatismTest from './src/screens/VisionAssessments/AstigmatismTest';
 
 
 
@@ -65,6 +66,7 @@ function App() {
           <Stack.Screen name="ContrastSensitivityInfo" component={ContrastSensitivityInfo} />
           <Stack.Screen name="ContrastSensitivityTest" component={ContrastSensitivityTest} />
           <Stack.Screen name="AstigmatismInfo" component={AstigmatismInfo} />
+          <Stack.Screen name="AstigmatismTest" component={AstigmatismTest} />
           
           <Stack.Screen name="SignIn" component={SignInScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
