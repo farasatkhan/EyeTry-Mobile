@@ -154,7 +154,7 @@ const ColorBlindTest = () => {
   };
 
   const renderProgressBar = () => {
-    const progress = ((currentImageIndex) / images.length) * 100;
+    const progress = ((currentImageIndex + 1) / images.length) * 100;
     return (
       <View>
         <Text style={{ fontSize: 16, marginTop: 10 }}>Test Progress</Text>

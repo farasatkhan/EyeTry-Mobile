@@ -187,7 +187,7 @@ const TumblingETestScreen = () => {
 
 
           const renderProgressBar = () => {
-            const progress = ((currentMoveIndex) / moves.length) * 100;
+            const progress = ((currentMoveIndex + 1) / moves.length) * 100;
             return (
               <View>
                 <Text style={{ fontSize: 16, marginTop: 10 }}>Test Progress</Text>

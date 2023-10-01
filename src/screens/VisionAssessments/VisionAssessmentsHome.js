@@ -50,7 +50,7 @@ const VisionAssessmentHome = () => {
                         <View style={styles.circle2}>
                             <Image
                                 source={require('../../assets/images/visionAssessments/colorblind.png')}
-                                style={{ height: "100%", width: "100%" }}
+                                style={{ height: "100%", width: "100%", resizeMode: 'contain' }}
                             />
                         </View>
                         <Text>Color Blind</Text>

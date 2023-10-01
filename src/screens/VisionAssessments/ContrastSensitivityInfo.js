@@ -7,7 +7,7 @@ const ContrastSensitivityInfo = () => {
 
 
   const handleStartTest = () => {
-    navigation.navigate('VisionAcuityTest')
+    navigation.navigate('ContrastSensitivityTest')
   }
 
   return (
