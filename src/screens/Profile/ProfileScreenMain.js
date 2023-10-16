@@ -12,11 +12,11 @@ import ImageWithText from '../../components/ui/ImageWithText';
 import { ScrollView, } from 'react-native';
 import { storeDataAsyncStorage } from '../../utils/AsynchronusStorage/asyncStorage';
 
-
+import API_URL from '../../config/config';
 
 export default function ProfileScreenMain({ navigation }) {
 
-  const serverURL = 'http://localhost:3000';
+  const serverURL = API_URL;
   const [name, setName] = React.useState(null)
   const [img, setImg] = React.useState(null)
 
@@ -66,8 +66,6 @@ export default function ProfileScreenMain({ navigation }) {
           console.log('No Image is present')
           setImg(null)
         }
-        // console.error(e) // annoying
-        console.log(e)
       }
     }
 
