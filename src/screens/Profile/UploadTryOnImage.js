@@ -22,9 +22,10 @@ import PrimaryButton from '../../components/ui/PrimaryButton';
 import MediumButtonOutlineIcon from '../../components/ui/MediumButtonOutlineIcon';
 import HorizontalDivider from '../../components/ui/HorizontalDivider';
 
+import API_URL from '../../config/config';
 
 const UploadTryOnImage = ({ navigation, route }) => {
-  const serverURL = 'http://localhost:3000';
+  const serverURL = API_URL;
   let tryOnImageId = route.params?.imgId
   console.log('id undefined ', tryOnImageId == undefined)
   const [existingTryOnImage, setExistingTryOnImage] = React.useState(!(tryOnImageId == undefined))

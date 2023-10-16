@@ -15,10 +15,11 @@ import { updateUserData } from '../../services/Profile/userapi';
 import { chooseFile } from '../../utils/Camera/imageCapture';
 import { uploadImageToServer, viewProfileImage } from '../../services/Profile/userapi';
 
+import API_URL from '../../config/config';
 
 const EditDetails = ({ navigation }) => {
 
-    const serverURL = 'http://localhost:3000';
+    const serverURL = API_URL;
     // State Vars
     const [firstName, setFirstName] = React.useState(null);
     const [lastName, setLastName] = React.useState(null);
@@ -46,7 +47,6 @@ const EditDetails = ({ navigation }) => {
                 setUser(user)
                 setIsDataFetched(true)
                 const img = await viewProfileImage();
-                console.log(img.location)
                 setImgUri(serverURL + img.location)
             }
             catch (e) {
@@ -80,12 +80,9 @@ const EditDetails = ({ navigation }) => {
     // Image Upload
     const uploadImageToDB = async () => {
         try {
-            console.log('1')
             await uploadImageToServer(filePath)
-            console.log('2')
         }
         catch (err) {
-            console.log('0')
             throw err
         }
     }
@@ -123,7 +120,6 @@ const EditDetails = ({ navigation }) => {
 
     // Image Upload
     const handleImageUpload = async () => {
-        console.log("Inside Handle Image Upload")
         try {
             const response = await chooseFile('photo')
             if (!response?.didCancel && response?.errorCode == undefined) {

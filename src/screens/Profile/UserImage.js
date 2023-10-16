@@ -14,10 +14,11 @@ import MediumButtonOutlineIcon from '../../components/ui/MediumButtonOutlineIcon
 import HorizontalDivider from '../../components/ui/HorizontalDivider';
 import { uploadImageToServer, viewProfileImage } from '../../services/Profile/userapi';
 
+import API_URL from '../../config/config';
 
 const UserImage = ({ navigation }) => {
 
-  const serverURL = 'http://localhost:3000';
+  const serverURL = API_URL;
 
   const [filePath, setFilePath] = React.useState({})
   const [isImageSet, setIsImageSet] = React.useState(false)
@@ -59,7 +60,6 @@ const UserImage = ({ navigation }) => {
       try {
 
         const img = await viewProfileImage();
-        console.log(img.location)
         setImageUri(serverURL + img.location)
         setIsImageSet(true)
 

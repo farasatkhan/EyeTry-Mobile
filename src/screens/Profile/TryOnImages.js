@@ -8,11 +8,12 @@ import TryOnImageItem from '../../components/ui/TryOnImageItem';
 import PrimaryButton from '../../components/ui/PrimaryButton';
 import { deleteTryOnImageFromServer, viewTryOnImages } from '../../services/Profile/userapi';
 
+import API_URL from '../../config/config';
 
 
 export default function TryOnImages({ navigation }) {
 
-    const serverURL = 'http://localhost:3000';
+    const serverURL = API_URL;
 
     const [imageIds, setImageIds] = React.useState([]) // image address
     const [noImagePresent, setNoImagePresent] = React.useState(false)
