@@ -13,8 +13,8 @@ import PrimaryButton from '../../components/ui/PrimaryButton';
 import MediumButtonOutlineIcon from '../../components/ui/MediumButtonOutlineIcon';
 import HorizontalDivider from '../../components/ui/HorizontalDivider';
 
-import { sendImageToIPDServer } from '../../services/Profile/userapi';
-import { getArucoMarkerPdf } from '../../services/Profile/userapi';
+import { sendImageToIPDServer } from '../../services/IPD/ipdApi';
+import { getArucoMarkerPdf } from '../../services/IPD/ipdApi';
 
 import PrimaryButtonOutline from '../../components/ui/PrimaryButtonOutline';
 

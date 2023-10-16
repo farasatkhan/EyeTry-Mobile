@@ -5,8 +5,9 @@ import { storeDataAsyncStorage } from '../../utils/AsynchronusStorage/asyncStora
 import { reGenerateAccessToken } from '../Authentication/authapi';
 
 
-const baseURL = 'http://localhost:3000'
 
+const baseURL = 'http://localhost:3000'
+const flaskAPIURL = 'http://localhost:5001'
 
 // Getting user data 
 export const getUserData = async () => {
@@ -693,3 +694,4 @@ export const updatePaymentMethod = async (data, id) => {
         throw error;
     }
 };
+
