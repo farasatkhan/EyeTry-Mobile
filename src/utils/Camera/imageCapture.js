@@ -19,10 +19,7 @@ export const captureImage = async (type) => {
     };
     let isCameraPermitted = await requestCameraPermission();
     let isStoragePermitted = await requestExternalWritePermission();
-    console.log("camera", isCameraPermitted)
-    console.log("storage", isStoragePermitted)
     if (isCameraPermitted && isStoragePermitted) {
-        console.log("Inside ")
         const res = await launchCamera(options, (response) => {
             console.log('Camera Response = ', response);
             if (response.didCancel) {
