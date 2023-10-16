@@ -75,7 +75,7 @@ export default function ProfileStackScreen() {
       <ProfileStack.Screen name='AddPaymentMethod' component={AddPaymentMethod} options={{ title: "Add Payment Method" }} />
       <ProfileStack.Screen name='AddPaymentMethod2' component={AddPaymentMethod2} options={{ title: "Add Payment Method" }} />
       <ProfileStack.Screen name='EditPaymentMethod' component={EditPaymentMethod} options={{ title: "Edit Payment Method" }} />
-      <ProfileStack.Screen name='EditPaymentMethod2' component={EditPaymentMethod2} options={{ title: "Add Payment Method" }} />
+      <ProfileStack.Screen name='EditPaymentMethod2' component={EditPaymentMethod2} options={{ title: "Edit Payment Method" }} />
 
       <ProfileStack.Screen name='TryOnImages' component={TryOnImages} options={{ title: "Try On Images" }} />
       <ProfileStack.Screen name='UploadTryOnImage' component={UploadTryOnImage} options={{ title: "Upload Try On Image" }} />

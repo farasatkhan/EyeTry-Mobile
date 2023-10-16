@@ -19,6 +19,7 @@ export default function PaymentMethods({ navigation }) {
         const getAllPaymentMethods = async () => {
             try {
                 const response = await viewAllPayments()
+                console.log("Card Info ", response)
                 setPaymentMethods(response)
                 setIsDataFetched(true)
             }
@@ -60,7 +61,7 @@ export default function PaymentMethods({ navigation }) {
                 {
                     paymentMethods.map((pMethod) => {
                         return (
-                            <PaymentMethodItem key={pMethod._id} name={pMethod.nameOnCard} cardType={pMethod.paymentType} cardNo={pMethod.cardNumber} expDate={pMethod.expirationYear.split('T')[0]} cvv={pMethod.cvv}
+                            <PaymentMethodItem key={pMethod._id} name={pMethod.nameOnCard} cardType={pMethod.paymentType} cardNo={pMethod.cardNumber} expDate={ /* pMethod.expirationYear.split('T')[0] */ pMethod.expirationMonth + '-' + pMethod.expirationYear} cvv={pMethod.cvv}
                                 handleEditPaymentMethod={() => handleEditPaymentMethod(pMethod._id)} handleDeletePaymentMethod={() => handleDeletePaymentMethod(pMethod._id)} />
                         )
                     })

@@ -38,7 +38,8 @@ export default function EditPaymentMethod({ navigation, route }) {
 
                 setName(response?.nameOnCard)
                 setCardNo(response?.cardNumber)
-                setExpDate(response?.expirationYear.split('T')[0])
+                // setExpDate(response?.expirationYear.split('T')[0])
+                setExpDate(response?.expirationYear + '-' + response?.expirationMonth)
                 setCVV(response?.cvv)
                 setFirstName(response.billingInfo.firstName)
                 setLastName(response.billingInfo.lastName)
@@ -62,6 +63,11 @@ export default function EditPaymentMethod({ navigation, route }) {
             setErrorVisible(true)
             setErrorMsg('Please fill out all fields');
             return false;
+        }
+        if (!expDate.includes("-")) {
+            setErrorVisible(true)
+            setErrorMsg('Invalid Date Entry, Date format is MM-YY');
+            return false
         }
         return true
     }
