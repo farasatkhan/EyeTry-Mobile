@@ -47,7 +47,7 @@ const ProfileStack = createNativeStackNavigator();
 
 export default function ProfileStackScreen() {
   return (
-    <ProfileStack.Navigator screenOptions={{ headerTitleAlign: 'center' }} initialRouteName='ProfileScreenMain'>
+    <ProfileStack.Navigator screenOptions={{ headerTitleAlign: 'center' }} initialRouteName='CheckIPD'>
       <ProfileStack.Screen name='ProfileScreenMain' component={ProfileScreenMain} options={{ headerShown: false }} />
 
       <ProfileStack.Screen name='MyDetails' component={MyDetails} options={{ title: "My Details" }} />

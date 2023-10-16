@@ -75,7 +75,7 @@ const UploadTryOnImage = ({ navigation, route }) => {
   };
 
   const calculateIPD = () => {
-    Alert.alert("Calculate User's IPD");
+    navigation.navigate('CheckIPD')
   };
 
   const uploadImageToDB = async () => {

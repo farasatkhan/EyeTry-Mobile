@@ -11,7 +11,7 @@ import SignInScreen from './src/screens/Auth/SignIn';
 import SignUpScreen from './src/screens/Auth/SignUp';
 import ForgotPasswordScreen from './src/screens/Auth/ForgotPassword';
 import ResetLinkScreen from './src/screens/Auth/ResetLink';
-import HomeTabScreen from './src/screens/HomeTabNavigator/HomeTabScreen'; 
+import HomeTabScreen from './src/screens/HomeTabNavigator/HomeTabScreen';
 {/* Home Component contains the tab navigation */ }
 
 // Vission Assessments Screens
@@ -31,26 +31,26 @@ const Stack = createNativeStackNavigator();
 
 
 function App() {
-  const [initialRouteName, setInitialRouteName] = React.useState('VisionAssessmentsHome')
-  const [loading, setIsLoading] = React.useState(false)
+  const [initialRouteName, setInitialRouteName] = React.useState(null)
+  const [loading, setIsLoading] = React.useState(true)
 
 
 
 
-  // React.useEffect(() => {
-  //   const checkToken = async () => {
-  //     const token = await getDataAsyncStorage("refreshToken")
-  //     if (token === null) {
-  //       setInitialRouteName('SignIn')
-  //       setIsLoading(false)
-  //     }
-  //     else {
-  //       setInitialRouteName('HomeTabScreen')
-  //       setIsLoading(false)
-  //     }
-  //   }
-  //   checkToken()
-  // }, [])
+  React.useEffect(() => {
+    const checkToken = async () => {
+      const token = await getDataAsyncStorage("refreshToken")
+      if (token === null) {
+        setInitialRouteName('SignIn')
+        setIsLoading(false)
+      }
+      else {
+        setInitialRouteName('HomeTabScreen')
+        setIsLoading(false)
+      }
+    }
+    checkToken()
+  }, [])
 
 
   return (
@@ -67,7 +67,7 @@ function App() {
           <Stack.Screen name="ContrastSensitivityTest" component={ContrastSensitivityTest} />
           <Stack.Screen name="AstigmatismInfo" component={AstigmatismInfo} />
           <Stack.Screen name="AstigmatismTest" component={AstigmatismTest} />
-          
+
           <Stack.Screen name="SignIn" component={SignInScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
