@@ -84,15 +84,15 @@ export default function ProfileScreenMain({ navigation }) {
         }{
           !img && <ImageWithText name={name} onPress={handleUserImage} />
         }
-        <ProfileItem iconName={'md-cart'} name={'My Orders'} iconSize={24} />
+        <ProfileItem iconName={'cart'} name={'My Orders'} iconSize={24} />
         <ProfileItem iconName={'person-outline'} name={'My Details'} iconSize={24} onPress={goToMyDetails} />
-        <ProfileItem iconName={'ios-newspaper-outline'} name={'My Prescriptions'} iconSize={24} onPress={goToMyPrescriptions} />
+        <ProfileItem iconName={'newspaper-outline'} name={'My Prescriptions'} iconSize={24} onPress={goToMyPrescriptions} />
         <ProfileItem iconName={'location-outline'} name={'Address Book'} iconSize={24} onPress={goToAddressBook} />
-        <ProfileItem iconName={'md-cash-outline'} name={'Payment Methods'} iconSize={24} onPress={goToPaymentMethods} />
-        <ProfileItem iconName={'md-image-outline'} name={'Try On Images'} iconSize={24} onPress={goToTryOnImages} />
-        <ProfileItem iconName={'md-gift-outline'} name={'Gift Cards'} iconSize={24} onPress={goToGiftCard} />
-        <ProfileItem iconName={'md-help'} name={'Help Center'} iconSize={24} />
-        <ProfileItem iconName={'md-log-out-outline'} name={'Logout'} iconSize={24} onPress={logout} />
+        <ProfileItem iconName={'cash-outline'} name={'Payment Methods'} iconSize={24} onPress={goToPaymentMethods} />
+        <ProfileItem iconName={'image-outline'} name={'Try On Images'} iconSize={24} onPress={goToTryOnImages} />
+        <ProfileItem iconName={'gift-outline'} name={'Gift Cards'} iconSize={24} onPress={goToGiftCard} />
+        <ProfileItem iconName={'help'} name={'Help Center'} iconSize={24} />
+        <ProfileItem iconName={'log-out-outline'} name={'Logout'} iconSize={24} onPress={logout} />
       </ScrollView>
     </Container>)
   );

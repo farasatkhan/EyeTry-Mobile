@@ -14,17 +14,6 @@ import ResetLinkScreen from './src/screens/Auth/ResetLink';
 import HomeTabScreen from './src/screens/HomeTabNavigator/HomeTabScreen';
 {/* Home Component contains the tab navigation */ }
 
-// Vission Assessments Screens
-import VisionAssessmentHome from './src/screens/VisionAssessments/VisionAssessmentsHome';
-import VisionAcuityInfo from './src/screens/VisionAssessments/VisionAcuityInfo';
-import VisionAcuityTest from './src/screens/VisionAssessments/VisionAcuityTest';
-import ColorBlindInfo from './src/screens/VisionAssessments/ColorBlindInfo';
-import ColorBlindTest from './src/screens/VisionAssessments/ColorBlindTest';
-import ContrastSensitivityInfo from './src/screens/VisionAssessments/ContrastSensitivityInfo';
-import ContrastSensitivityTest from './src/screens/VisionAssessments/ContrastSensitivityTest';
-import AstigmatismInfo from './src/screens/VisionAssessments/AstigmatismInfo';
-import AstigmatismTest from './src/screens/VisionAssessments/AstigmatismTest';
-
 
 
 const Stack = createNativeStackNavigator();
@@ -58,15 +47,7 @@ function App() {
       <NavigationContainer>
         <Stack.Navigator initialRouteName={initialRouteName} screenOptions={{ headerShown: false }}>
           {/* Vission Assessments */}
-          <Stack.Screen name="VisionAssessmentsHome" component={VisionAssessmentHome} />
-          <Stack.Screen name="VisionAcuityInfo" component={VisionAcuityInfo} />
-          <Stack.Screen name="VisionAcuityTest" component={VisionAcuityTest} />
-          <Stack.Screen name="ColorBlindInfo" component={ColorBlindInfo} />
-          <Stack.Screen name="ColorBlindTest" component={ColorBlindTest} />
-          <Stack.Screen name="ContrastSensitivityInfo" component={ContrastSensitivityInfo} />
-          <Stack.Screen name="ContrastSensitivityTest" component={ContrastSensitivityTest} />
-          <Stack.Screen name="AstigmatismInfo" component={AstigmatismInfo} />
-          <Stack.Screen name="AstigmatismTest" component={AstigmatismTest} />
+
 
           <Stack.Screen name="SignIn" component={SignInScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
