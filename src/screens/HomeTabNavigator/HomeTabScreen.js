@@ -29,7 +29,7 @@ const HomeTabScreen = () => {
             iconName = focused ? 'person' : 'person-outline';
           }
           else if (route.name === 'ProductStackScreen') {
-            iconName = focused ? 'md-glasses' : 'md-glasses';
+            iconName = focused ? 'glasses' : 'glasses';
             return <Ionicons name={iconName} size={35} color={color} />;
           }
           else if (route.name === 'WishListStackScreen') {

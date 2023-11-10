@@ -31,11 +31,8 @@ const Stack = createNativeStackNavigator();
 
 
 function App() {
-  const [initialRouteName, setInitialRouteName] = React.useState('VisionAssessmentsHome')
+  const [initialRouteName, setInitialRouteName] = React.useState('SignUp')
   const [loading, setIsLoading] = React.useState(false)
-
-
-
 
   // React.useEffect(() => {
   //   const checkToken = async () => {
