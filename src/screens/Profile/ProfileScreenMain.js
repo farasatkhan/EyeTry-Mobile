@@ -58,11 +58,11 @@ export default function ProfileScreenMain({ navigation }) {
         setImg(serverURL + img.location)
       }
       catch (e) {
-        if (e.response.status == 403) {
+        if (e?.response.status == 403) {
           console.log('Refreshing Token Failed')
           navigation.navigate('SignIn')
         }
-        if (e.response.status == 400) {
+        if (e?.response.status == 400) {
           console.log('No Image is present')
           setImg(null)
         }
