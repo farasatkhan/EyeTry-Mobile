@@ -47,7 +47,15 @@ function App() {
       <NavigationContainer>
         <Stack.Navigator initialRouteName={initialRouteName} screenOptions={{ headerShown: false }}>
           {/* Vission Assessments */}
-
+          <Stack.Screen name="VisionAssessmentsHome" component={VisionAssessmentHome} />
+          <Stack.Screen name="VisionAcuityInfo" component={VisionAcuityInfo} />
+          <Stack.Screen name="VisionAcuityTest" component={VisionAcuityTest} />
+          <Stack.Screen name="ColorBlindInfo" component={ColorBlindInfo} />
+          <Stack.Screen name="ColorBlindTest" component={ColorBlindTest} />
+          <Stack.Screen name="ContrastSensitivityInfo" component={ContrastSensitivityInfo} />
+          <Stack.Screen name="ContrastSensitivityTest" component={ContrastSensitivityTest} />
+          <Stack.Screen name="AstigmatismInfo" component={AstigmatismInfo} />
+          <Stack.Screen name="AstigmatismTest" component={AstigmatismTest} />
 
           <Stack.Screen name="SignIn" component={SignInScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
