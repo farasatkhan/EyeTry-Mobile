@@ -14,6 +14,16 @@ import ResetLinkScreen from './src/screens/Auth/ResetLink';
 import HomeTabScreen from './src/screens/HomeTabNavigator/HomeTabScreen';
 {/* Home Component contains the tab navigation */ }
 
+// Vission Assessments Screens
+import VisionAssessmentHome from './src/screens/VisionAssessments/VisionAssessmentsHome';
+import VisionAcuityInfo from './src/screens/VisionAssessments/VisionAcuityInfo';
+import VisionAcuityTest from './src/screens/VisionAssessments/VisionAcuityTest';
+import ColorBlindInfo from './src/screens/VisionAssessments/ColorBlindInfo';
+import ColorBlindTest from './src/screens/VisionAssessments/ColorBlindTest';
+import ContrastSensitivityInfo from './src/screens/VisionAssessments/ContrastSensitivityInfo';
+import ContrastSensitivityTest from './src/screens/VisionAssessments/ContrastSensitivityTest';
+import AstigmatismInfo from './src/screens/VisionAssessments/AstigmatismInfo';
+import AstigmatismTest from './src/screens/VisionAssessments/AstigmatismTest';
 
 
 const Stack = createNativeStackNavigator();
