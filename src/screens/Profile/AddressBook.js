@@ -22,11 +22,11 @@ export default function AddressBook({ navigation }) {
         const getAllAddresses = async () => {
             try {
                 const response = await viewAddresses()
-                setAddresses(response.addressBook)
+                setAddresses(response)
                 setIsDataFetched(true)
             }
             catch (e) {
-
+                console.log(e)
             }
         }
         getAllAddresses()
