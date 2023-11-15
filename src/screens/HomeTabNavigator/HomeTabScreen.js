@@ -9,6 +9,8 @@ import CartStackScreen from '../Cart/CartStackScreen';
 import ProfileStackScreen from '../Profile/ProfileStackScreen';
 import WishListStackScreen from '../WishList/WishListStackScreen';
 
+import HomeScreen from '../HomeScreen';
+import ShopScreen from '../ShopScreen';
 
 const Tab = createBottomTabNavigator();
 const HomeTabScreen = () => {
@@ -46,9 +48,9 @@ const HomeTabScreen = () => {
         tabBarInactiveTintColor: 'gray',
       })}
     >
-      <Tab.Screen name="ProductStackScreen" component={ProductStackScreen} />
+      <Tab.Screen name="ProductStackScreen" component={ShopScreen} />
       <Tab.Screen name="WishListStackScreen" component={WishListStackScreen} />
-      <Tab.Screen name="HomeStackScreen" component={HomeStackScreen} />
+      <Tab.Screen name="HomeStackScreen" component={HomeScreen} />
       <Tab.Screen name="CartStackScreen" component={CartStackScreen} />
       <Tab.Screen name="ProfileStackScreen" component={ProfileStackScreen} />
     </Tab.Navigator>

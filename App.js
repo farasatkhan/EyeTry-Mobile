@@ -25,13 +25,13 @@ import ContrastSensitivityTest from './src/screens/VisionAssessments/ContrastSen
 import AstigmatismInfo from './src/screens/VisionAssessments/AstigmatismInfo';
 import AstigmatismTest from './src/screens/VisionAssessments/AstigmatismTest';
 
+import HomeScreen from './src/screens/HomeScreen';
 
 
 const Stack = createNativeStackNavigator();
 
-
 function App() {
-  const [initialRouteName, setInitialRouteName] = React.useState('SignUp')
+  const [initialRouteName, setInitialRouteName] = React.useState('HomeTabScreen')
   const [loading, setIsLoading] = React.useState(false)
 
   // React.useEffect(() => {
