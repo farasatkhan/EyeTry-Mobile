@@ -150,7 +150,8 @@ export const viewAddresses = async () => {
                 Authorization: `Bearer ${accessToken}`
             }
         });
-        console.log("Response ", response?.data.addressBook || "Not Modified 304 ")
+
+        console.log("Response ", response?.data || "Not Modified 304 ")
         return response?.data;
     }
     catch (error) {
