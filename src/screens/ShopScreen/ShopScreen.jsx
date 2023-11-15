@@ -15,7 +15,7 @@ const ShopScreen = () => {
   return (
     <SafeAreaView className="bg-white">
       <ScrollView>
-        <Pressable className="flex flex-row justify-between items-center mx-5 mt-5 bg-blue-100 rounded-lg shadow-lg shadow-black/40">
+        <Pressable className="flex flex-row justify-between items-center mx-5 mt-5 bg-sky-100 rounded-lg shadow-lg shadow-black/40">
           <View className="pl-5">
             <Text className="text-black text-xl">Eyeglasses</Text>
           </View>
@@ -25,7 +25,7 @@ const ShopScreen = () => {
             source={require('../../assets/shop_screen/eyeglasses.png')}
           />
         </Pressable>
-        <Pressable className="flex flex-row justify-between items-center mx-5 mt-5 bg-blue-100 rounded-lg shadow-lg shadow-black/40">
+        <Pressable className="flex flex-row justify-between items-center mx-5 mt-5 bg-sky-200 rounded-lg shadow-lg shadow-black/40">
           <View className="pl-5">
             <Text className="text-black text-xl">Sunglasses</Text>
           </View>
@@ -37,7 +37,7 @@ const ShopScreen = () => {
         </Pressable>
         <Pressable
           onPress={() => handleNavigation('VisionAssessmentsHome')}
-          className={`flex flex-row justify-between items-center mx-5 mt-5 bg-blue-100 rounded-lg shadow-lg shadow-black/40`}>
+          className={`flex flex-row justify-between items-center mx-5 mt-5 bg-sky-300 rounded-lg shadow-lg shadow-black/40`}>
           <View className="pl-5">
             <Text className="text-black text-xl">Vision</Text>
             <Text className="text-black text-xl">Assessment</Text>
@@ -47,7 +47,7 @@ const ShopScreen = () => {
             source={require('../../assets/shop_screen/vision_assessment_2.png')}
           />
         </Pressable>
-        <Pressable className="flex flex-row justify-between items-center mx-5 mt-5 mb-5 bg-blue-100 rounded-lg shadow-lg shadow-black/40">
+        <Pressable className="flex flex-row justify-between items-center mx-5 mt-5 bg-sky-400 rounded-lg shadow-lg shadow-black/40">
           <View className="pl-5">
             <Text className="text-black text-xl">IPD</Text>
           </View>
@@ -57,7 +57,7 @@ const ShopScreen = () => {
             source={require('../../assets/shop_screen/ipd.png')}
           />
         </Pressable>
-        <Pressable className="flex flex-row justify-between items-center mx-5 mt-5 mb-5 bg-blue-100 rounded-lg shadow-lg shadow-black/40">
+        <Pressable className="flex flex-row justify-between items-center mx-5 mt-5 mb-5 bg-sky-500 rounded-lg shadow-lg shadow-black/40">
           <View className="pl-5">
             <Text className="text-black text-xl">Frame Finder</Text>
           </View>
