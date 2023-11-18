@@ -1,5 +1,10 @@
 
 import * as React from 'react';
+import { View } from 'react-native';
+
+import FeatherIcons from "react-native-vector-icons/Feather";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ActivityIndicator } from 'react-native';
@@ -26,6 +31,7 @@ import AstigmatismInfo from './src/screens/VisionAssessments/AstigmatismInfo';
 import AstigmatismTest from './src/screens/VisionAssessments/AstigmatismTest';
 
 import HomeScreen from './src/screens/HomeScreen';
+import Glasses from './src/screens/Glasses';
 
 
 const Stack = createNativeStackNavigator();
@@ -53,23 +59,33 @@ function App() {
   return (
     loading ? <ActivityIndicator size="large" /> : (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName={initialRouteName} screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName={initialRouteName}>
           {/* Vission Assessments */}
-          <Stack.Screen name="VisionAssessmentsHome" component={VisionAssessmentHome} />
-          <Stack.Screen name="VisionAcuityInfo" component={VisionAcuityInfo} />
-          <Stack.Screen name="VisionAcuityTest" component={VisionAcuityTest} />
-          <Stack.Screen name="ColorBlindInfo" component={ColorBlindInfo} />
-          <Stack.Screen name="ColorBlindTest" component={ColorBlindTest} />
-          <Stack.Screen name="ContrastSensitivityInfo" component={ContrastSensitivityInfo} />
-          <Stack.Screen name="ContrastSensitivityTest" component={ContrastSensitivityTest} />
-          <Stack.Screen name="AstigmatismInfo" component={AstigmatismInfo} />
-          <Stack.Screen name="AstigmatismTest" component={AstigmatismTest} />
+          <Stack.Screen name="VisionAssessmentsHome" component={VisionAssessmentHome} options={{ headerShown: false }}/>
+          <Stack.Screen name="VisionAcuityInfo" component={VisionAcuityInfo} options={{ headerShown: false }}/>
+          <Stack.Screen name="VisionAcuityTest" component={VisionAcuityTest} options={{ headerShown: false }}/>
+          <Stack.Screen name="ColorBlindInfo" component={ColorBlindInfo} options={{ headerShown: false }}/>
+          <Stack.Screen name="ColorBlindTest" component={ColorBlindTest} options={{ headerShown: false }}/>
+          <Stack.Screen name="ContrastSensitivityInfo" component={ContrastSensitivityInfo} options={{ headerShown: false }}/>
+          <Stack.Screen name="ContrastSensitivityTest" component={ContrastSensitivityTest} options={{ headerShown: false }}/>
+          <Stack.Screen name="AstigmatismInfo" component={AstigmatismInfo} options={{ headerShown: false }}/>
+          <Stack.Screen name="AstigmatismTest" component={AstigmatismTest} options={{ headerShown: false }}/>
           
-          <Stack.Screen name="SignIn" component={SignInScreen} />
-          <Stack.Screen name="SignUp" component={SignUpScreen} />
-          <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
-          <Stack.Screen name="ResetLink" component={ResetLinkScreen} />
-          <Stack.Screen name="HomeTabScreen" component={HomeTabScreen} />
+          <Stack.Screen name="SignIn" component={SignInScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name="ResetLink" component={ResetLinkScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name="HomeTabScreen" component={HomeTabScreen} options={{ headerShown: false }}/>
+
+          <Stack.Screen name="Glasses" component={Glasses} options={{
+          headerTitle: "Eyeglasses",
+          headerRight: () => (
+            <View className="flex flex-row gap-10">
+              <FeatherIcons name="search" size={30} color="#0ea5e9"/>
+              <MaterialIcons name="filter-list" size={30} color="#0ea5e9"/>
+            </View>
+          ),
+        }}/>
         </Stack.Navigator>
       </NavigationContainer>
     )

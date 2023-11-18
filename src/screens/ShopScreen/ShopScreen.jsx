@@ -15,7 +15,9 @@ const ShopScreen = () => {
   return (
     <SafeAreaView className="bg-white">
       <ScrollView>
-        <Pressable className="flex flex-row justify-between items-center mx-5 mt-5 bg-sky-100 rounded-lg shadow-lg shadow-black/40">
+        <Pressable
+          onPress={() => handleNavigation('Glasses')}
+          className="flex flex-row justify-between items-center mx-5 mt-5 bg-sky-100 rounded-lg shadow-lg shadow-black/40">
           <View className="pl-5">
             <Text className="text-black text-xl">Eyeglasses</Text>
           </View>
