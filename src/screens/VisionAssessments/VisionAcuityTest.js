@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
+import { black } from 'react-native-paper/lib/typescript/src/styles/themes/v2/colors';
 import Icon from 'react-native-vector-icons/AntDesign';
 const TumblingETestScreen = () => {
     const [currentMoveIndex, setCurrentMoveIndex] = useState(0);
@@ -15,7 +16,7 @@ const TumblingETestScreen = () => {
     //       testType: "Vision Acuity Test",
     //       status: status
     //     };
-      
+
     //     try {
     //       const accessToken = await localStorage.getItem('accessToken');
     //       const response = await axios.post(`${baseURL}/users/submit_vision_assessment_result/`, data, {
@@ -23,7 +24,7 @@ const TumblingETestScreen = () => {
     //           Authorization: `Bearer ${accessToken}`
     //         }
     //       });
-      
+
     //       console.log('Response:', response);
     //       return response;
     //     } catch (error) {
@@ -97,16 +98,20 @@ const TumblingETestScreen = () => {
             height: arrowSize,
             alignItems: 'center', // To center the rotated content
             justifyContent: 'center', // To center the rotated content
+            // backgroundColor: 'black',
+            // padding: 
         };
 
         return (
-            <View style={rotationStyle}>
-                {/* Your content goes here */}
-                <Image source={require('../../assets/images/visionAssessments/E.png')} style={{ width: '100%', height: '100%' }} />
+            <View style={{ height: 80, width: 80, justifyContent: 'center', alignItems: 'center' }}>
+                <View style={rotationStyle}>
+                    {/* Your content goes here */}
+                    <Image source={require('../../assets/images/visionAssessments/E.png')} style={{ width: '100%', height: '100%' }} />
+                </View>
             </View>
         );
     };
-    
+
 
     const getRotationValue = (direction) => {
         switch (direction) {
@@ -126,22 +131,21 @@ const TumblingETestScreen = () => {
     const renderResults = () => {
         return results.map((result, index) => (
             <View key={index} style={styles.tableRow}>
-                <Text>{index + 1}</Text>
-                <Text style={result.isCorrect ? styles.greenText : styles.redText}>
+                <Text style={styles.tableHeaderText}>{index + 1}</Text>
+                <Text style={styles.tableHeaderText}>
                     {result.isCorrect ? 'Correct' : 'Incorrect'}
-                {result.isCorrect ? (
-                    <View style={styles.resultIcon}>
-                        <Icon name="checkcircleo" size={14} color="green" />
-                    </View>
-                ) : (
-                    <View style={styles.resultIcon}>
-                        <Icon name="closecircleo" size={14} color="red" />
-                    </View>
-                )}
                 </Text>
+                <View style={styles.resultIcon}>
+                    {result.isCorrect ? (
+                        <Icon name="checkcircleo" size={14} color="green" />
+                    ) : (
+                        <Icon name="closecircleo" size={14} color="red" />
+                    )}
+                </View>
             </View>
         ));
     };
+
 
     const getTotalIncorrectResults = () => {
         const incorrectNumbers = results.filter(result => !result.isCorrect).length;
@@ -186,18 +190,18 @@ const TumblingETestScreen = () => {
     };
 
 
-          const renderProgressBar = () => {
-            const progress = ((currentMoveIndex + 1) / moves.length) * 100;
-            return (
-              <View>
+    const renderProgressBar = () => {
+        const progress = ((currentMoveIndex + 1) / moves.length) * 100;
+        return (
+            <View>
                 <Text style={{ fontSize: 16, marginTop: 10 }}>Test Progress</Text>
                 <View style={{ width: '100%', backgroundColor: '#ccc', borderRadius: 10 }}>
-                  <View style={{ width: `${progress}%`, backgroundColor: '#374151', height: 12, borderRadius: 10 }} />
+                    <View style={{ width: `${progress}%`, backgroundColor: '#374151', height: 12, borderRadius: 10 }} />
                 </View>
-              </View>
-            );
-          };
-      
+            </View>
+        );
+    };
+
 
     return (
         <View style={styles.container}>
@@ -221,7 +225,7 @@ const TumblingETestScreen = () => {
                         </TouchableOpacity>
                     </View>
                     <View style={{}}>
-                    {renderProgressBar()}
+                        {renderProgressBar()}
                     </View>
                 </View>
             ) : (
@@ -229,9 +233,9 @@ const TumblingETestScreen = () => {
                     <Text style={styles.header}>Test Results</Text>
                     <View style={styles.resultsTable}>
                         <View style={styles.tableHeader}>
-                            <Text style={styles.tableHeaderText}>Move</Text>
-                            <Text style={styles.tableHeaderText}>Result</Text>
-                            <Text style={styles.tableHeaderText}>Status</Text>
+                            <Text style={[styles.tableHeaderText, { color: 'white' }]}>Move</Text>
+                            <Text style={[styles.tableHeaderText, { color: 'white' }]}>Result</Text>
+                            <Text style={[styles.tableHeaderText, { color: 'white' }]}>Status</Text>
                         </View>
                         {renderResults()}
                     </View>
@@ -240,10 +244,10 @@ const TumblingETestScreen = () => {
                     </View>
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity onPress={retakeTest} style={styles.button}>
-                            <Text style={styles.buttonText}>Retake Test</Text>
+                            <Text style={styles.resultButtonText}>Retake Test</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.button}>
-                            <Text onPress={() => Alert.alert('Result Saved Successfully!')} style={styles.buttonText}>Save Results</Text>
+                        <TouchableOpacity style={[styles.button, { backgroundColor: 'gray' }]}>
+                            <Text onPress={() => Alert.alert('Result Saved Successfully!')} style={styles.resultButtonText}>Save Results</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -273,12 +277,19 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     directionButton: {
-        backgroundColor: '#007bff',
-        padding: 10,
+        backgroundColor: '#0F97B1',
+        width: 50,
+        height: 50,
         borderRadius: 5,
         marginBottom: 10,
     },
     buttonText: {
+        color: 'white',
+        fontSize: 26,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    resultButtonText: {
         color: 'white',
         fontSize: 16,
         fontWeight: 'bold',
@@ -289,39 +300,54 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         backgroundColor: '#ccc', // Add a background color to the container
         borderRadius: 10, // Optional: add border radius to match your design
-      },
-      progressBar: {
+    },
+    progressBar: {
         height: 10,
         backgroundColor: '#374151', // Add a background color to the progress bar
         borderRadius: 10, // Optional: add border radius to match your design
-      },
+    },
     resultsContainer: {
         flex: 1,
         padding: 20,
         alignItems: 'center',
+        width: '100%'
     },
     resultsTable: {
-        width: '100%',
+        width: '100%', // Adjust the width as needed
         marginBottom: 20,
+        backgroundColor: 'white', // Set the background color to white or any other desired color
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        overflow: 'hidden', // Hide content that overflows the container
     },
     tableHeader: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         borderBottomWidth: 1,
         borderColor: '#ccc',
-        marginBottom: 10,
+        padding: 10,
+        backgroundColor: '#0F97B1',
     },
+
     tableHeaderText: {
-        flex: 1,
         fontSize: 16,
         fontWeight: 'bold',
+        textAlign: 'center',
+        justifyContent: 'space-between',
     },
+
     tableRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         borderBottomWidth: 1,
         borderColor: '#ccc',
-        marginBottom: 10,
+        padding: 10,
+        backgroundColor: 'white',
+
+    },
+    resultIcon: {
+        width: 20,
         alignItems: 'center',
     },
     greenText: {
@@ -338,9 +364,10 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
     },
     button: {
-        backgroundColor: '#007bff',
+        backgroundColor: '#0F97B1',
         padding: 10,
         borderRadius: 5,
+        margin: 10
     },
 });
 

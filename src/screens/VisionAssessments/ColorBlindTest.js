@@ -104,7 +104,7 @@ const ColorBlindTest = () => {
   };
 
   const handleSubmit = () => {
-    if (userInput == ''){
+    if (userInput == '') {
       Alert.alert('Please Enter The Number!')
     }
     else {
@@ -151,9 +151,11 @@ const ColorBlindTest = () => {
               keyboardType="numeric"
             />
             <View style={{ marginTop: 10 }} >
-              <TouchableOpacity style={{justifyContent:'center', alignItems:'center', 
-              backgroundColor: '#0F97B1', height: 40, borderRadius: 5 }} title="Submit" onPress={handleSubmit}>
-                <Text style={{color: 'white', fontSize: 16}} >Submit</Text>
+              <TouchableOpacity style={{
+                justifyContent: 'center', alignItems: 'center',
+                backgroundColor: '#0F97B1', height: 40, borderRadius: 5
+              }} title="Submit" onPress={handleSubmit}>
+                <Text style={{ color: 'white', fontSize: 16 }} >Submit</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -215,7 +217,7 @@ const ColorBlindTest = () => {
       <View key={index} style={styles.tableRow}>
         <Text>{index + 1}</Text>
         <Text style={result.isCorrect ? styles.greenText : styles.redText}>
-          {result.isCorrect ? 'Correct' : 'Incorrect'}
+          {result.isCorrect ? 'Correct ' : 'Incorrect '}
           {result.isCorrect ? (
             <View style={styles.resultIcon}>
               <Icon name="checkcircleo" size={14} color="green" />
@@ -256,17 +258,17 @@ const ColorBlindTest = () => {
 
   const renderRetakeButton = () => {
     return (
-      <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 8 }}>
-        <Button
-          title="Retake Test"
-          onPress={handleRetakeTest}
-          style={{ backgroundColor: 'red', color: 'white' }}
-        />
-        <Button
-          title="Save Results"
-          onPress={() => Alert.alert('Result Saved Successfully!')}
-          style={{ backgroundColor: 'gray', color: 'white' }}
-        />
+      <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 16 }}>
+        <TouchableOpacity onPress={handleRetakeTest}
+          style={{ borderRadius: 4,  marginRight: 6, backgroundColor: '#0F97B1', color: 'white', height:40, width: 100, justifyContent:'center', alignItems:'center' }}>
+
+          <Text style={{fontSize: 14, fontWeight: 'bold', color:'white'}}>Retake Test</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => Alert.alert('Result Saved Successfully!')}
+          style={{ borderRadius: 4, marginLeft: 6, backgroundColor: 'gray', color: 'white', height:40, width: 100, justifyContent:'center', alignItems:'center' }}>
+
+          <Text style={{fontSize: 14, fontWeight: 'bold', color:'white'}}>Save Results</Text>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -280,7 +282,7 @@ const ColorBlindTest = () => {
             <View style={styles.resultsTable}>
               <View style={styles.tableHeader}>
                 <Text style={styles.tableHeaderText}>Move</Text>
-                <Text style={styles.tableHeaderText}>Result</Text>
+                <Text style={[styles.tableHeaderText, { marginRight: 35 }]}>Result</Text>
                 <Text style={styles.tableHeaderText}>Status</Text>
               </View>
               {renderResults()}
@@ -324,6 +326,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     alignItems: 'center',
+    width: '100%'
   },
   resultsTable: {
     width: '90%',
@@ -335,13 +338,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: '#ccc',
     marginBottom: 10,
-    alignItems: 'center',
   },
   tableHeaderText: {
-    flex: 1,
     fontSize: 16,
     fontWeight: 'bold',
-    textAlign: 'center', // Center align the text in headers
+    justifyContent: 'space-between',
   },
   tableRow: {
     flexDirection: 'row',
