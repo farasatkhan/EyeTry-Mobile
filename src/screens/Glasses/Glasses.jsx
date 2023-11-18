@@ -78,18 +78,28 @@ const Glasses = () => {
     fetchAllWishlistProducts();
   }, []);
 
+  const [selectedVariants, setSelectedVariants] = useState({});
+
+  const handleVariantPress = (itemId, variantIndex) => {
+    setSelectedVariants({...selectedVariants, [itemId]: variantIndex});
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       <FlatList
         data={glasses}
         keyExtractor={item => item.key}
         renderItem={({item}) => {
+          const selectedVariantIndex = selectedVariants[item._id] || 0;
+          const selectedVariant =
+            item.frame_information.frame_variants[selectedVariantIndex];
+
           const isFavorite =
             wishlists.wishlist &&
             wishlists.wishlist.some(product => product._id === item._id);
 
           return (
-            <View className="">
+            <View className="my-5">
               <View className="flex">
                 {isFavorite ? (
                   <Pressable onPress={() => handleRemoveFavorite(item._id)}>
@@ -112,13 +122,24 @@ const Glasses = () => {
                       className="h-60 object-cover"
                       resizeMode="contain"
                       source={{
-                        uri:
-                          API_URL +
-                          item.frame_information.frame_variants[0].images[0],
+                        uri: API_URL + selectedVariant.images[0],
                       }}
                     />
                   </View>
                 )}
+              </View>
+              <View className="flex flex-row justify-end mb-2 pr-5 gap-5">
+                {item.frame_information.frame_variants.map((variant, index) => (
+                  <View
+                    style={{borderColor: variant.color_code}}
+                    className="flex justify-center items-center w-10 h-10 border rounded-full">
+                    <Pressable
+                      key={index}
+                      onPress={() => handleVariantPress(item._id, index)}
+                      style={{backgroundColor: variant.color_code}}
+                      className="w-7 h-7 rounded-full bg-black"></Pressable>
+                  </View>
+                ))}
               </View>
               <View className="flex flex-row justify-between mx-5">
                 <View className="flex flex-col">
