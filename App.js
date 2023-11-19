@@ -85,7 +85,7 @@ function App() {
           headerTitle: "Eyeglasses",
           headerRight: () => <GlassesHeader />,
           }}/>
-          <Stack.Screen name='GlassesSearch' component={GlassesSearch}/>
+          <Stack.Screen name='GlassesSearch' component={GlassesSearch} options={{headerShown: false}}/>
           <Stack.Screen name='GlassesFilter' component={GlassesFilter}/>
           <Stack.Screen name='Product' component={Product}/>
           
