@@ -43,9 +43,6 @@ function App() {
   const [initialRouteName, setInitialRouteName] = React.useState('SignIn')
   const [loading, setIsLoading] = React.useState(false)
 
-
-
-
   React.useEffect(() => {
     const checkToken = async () => {
       const token = await getDataAsyncStorage("refreshToken")
