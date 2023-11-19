@@ -10,7 +10,7 @@ export const viewAllGlasses = async () => {
     }
 }
 
-export const viewAllEyeGlasses = async () => {
+export const viewAllEyeGlassesList = async () => {
     try {
         const response = await authenticatedAxiosInstance.get('/products/v1/glasses/eyeglasses');
         return response.data;
@@ -20,7 +20,7 @@ export const viewAllEyeGlasses = async () => {
     }
 }
 
-export const viewAllSunGlasses = async () => {
+export const viewAllSunGlassesList = async () => {
     try {
         const response = await authenticatedAxiosInstance.get('/products/v1/glasses/sunglasses');
         return response.data;
