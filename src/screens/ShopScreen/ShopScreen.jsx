@@ -8,15 +8,17 @@ import Pressable from '../../wrapper_components/Pressable';
 const ShopScreen = () => {
   const navigation = useNavigation();
 
-  const handleNavigation = screen => {
-    navigation.navigate(screen);
+  const handleNavigation = (screen, options) => {
+    navigation.navigate(screen, options);
   };
 
   return (
     <SafeAreaView className="bg-white">
       <ScrollView>
         <Pressable
-          onPress={() => handleNavigation('Glasses')}
+          onPress={() =>
+            handleNavigation('Glasses', {glassesType: 'Eyeglasses'})
+          }
           className="flex flex-row justify-between items-center mx-5 mt-5 bg-sky-100 rounded-lg shadow-lg shadow-black/40">
           <View className="pl-5">
             <Text className="text-black text-xl">Eyeglasses</Text>
@@ -27,7 +29,11 @@ const ShopScreen = () => {
             source={require('../../assets/shop_screen/eyeglasses.png')}
           />
         </Pressable>
-        <Pressable className="flex flex-row justify-between items-center mx-5 mt-5 bg-sky-200 rounded-lg shadow-lg shadow-black/40">
+        <Pressable
+          onPress={() =>
+            handleNavigation('Glasses', {glassesType: 'Sunglasses'})
+          }
+          className="flex flex-row justify-between items-center mx-5 mt-5 bg-sky-200 rounded-lg shadow-lg shadow-black/40">
           <View className="pl-5">
             <Text className="text-black text-xl">Sunglasses</Text>
           </View>

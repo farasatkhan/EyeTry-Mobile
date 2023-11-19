@@ -82,7 +82,6 @@ function App() {
           <Stack.Screen name="HomeTabScreen" component={HomeTabScreen} options={{ headerShown: false }}/>
           
           <Stack.Screen name="Glasses" component={Glasses} options={{
-          headerTitle: "Eyeglasses",
           headerRight: () => <GlassesHeader />,
           }}/>
           <Stack.Screen name='GlassesSearch' component={GlassesSearch} options={{headerShown: false}}/>
