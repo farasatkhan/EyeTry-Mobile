@@ -346,6 +346,7 @@ const Product = ({route}) => {
             </View>
           </View>
           <View className="flex flex-col gap-y-5 px-5 my-5">
+            {/* Change the handleNavigation to Try-On Screen */}
             <Pressable
               onPress={() => handleNavigation('HomeTabScreen')}
               className="flex flex-row justify-center items-center h-16 bg-blue-200 rounded-lg">
@@ -353,6 +354,7 @@ const Product = ({route}) => {
                 Virtual Try-On
               </Text>
             </Pressable>
+            {/* Change the handleNavigation to Orderflow Screen */}
             <Pressable
               onPress={() => handleNavigation('HomeTabScreen')}
               className="flex flex-row justify-center items-center h-16 bg-blue-600 rounded-lg">

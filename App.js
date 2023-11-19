@@ -2,8 +2,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 
-import FeatherIcons from "react-native-vector-icons/Feather";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -30,10 +29,14 @@ import ContrastSensitivityTest from './src/screens/VisionAssessments/ContrastSen
 import AstigmatismInfo from './src/screens/VisionAssessments/AstigmatismInfo';
 import AstigmatismTest from './src/screens/VisionAssessments/AstigmatismTest';
 
+
 import HomeScreen from './src/screens/HomeScreen';
 import Glasses from './src/screens/Glasses';
+import GlassesSearch from './src/screens/GlassesSearch';
+import GlassesFilter from './src/screens/GlassesFilter';
 import Product from './src/screens/Product';
 
+import GlassesHeader from './src/components/ui/GlassesHeader';
 
 const Stack = createNativeStackNavigator();
 
@@ -55,7 +58,7 @@ function App() {
   //   }
   //   checkToken()
   // }, [])
-
+  
 
   return (
     loading ? <ActivityIndicator size="large" /> : (
@@ -77,17 +80,15 @@ function App() {
           <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} options={{ headerShown: false }}/>
           <Stack.Screen name="ResetLink" component={ResetLinkScreen} options={{ headerShown: false }}/>
           <Stack.Screen name="HomeTabScreen" component={HomeTabScreen} options={{ headerShown: false }}/>
-
+          
           <Stack.Screen name="Glasses" component={Glasses} options={{
           headerTitle: "Eyeglasses",
-          headerRight: () => (
-            <View className="flex flex-row gap-10">
-              <FeatherIcons name="search" size={30} color="#0ea5e9"/>
-              <MaterialIcons name="filter-list" size={30} color="#0ea5e9"/>
-            </View>
-          ),
+          headerRight: () => <GlassesHeader />,
           }}/>
+          <Stack.Screen name='GlassesSearch' component={GlassesSearch}/>
+          <Stack.Screen name='GlassesFilter' component={GlassesFilter}/>
           <Stack.Screen name='Product' component={Product}/>
+          
         </Stack.Navigator>
       </NavigationContainer>
     )
