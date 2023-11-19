@@ -132,7 +132,7 @@ const Glasses = () => {
                   </Pressable>
                 )}
               </View>
-              <View className="flex flex-row justify-end mb-2 pr-5 gap-5">
+              <View className="flex flex-row justify-end mb-2 pr-5 gap-x-5 bg-yellow-500">
                 {item.frame_information.frame_variants.map((variant, index) => (
                   <View
                     style={

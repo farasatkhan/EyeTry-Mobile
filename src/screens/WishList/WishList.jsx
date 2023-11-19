@@ -32,8 +32,8 @@ const Wishlist = () => {
 
   const navigation = useNavigation();
 
-  const handleNavigation = screen => {
-    navigation.navigate(screen);
+  const handleNavigation = (screen, options) => {
+    navigation.navigate(screen, options);
   };
 
   const [wishlistGlasses, setWishlistGlasses] = useState({});
@@ -66,7 +66,7 @@ const Wishlist = () => {
     <SafeAreaView className="flex-1 bg-white">
       {wishlistGlasses.length === 0 ? (
         <View className="flex-1 justify-end items-center bg-white pb-32">
-          <View className="flex flex-col justify-center items-center gap-5">
+          <View className="flex flex-col justify-center items-center gap-y-5">
             <Text className="text-xl text-black">No Favorites Yet!</Text>
             <Text className="text-black">
               Browse our frames and save the one you like the most..
@@ -92,7 +92,11 @@ const Wishlist = () => {
                   </Pressable>
 
                   {item.frame_information.frame_variants.length > 0 && (
-                    <View className="flex flex-row justify-center items-center">
+                    <Pressable
+                      onPress={() =>
+                        handleNavigation('Product', {productId: item._id})
+                      }
+                      className="flex flex-row justify-center items-center">
                       <Image
                         style={{width: width}}
                         className="h-60 object-cover"
@@ -101,14 +105,18 @@ const Wishlist = () => {
                           uri: API_URL + selectedVariant.images[0],
                         }}
                       />
-                    </View>
+                    </Pressable>
                   )}
                 </View>
-                <View className="flex flex-row justify-end mb-2 pr-5 gap-5">
+                <View className="flex flex-row justify-end mb-2 pr-5 gap-x-5">
                   {item.frame_information.frame_variants.map(
                     (variant, index) => (
                       <View
-                        style={{borderColor: variant.color_code}}
+                        style={
+                          selectedVariantIndex === index
+                            ? {borderColor: variant.color_code}
+                            : {borderColor: '#fff'}
+                        }
                         className="flex justify-center items-center w-10 h-10 border rounded-full">
                         <Pressable
                           key={index}

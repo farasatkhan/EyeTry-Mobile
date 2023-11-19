@@ -135,7 +135,7 @@ const Product = ({route}) => {
                 </View>
               )}
             />
-            <View className="flex flex-row justify-start p-5 gap-5">
+            <View className="flex flex-row justify-start p-5 gap-x-5">
               {product.frame_information.frame_variants.map(
                 (variant, index) => (
                   <Pressable
@@ -198,7 +198,7 @@ const Product = ({route}) => {
                   <Text className="text-xl text-black mb-2">
                     Product Details
                   </Text>
-                  <View className="flex flex-row gap-10">
+                  <View className="flex flex-row gap-x-10">
                     <View className="flex flex-col">
                       <Text className="text-gray-500 text-[16px]">
                         Manufacturer:
@@ -231,7 +231,7 @@ const Product = ({route}) => {
                   <Text className="text-xl text-black mb-2">
                     Lens Information
                   </Text>
-                  <View className="flex flex-row gap-10">
+                  <View className="flex flex-row gap-x-10">
                     <View className="flex flex-col">
                       <Text className="text-gray-500 text-[16px]">
                         Lens Width:
@@ -345,7 +345,7 @@ const Product = ({route}) => {
               )}
             </View>
           </View>
-          <View className="flex flex-col gap-5 px-5 my-5">
+          <View className="flex flex-col gap-y-5 px-5 my-5">
             <Pressable
               onPress={() => handleNavigation('HomeTabScreen')}
               className="flex flex-row justify-center items-center h-16 bg-blue-200 rounded-lg">
