@@ -10,3 +10,12 @@ export const viewAllGlasses = async () => {
     }
 }
 
+export const viewSingleProduct = async (productId) => {
+    try {
+        const response = await authenticatedAxiosInstance.get('/products/v1/glasses/' + productId);
+        return response.data;
+    } catch (error) {
+        console.error('Error while retriving glasses', error);
+        throw error;
+    }
+}

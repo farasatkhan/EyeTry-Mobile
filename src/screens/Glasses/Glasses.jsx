@@ -30,8 +30,8 @@ const height = Dimensions.get('window').height;
 const Glasses = () => {
   const navigation = useNavigation();
 
-  const handleNavigation = screen => {
-    navigation.navigate(screen);
+  const handleNavigation = (screen, options) => {
+    navigation.navigate(screen, options);
   };
 
   const [glasses, setGlasses] = useState([]);
@@ -99,7 +99,7 @@ const Glasses = () => {
             wishlists.wishlist.some(product => product._id === item._id);
 
           return (
-            <View className="my-5">
+            <View className="my-5" onPress={() => handleNavigation('Product')}>
               <View className="flex">
                 {isFavorite ? (
                   <Pressable onPress={() => handleRemoveFavorite(item._id)}>
@@ -116,7 +116,11 @@ const Glasses = () => {
                 )}
 
                 {item.frame_information.frame_variants.length > 0 && (
-                  <View className="flex flex-row justify-center items-center">
+                  <Pressable
+                    onPress={() =>
+                      handleNavigation('Product', {productId: item._id})
+                    }
+                    className="flex flex-row justify-center items-center">
                     <Image
                       style={{width: width}}
                       className="h-60 object-cover"
@@ -125,13 +129,17 @@ const Glasses = () => {
                         uri: API_URL + selectedVariant.images[0],
                       }}
                     />
-                  </View>
+                  </Pressable>
                 )}
               </View>
               <View className="flex flex-row justify-end mb-2 pr-5 gap-5">
                 {item.frame_information.frame_variants.map((variant, index) => (
                   <View
-                    style={{borderColor: variant.color_code}}
+                    style={
+                      selectedVariantIndex === index
+                        ? {borderColor: variant.color_code}
+                        : {borderColor: '#fff'}
+                    }
                     className="flex justify-center items-center w-10 h-10 border rounded-full">
                     <Pressable
                       key={index}

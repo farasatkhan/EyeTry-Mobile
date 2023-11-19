@@ -76,7 +76,7 @@ const Wishlist = () => {
       ) : (
         <FlatList
           data={wishlistGlasses}
-          keyExtractor={item => item.key}
+          keyExtractor={item => item._id}
           renderItem={({item}) => {
             const selectedVariantIndex = selectedVariants[item._id] || 0;
             const selectedVariant =

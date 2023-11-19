@@ -32,6 +32,7 @@ import AstigmatismTest from './src/screens/VisionAssessments/AstigmatismTest';
 
 import HomeScreen from './src/screens/HomeScreen';
 import Glasses from './src/screens/Glasses';
+import Product from './src/screens/Product';
 
 
 const Stack = createNativeStackNavigator();
@@ -85,7 +86,8 @@ function App() {
               <MaterialIcons name="filter-list" size={30} color="#0ea5e9"/>
             </View>
           ),
-        }}/>
+          }}/>
+          <Stack.Screen name='Product' component={Product}/>
         </Stack.Navigator>
       </NavigationContainer>
     )
