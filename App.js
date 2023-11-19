@@ -1,5 +1,9 @@
 
 import * as React from 'react';
+import { View } from 'react-native';
+
+
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ActivityIndicator } from 'react-native';
@@ -25,13 +29,19 @@ import ContrastSensitivityTest from './src/screens/VisionAssessments/ContrastSen
 import AstigmatismInfo from './src/screens/VisionAssessments/AstigmatismInfo';
 import AstigmatismTest from './src/screens/VisionAssessments/AstigmatismTest';
 
+import HomeScreen from './src/screens/HomeScreen';
+import Glasses from './src/screens/Glasses';
+import GlassesSearch from './src/screens/GlassesSearch';
+import GlassesFilter from './src/screens/GlassesFilter';
+import Product from './src/screens/Product';
+
+import GlassesHeader from './src/components/ui/GlassesHeader';
 
 const Stack = createNativeStackNavigator();
 
-
 function App() {
-  const [initialRouteName, setInitialRouteName] = React.useState(null)
-  const [loading, setIsLoading] = React.useState(true)
+  const [initialRouteName, setInitialRouteName] = React.useState('HomeTabScreen')
+  const [loading, setIsLoading] = React.useState(false)
 
 
 
@@ -55,23 +65,31 @@ function App() {
   return (
     loading ? <ActivityIndicator size="large" /> : (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName={'VisionAssessmentsHome'} screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName={initialRouteName}>
           {/* Vission Assessments */}
-          <Stack.Screen name="VisionAssessmentsHome" component={VisionAssessmentHome} />
-          <Stack.Screen name="VisionAcuityInfo" component={VisionAcuityInfo} />
-          <Stack.Screen name="VisionAcuityTest" component={VisionAcuityTest} />
-          <Stack.Screen name="ColorBlindInfo" component={ColorBlindInfo} />
-          <Stack.Screen name="ColorBlindTest" component={ColorBlindTest} />
-          <Stack.Screen name="ContrastSensitivityInfo" component={ContrastSensitivityInfo} />
-          <Stack.Screen name="ContrastSensitivityTest" component={ContrastSensitivityTest} />
-          <Stack.Screen name="AstigmatismInfo" component={AstigmatismInfo} />
-          <Stack.Screen name="AstigmatismTest" component={AstigmatismTest} />
-
-          <Stack.Screen name="SignIn" component={SignInScreen} />
-          <Stack.Screen name="SignUp" component={SignUpScreen} />
-          <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
-          <Stack.Screen name="ResetLink" component={ResetLinkScreen} />
-          <Stack.Screen name="HomeTabScreen" component={HomeTabScreen} />
+          <Stack.Screen name="VisionAssessmentsHome" component={VisionAssessmentHome} options={{ headerShown: false }}/>
+          <Stack.Screen name="VisionAcuityInfo" component={VisionAcuityInfo} options={{ headerShown: false }}/>
+          <Stack.Screen name="VisionAcuityTest" component={VisionAcuityTest} options={{ headerShown: false }}/>
+          <Stack.Screen name="ColorBlindInfo" component={ColorBlindInfo} options={{ headerShown: false }}/>
+          <Stack.Screen name="ColorBlindTest" component={ColorBlindTest} options={{ headerShown: false }}/>
+          <Stack.Screen name="ContrastSensitivityInfo" component={ContrastSensitivityInfo} options={{ headerShown: false }}/>
+          <Stack.Screen name="ContrastSensitivityTest" component={ContrastSensitivityTest} options={{ headerShown: false }}/>
+          <Stack.Screen name="AstigmatismInfo" component={AstigmatismInfo} options={{ headerShown: false }}/>
+          <Stack.Screen name="AstigmatismTest" component={AstigmatismTest} options={{ headerShown: false }}/>
+          
+          <Stack.Screen name="SignIn" component={SignInScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name="ResetLink" component={ResetLinkScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name="HomeTabScreen" component={HomeTabScreen} options={{ headerShown: false }}/>
+          
+          <Stack.Screen name="Glasses" component={Glasses} options={{
+          headerRight: () => <GlassesHeader />,
+          }}/>
+          <Stack.Screen name='GlassesSearch' component={GlassesSearch} options={{headerShown: false}}/>
+          <Stack.Screen name='GlassesFilter' component={GlassesFilter}/>
+          <Stack.Screen name='Product' component={Product}/>
+          
         </Stack.Navigator>
       </NavigationContainer>
     )
