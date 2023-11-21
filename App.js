@@ -55,7 +55,7 @@ function App() {
   return (
     loading ? <ActivityIndicator size="large" /> : (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName={'VisionAssessmentsHome'} screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName={'HomeTabScreen'} screenOptions={{ headerShown: false }}>
           {/* Vission Assessments */}
           <Stack.Screen name="VisionAssessmentsHome" component={VisionAssessmentHome} />
           <Stack.Screen name="VisionAcuityInfo" component={VisionAcuityInfo} />
