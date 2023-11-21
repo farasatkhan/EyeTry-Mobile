@@ -37,6 +37,8 @@ import Product from './src/screens/Product';
 
 import GlassesHeader from './src/components/ui/GlassesHeader';
 
+
+
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -62,7 +64,7 @@ function App() {
   return (
     loading ? <ActivityIndicator size="large" /> : (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName={initialRouteName}>
+        <Stack.Navigator initialRouteName={'HomeTabScreen'}>
           {/* Vission Assessments */}
           <Stack.Screen name="VisionAssessmentsHome" component={VisionAssessmentHome} options={{ headerShown: false }}/>
           <Stack.Screen name="VisionAcuityInfo" component={VisionAcuityInfo} options={{ headerShown: false }}/>

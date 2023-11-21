@@ -348,7 +348,7 @@ const Product = ({route}) => {
           <View className="flex flex-col gap-y-5 px-5 my-5">
             {/* Change the handleNavigation to Try-On Screen */}
             <Pressable
-              onPress={() => handleNavigation('HomeTabScreen')}
+              onPress={() => handleNavigation('WebView')}
               className="flex flex-row justify-center items-center h-16 bg-blue-200 rounded-lg">
               <Text className="text-blue-600 text-xl font-semibold">
                 Virtual Try-On
@@ -356,7 +356,7 @@ const Product = ({route}) => {
             </Pressable>
             {/* Change the handleNavigation to Orderflow Screen */}
             <Pressable
-              onPress={() => handleNavigation('HomeTabScreen')}
+              onPress={() => handleNavigation('LensCustomizationMain', { productId: productId })}
               className="flex flex-row justify-center items-center h-16 bg-blue-600 rounded-lg">
               <Text className="text-white text-xl font-semibold">
                 Select Lens

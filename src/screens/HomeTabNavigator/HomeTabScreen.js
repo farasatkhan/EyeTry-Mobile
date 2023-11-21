@@ -45,7 +45,7 @@ const HomeTabScreen = () => {
         tabBarActiveTintColor: '#7286D3',
         tabBarInactiveTintColor: 'gray',
       })}>
-      <Tab.Screen name="ProductStackScreen" component={ShopScreen} />
+      <Tab.Screen name="ProductStackScreen" component={ProductStackScreen} />
       <Tab.Screen name="WishListStackScreen" component={Wishlist} />
       <Tab.Screen name="HomeStackScreen" component={HomeScreen} />
       <Tab.Screen name="CartStackScreen" component={CartStackScreen} />
