@@ -7,17 +7,17 @@ import Pressable from '../../../wrapper_components/Pressable';
 const GlassesFilterItem = ({title, itemsSelectedCount, property}) => {
   const [filteredItem, setFilteredItem] = useState([]);
 
-  const toggleCategory = (category, setterFunc, currentList) => {
-    const categoryIndex = currentList.indexOf(category);
-    let newCategories = [...currentList];
+  const toggleFilteredItem = item => {
+    const itemIndex = filteredItem.indexOf(item);
+    let newfilteredItem = [...filteredItem];
 
-    if (categoryIndex === -1) {
-      newCategories = [...newCategories, category];
+    if (itemIndex === -1) {
+      newfilteredItem = [...newfilteredItem, item];
     } else {
-      newCategories.splice(categoryIndex, 1);
+      newfilteredItem.splice(itemIndex, 1);
     }
 
-    setterFunc(newCategories);
+    setFilteredItem(newfilteredItem);
   };
 
   return (
@@ -34,9 +34,7 @@ const GlassesFilterItem = ({title, itemsSelectedCount, property}) => {
 
           return (
             <Pressable
-              onPress={() =>
-                toggleCategory(item, setFilteredItem, filteredItem)
-              }
+              onPress={() => toggleFilteredItem(item)}
               style={{
                 backgroundColor: isSelected ? '#0ea5e9' : '#ffff',
               }}

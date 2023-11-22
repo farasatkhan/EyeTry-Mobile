@@ -136,6 +136,11 @@ const GlassesFilter = () => {
             property={properties.size}
           />
         </View>
+        <View className="my-10">
+          <Pressable className="flex flex-row justify-center items-center mx-10 h-16 border rounded-md">
+            <Text className="text-black text-xl font-bold">Search Filter</Text>
+          </Pressable>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
