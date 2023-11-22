@@ -40,7 +40,7 @@ import GlassesHeader from './src/components/ui/GlassesHeader';
 const Stack = createNativeStackNavigator();
 
 function App() {
-  const [initialRouteName, setInitialRouteName] = React.useState('SignIn')
+  const [initialRouteName, setInitialRouteName] = React.useState('GlassesFilter')
   const [loading, setIsLoading] = React.useState(false)
 
   React.useEffect(() => {
