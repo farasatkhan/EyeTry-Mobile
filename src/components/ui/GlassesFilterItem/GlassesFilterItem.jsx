@@ -4,7 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 
 import Pressable from '../../../wrapper_components/Pressable';
 
-const GlassesFilterItem = ({title, property}) => {
+const GlassesFilterItem = ({title, property, onFilterChange}) => {
   const [filteredItem, setFilteredItem] = useState([]);
 
   const toggleFilteredItem = item => {
@@ -18,6 +18,7 @@ const GlassesFilterItem = ({title, property}) => {
     }
 
     setFilteredItem(newfilteredItem);
+    onFilterChange(newfilteredItem);
   };
 
   return (

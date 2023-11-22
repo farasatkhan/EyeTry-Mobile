@@ -8,56 +8,7 @@ import Pressable from '../../wrapper_components/Pressable';
 
 import GlassesFilterItem from '../../components/ui/GlassesFilterItem';
 
-const properties = {
-  colors: [
-    'All',
-    'Black',
-    'Blue',
-    'Brown',
-    'Green',
-    'Red',
-    'Yellow',
-    'Purple',
-    'Orange',
-    'White',
-    'Transparent',
-    'Silver',
-  ],
-  material: [
-    'All',
-    'Acetate',
-    'Metal',
-    'Stainless',
-    'Steel',
-    'Titanium',
-    'Tr-90',
-    'Plastic',
-  ],
-  frame_shape: [
-    'All',
-    'Aviatrix',
-    'Cat eye',
-    'Browline',
-    'Oval',
-    'Polygon',
-    'Rectangle',
-    'Round',
-    'Square',
-  ],
-  face_shape: [
-    'All',
-    'Round',
-    'Square',
-    'Oval',
-    'Heart-Shaped',
-    'Diamond',
-    'Rectangle/Long',
-  ],
-  gender: ['Male', 'Female', 'Kids'],
-  rim: ['All Rims', 'Full Rim', 'Rim Less', 'Semi Rim'],
-  size: ['All', 'Small', 'Medium', 'Large', 'Extra Large'],
-  categories: ['All', 'Eyeglasses', 'Sunglasses', 'Men', 'Women', 'Kids'],
-};
+import properties from '../../data/GlassesFilterProperties';
 
 const GlassesFilter = () => {
   const navigation = useNavigation();
@@ -82,26 +33,49 @@ const GlassesFilter = () => {
     fetchGlassess();
   }, []);
 
-  const [colors, setColors] = useState([]);
-  const [material, setMaterial] = useState([]);
-  const [frameShape, setFrameShape] = useState([]);
-  const [faceShape, setFaceShape] = useState([]);
-  const [gender, setGender] = useState([]);
-  const [rim, setRim] = useState([]);
-  const [size, setSize] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [filters, setFilters] = useState({
+    categories: [],
+    colors: [],
+    materials: [],
+    frameShape: [],
+    faceShape: [],
+    gender: [],
+    rim: [],
+    size: [],
+  });
 
-  const updateState = (category, setterFunc, currentList) => {
-    const categoryIndex = currentList.indexOf(category);
-    let newCategories = [...currentList];
-
-    if (categoryIndex === -1) {
-      newCategories = [...newCategories, category];
-    } else {
-      newCategories.splice(categoryIndex, 1);
+  const applyFilter = (filter, type) => {
+    switch (type) {
+      case 'Categories':
+        setFilters(prevFilters => ({...prevFilters, categories: filter}));
+        break;
+      case 'Colors':
+        setFilters(prevFilters => ({...prevFilters, colors: filter}));
+        break;
+      case 'Materials':
+        setFilters(prevFilters => ({...prevFilters, materials: filter}));
+        break;
+      case 'Frame Shape':
+        setFilters(prevFilters => ({...prevFilters, frameShape: filter}));
+        break;
+      case 'Face Shape':
+        setFilters(prevFilters => ({...prevFilters, faceShape: filter}));
+        break;
+      case 'Gender':
+        setFilters(prevFilters => ({...prevFilters, gender: filter}));
+        break;
+      case 'Rim':
+        setFilters(prevFilters => ({...prevFilters, rim: filter}));
+        break;
+      case 'Size':
+        setFilters(prevFilters => ({...prevFilters, size: filter}));
+        break;
     }
+  };
 
-    setterFunc(newCategories);
+  const SearchFiltered = () => {
+    // apply filters and search it
+    console.log(filters);
   };
 
   return (
@@ -111,23 +85,49 @@ const GlassesFilter = () => {
           <GlassesFilterItem
             title="Categories"
             property={properties.categories}
+            onFilterChange={filter => applyFilter(filter, 'Categories')}
           />
-          <GlassesFilterItem title="Colors" property={properties.colors} />
-          <GlassesFilterItem title="Materials" property={properties.material} />
+          <GlassesFilterItem
+            title="Colors"
+            property={properties.colors}
+            onFilterChange={filter => applyFilter(filter, 'Colors')}
+          />
+          <GlassesFilterItem
+            title="Materials"
+            property={properties.material}
+            onFilterChange={filter => applyFilter(filter, 'Materials')}
+          />
           <GlassesFilterItem
             title="Frame Shape"
             property={properties.frame_shape}
+            onFilterChange={filter => applyFilter(filter, 'Frame Shape')}
           />
           <GlassesFilterItem
             title="Face Shape"
             property={properties.face_shape}
+            onFilterChange={filter => applyFilter(filter, 'Face Shape')}
           />
-          <GlassesFilterItem title="Gender" property={properties.gender} />
-          <GlassesFilterItem title="Rim" property={properties.rim} />
-          <GlassesFilterItem title="Size" property={properties.size} />
+          <GlassesFilterItem
+            title="Gender"
+            property={properties.gender}
+            onFilterChange={filter => applyFilter(filter, 'Gender')}
+          />
+          <GlassesFilterItem
+            title="Rim"
+            property={properties.rim}
+            onFilterChange={filter => applyFilter(filter, 'Rim')}
+          />
+          <GlassesFilterItem
+            title="Size"
+            property={properties.size}
+            onFilterChange={filter => applyFilter(filter, 'Size')}
+          />
         </View>
         <View className="my-10">
-          <Pressable className="flex flex-row justify-center items-center mx-10 h-16 border rounded-md">
+          <Pressable
+            onPress={() => SearchFiltered()}
+            className="flex flex-row justify-center items-center mx-10 h-16
+            border rounded-md">
             <Text className="text-black text-xl font-bold">Search Filter</Text>
           </Pressable>
         </View>
