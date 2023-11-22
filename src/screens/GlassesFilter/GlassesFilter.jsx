@@ -91,50 +91,40 @@ const GlassesFilter = () => {
   const [size, setSize] = useState([]);
   const [categories, setCategories] = useState([]);
 
+  const updateState = (category, setterFunc, currentList) => {
+    const categoryIndex = currentList.indexOf(category);
+    let newCategories = [...currentList];
+
+    if (categoryIndex === -1) {
+      newCategories = [...newCategories, category];
+    } else {
+      newCategories.splice(categoryIndex, 1);
+    }
+
+    setterFunc(newCategories);
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView>
         <View className="my-10">
           <GlassesFilterItem
             title="Categories"
-            itemsSelectedCount={0}
             property={properties.categories}
           />
-          <GlassesFilterItem
-            title="Colors"
-            itemsSelectedCount={0}
-            property={properties.colors}
-          />
-          <GlassesFilterItem
-            title="Materials"
-            itemsSelectedCount={0}
-            property={properties.material}
-          />
+          <GlassesFilterItem title="Colors" property={properties.colors} />
+          <GlassesFilterItem title="Materials" property={properties.material} />
           <GlassesFilterItem
             title="Frame Shape"
-            itemsSelectedCount={0}
             property={properties.frame_shape}
           />
           <GlassesFilterItem
             title="Face Shape"
-            itemsSelectedCount={0}
             property={properties.face_shape}
           />
-          <GlassesFilterItem
-            title="Gender"
-            itemsSelectedCount={0}
-            property={properties.gender}
-          />
-          <GlassesFilterItem
-            title="Rim"
-            itemsSelectedCount={0}
-            property={properties.rim}
-          />
-          <GlassesFilterItem
-            title="Size"
-            itemsSelectedCount={0}
-            property={properties.size}
-          />
+          <GlassesFilterItem title="Gender" property={properties.gender} />
+          <GlassesFilterItem title="Rim" property={properties.rim} />
+          <GlassesFilterItem title="Size" property={properties.size} />
         </View>
         <View className="my-10">
           <Pressable className="flex flex-row justify-center items-center mx-10 h-16 border rounded-md">

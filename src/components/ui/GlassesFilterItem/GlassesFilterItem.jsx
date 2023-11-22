@@ -25,7 +25,7 @@ const GlassesFilterItem = ({title, itemsSelectedCount, property}) => {
       <View className="flex flex-row justify-center items-center mb-5 gap-x-3">
         <Text className="text-black text-xl font-semibold">{title}</Text>
         <View className="flex flex-row justify-center items-center w-8 h-8 rounded-full bg-gray-200">
-          <Text className="text-black text-xs">{itemsSelectedCount}</Text>
+          <Text className="text-black text-xs">{filteredItem.length}</Text>
         </View>
       </View>
       <View className="flex flex-row flex-wrap justify-center items-center mx-5 gap-4">
