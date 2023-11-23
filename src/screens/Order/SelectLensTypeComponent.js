@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { updateSelectedOptions } from '../../../../redux/actions/orderSelectionAction';
+import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateSelectedOptions } from '../../redux/actions/orderSelectionAction';
 import { useNavigation } from '@react-navigation/native';
 // import { viewParticularProduct } from '../../../../api/productsApi';
 import { useParams } from '@react-navigation/native';
@@ -9,12 +9,12 @@ import API_URL from '../../config/config';
 
 // import SunglassesLensPreview from '../OrderComponets/SunglassesLensPreview/SunglassesLensPreview';
 // import TransitionLensPreview from '../OrderComponets/TransitionLensPreview/TransitionLensPreview';
-import SelectGlassesType from "../Order/SelectGlassesType";
-// import SelectPrescriptionOption from "../OrderComponets/SelectPrescriptionOption";
-// import SelectLensTypeComponent from "../OrderComponets/SelectPrescriptionType"
-// import EnterPrescription from "../OrderComponets/EnterPrescription"
-// import SaveOrderPrescription from "../OrderComponets/SaveOrderPrescription"
-// import ChooseLensPackage from "../OrderComponets/ChooseLensPackage"
+import SelectGlassesType from "./SelectGlassesType";
+import SelectPrescriptionOption from "./SelectPrescriptionOption";
+import SelectPrescriptionType from "../Order/SelectPrescriptionType"
+import EnterPrescription from "../Order/EnterPrescription"
+import SaveOrderPrescription from "../Order/SaveOrderPrescription"
+import ChooseLensPackage from "../Order/ChooseLensPackage"
 // import SelectLensType from "../OrderComponets/SelectLensType"
 // import AvailableCoatings from "../OrderComponets/AvailableCoatings"
 // import ReviewSelections from "../OrderComponets/ReviewSelections"
@@ -29,8 +29,8 @@ export default function SelectLensTypeScreen({ route }) {
   const {productId} = route.params;
 
   const [product, setProduct] = useState({});
-//   const dispatch = useDispatch();
-//   const selectedOptions = useSelector((state) => state.selectedOptions);
+  const dispatch = useDispatch();
+  const selectedOptions = useSelector((state) => state.selectedOptions);
 
   // fetching product data
   useEffect(() => {
@@ -174,7 +174,7 @@ export default function SelectLensTypeScreen({ route }) {
       rightSideComponent = <SelectPrescriptionOption onNextStep={handleNextStep} />;
       break;
     case 3:
-      rightSideComponent = <SelectLensTypeComponent onNextStep={handleNextStep} />;
+      rightSideComponent = <SelectPrescriptionType onNextStep={handleNextStep} />;
       break;
     case 4:
       rightSideComponent = <EnterPrescription onNextStep={handleNextStep} />;
@@ -226,7 +226,7 @@ const productImage = (product) => {
     console.log("Image path is: " + completePath);
 
     return (
-      <View className="bg-red-500">
+      <View className="">
         <Image
           className="w-[60%] mx-auto object-contain h-[120px]" // Adjust the dimensions as needed
           source={{ uri: completePath }}
@@ -259,12 +259,12 @@ return (
             <>
               <View className="pl-4 pr-4 mt-2 flex flex-row h-[]">
                 <View className="w-[80%] ">
-                  <Text style={{ fontFamily: 'sans-serif', fontSize: 13, fontWeight: 'bold'}}>{product.name}</Text>
+                <Text style={{ fontFamily: 'sans-serif', fontSize: 13, fontWeight: 'bold'}} numberOfLines={1} ellipsizeMode='tail'>{product.name}</Text>
                   <Text style={{ fontFamily: 'sans-serif', fontSize: 12, fontWeight: '600'}}>{product.manufacturer}</Text>
                 </View>
-                <View className="w-[20%]  bg-slate-500">
+                <View className="w-[20%]">
                   {product && product.priceInfo ? (
-                    <Text style={{ fontFamily: 'sans-serif', fontSize: 16, fontWeight: 'bold' }}>{product.priceInfo.price} {product.priceInfo.currency}</Text>
+                    <Text className="color-gray-700" style={{ fontFamily: 'sans-serif', fontSize: 16, fontWeight: 'bold' }}>{product.priceInfo.price} {product.priceInfo.currency}</Text>
                   ) : (
                     <Text style={{ marginTop: 5, color: 'blue' }}>
                       price (Loading...)
@@ -281,17 +281,16 @@ return (
         </View>
 
         {/* section 2 */}
-        <View className="rounded-t-2xl mt-[-5] h-[70%] bg-gray-800 ">
+        <View className="rounded-t-2xl mt-[-5] h-[70%] bg-gray-100">
           <View style={{ flexDirection: 'row', marginTop: 10 }}>
             <TouchableOpacity onPress={handlePreviousStep} disabled={currentStep === 1}>
-              <Text style={{ width: '20%', fontSize: 16, marginBottom: 2, color: 'blue' }}>
-                {'<'} <Text style={{ textDecorationLine: 'underline' }}>Back</Text>
+              <Text className="font-sans font-bold color-blue-800 ml-8">{'<'}<Text style={{ textDecorationLine: 'underline' }}>Back</Text>
               </Text>
             </TouchableOpacity>
           </View>
-          <View style={{ flex: 1, margin: 8 }}>
+          <ScrollView style={{ flex: 1, marginRight:8, marginLeft:8}}>
             {rightSideComponent}
-          </View>
+          </ScrollView>
         </View>
       </View>
     </>
