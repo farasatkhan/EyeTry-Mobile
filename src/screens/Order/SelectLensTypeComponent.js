@@ -15,13 +15,16 @@ import SelectPrescriptionType from "../Order/SelectPrescriptionType"
 import EnterPrescription from "../Order/EnterPrescription"
 import SaveOrderPrescription from "../Order/SaveOrderPrescription"
 import ChooseLensPackage from "../Order/ChooseLensPackage"
-// import SelectLensType from "../OrderComponets/SelectLensType"
-// import AvailableCoatings from "../OrderComponets/AvailableCoatings"
-// import ReviewSelections from "../OrderComponets/ReviewSelections"
+import SelectLensType from "../Order/SelectLensType"
+import AvailableCoatings from "../Order/AvailableCoatings"
+import ReviewSelections from "../Order/ReviewSelections"
 // import SunglassesLensSelection from "../OrderComponets/SunglassesLensSelection"
 // import TransitionLensSelection from "../OrderComponets/TransitionLensSelection"
 import graysvg from '../../assets/svg/Order/gray.svg'
 import { viewParticularProduct } from '../../services/Orders/orderApi';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { storeDataAsyncStorage } from '../../utils/AsynchronusStorage/asyncStorage';
+
 viewParticularProduct
 export default function SelectLensTypeScreen({ route }) {
   const navigation = useNavigation();
@@ -35,6 +38,7 @@ export default function SelectLensTypeScreen({ route }) {
   // fetching product data
   useEffect(() => {
     getData(productId);
+    storeDataAsyncStorage('customizedProductId', productId)
   }, [])
 
   const getData = async (productId) => {

@@ -60,3 +60,67 @@ export const viewParticularProduct = async (glassesId) => {
         throw error;
     }
 };
+
+
+// Getting user data 
+export const getUserData = async () => {
+    try {
+        const accessToken = await getDataAsyncStorage("accessToken")
+        const response = await axios.get('/users/profile', {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        });
+        return response.data;
+    }
+    catch (error) {
+        // Server is returning 403 for expired token
+        if (error.response && error.response.status == 403) {
+            try {
+                console.log("Error Catched")
+                await reGenerateAccessToken()
+                return getUserData()
+            }
+            catch (e) {
+                console.error("Error while refreshing token", e)
+                throw e
+            }
+        }
+        throw error
+    }
+};
+
+
+// Delete Address
+export const deleteAddress = async (id) => {
+    const addressId = id
+    try {
+        const accessToken = await getDataAsyncStorage("accessToken")
+        const response = await axios.delete(`/users/delete_address/${addressId}`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            },
+        });
+        console.log("Delete Address Response :", response)
+        return response;
+    }
+    catch (error) {
+        // Server is returning 403 for expired token
+        if (error.response && error.response.status == 403) {
+            try {
+                console.log("Access Token Expired Trying to refresh it")
+                await reGenerateAccessToken()
+                return deleteAddress(addressId)
+            }
+            catch (e) {
+                console.log("Refresh Error")
+                if (e.response && e.response.status == 403) {
+                    console.log("Refresh Token is also expired logging out the user")
+                    return e.response.status
+                }
+                throw e
+            }
+        }
+        throw error;
+    }
+};

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect,  } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -7,14 +7,21 @@ import {
   FlatList,
   Dimensions,
   Image,
+  StyleSheet,
+  TouchableOpacity
 } from 'react-native';
 
-import {useNavigation} from '@react-navigation/native';
+
+// Redux imports 
+import { useDispatch } from 'react-redux';
+import { updateSelectedOptions } from '../../redux/actions/orderSelectionAction';
+
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 import API_URL from '../../config/config';
 
-import {viewSingleProduct} from '../../services/Glasses/Glasses';
+import { viewSingleProduct } from '../../services/Glasses/Glasses';
 
 import {
   viewAllWishlistsProducts,
@@ -27,14 +34,14 @@ const height = Dimensions.get('window').height;
 
 import Pressable from '../../wrapper_components/Pressable';
 
-const Product = ({route}) => {
+const Product = ({ route }) => {
   const navigation = useNavigation();
 
   const handleNavigation = (screen, options) => {
     navigation.navigate(screen, options);
   };
 
-  const {productId} = route.params;
+  const { productId } = route.params;
 
   const [product, setProduct] = useState(null);
   const [wishlists, setWishlists] = useState({});
@@ -43,7 +50,7 @@ const Product = ({route}) => {
     try {
       const fetchProduct = await viewSingleProduct(productId);
       setProduct(fetchProduct);
-      navigation.setOptions({title: fetchProduct.name});
+      navigation.setOptions({ title: fetchProduct.name });
     } catch (error) {
       console.error('Error fetching glasses', error);
     }
@@ -108,6 +115,33 @@ const Product = ({route}) => {
       wishlistProduct => wishlistProduct._id === product._id,
     );
 
+  // Frame Size
+  const [frameSize, setFrameSize] = useState('medium');
+  // handling frame size selection
+  const handleSizeSelect = (size) => {
+    setFrameSize(size);
+  }
+
+  // Frame Color
+  const [frameColor, setFrameColor] = useState('black');
+  const handleColorSelect = (color) => {
+    setFrameColor(color);
+  }
+
+  // Handling Lens Selection navigation and managing frame size and color states 
+  const dispatch = useDispatch();
+  const handleLensSelectionNavigation = () => {
+    // Dispatch an action to update selected package and coatings
+    dispatch(updateSelectedOptions({
+      "frameProperties": {
+        "frameSize": frameSize,
+        "frameColor": frameColor
+      }
+
+    }));
+    navigation.navigate('LensCustomizationMain', { productId: productId })
+  }
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       {product && (
@@ -122,10 +156,10 @@ const Product = ({route}) => {
                   .images
               }
               keyExtractor={(imageURL, index) => index.toString()}
-              renderItem={({item}) => (
+              renderItem={({ item }) => (
                 <View>
                   <Image
-                    style={{width: width}}
+                    style={{ width: width }}
                     className="h-60 object-cover"
                     resizeMode="contain"
                     source={{
@@ -139,16 +173,16 @@ const Product = ({route}) => {
               {product.frame_information.frame_variants.map(
                 (variant, index) => (
                   <Pressable
-                    onPress={() => handleVariantPress(index)}
+                    onPress={() => { handleVariantPress(index); handleColorSelect(variant.color) }}
                     key={index}
                     style={
                       selectedVariants === index
-                        ? {borderColor: variant.color_code}
-                        : {borderColor: '#fff'}
+                        ? { borderColor: variant.color_code }
+                        : { borderColor: '#fff' }
                     }
                     className="flex justify-center items-center w-12 h-12 border rounded-full">
                     <View
-                      style={{backgroundColor: variant.color_code}}
+                      style={{ backgroundColor: variant.color_code }}
                       className="w-10 h-10 rounded-full bg-black"></View>
                   </Pressable>
                 ),
@@ -188,6 +222,40 @@ const Product = ({route}) => {
                         ? '$ ' + product.priceInfo.price
                         : 'PKR.' + product.priceInfo.price}
                     </Text>
+                  </View>
+                  <View style={styles.container}>
+                    {/* Frame size buttons */}
+                    <View>
+                      <View style={styles.buttonContainer}>
+                        <TouchableOpacity
+                          style={[
+                            styles.button,
+                            { backgroundColor: frameSize === 'small' ? '#B91C1C' : '#cccccc' },
+                          ]}
+                          onPress={() => handleSizeSelect('small')}
+                        >
+                          <Text style={styles.buttonText}>S</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                          style={[
+                            styles.button,
+                            { backgroundColor: frameSize === 'medium' ? '#B91C1C' : '#cccccc' },
+                          ]}
+                          onPress={() => handleSizeSelect('medium')}
+                        >
+                          <Text style={styles.buttonText}>M</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                          style={[
+                            styles.button,
+                            { backgroundColor: frameSize === 'large' ? '#B91C1C' : '#cccccc' },
+                          ]}
+                          onPress={() => handleSizeSelect('large')}
+                        >
+                          <Text style={styles.buttonText}>L</Text>
+                        </TouchableOpacity>
+                      </View>
+                    </View>
                   </View>
                 </View>
               </View>
@@ -356,7 +424,7 @@ const Product = ({route}) => {
             </Pressable>
             {/* Change the handleNavigation to Orderflow Screen */}
             <Pressable
-              onPress={() => handleNavigation('LensCustomizationMain', { productId: productId })}
+              onPress={() => handleLensSelectionNavigation()}
               className="flex flex-row justify-center items-center h-16 bg-blue-600 rounded-lg">
               <Text className="text-white text-xl font-semibold">
                 Select Lens
@@ -368,5 +436,28 @@ const Product = ({route}) => {
     </SafeAreaView>
   );
 };
+
+
+const styles = StyleSheet.create({
+  container: {
+    // flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+  },
+  button: {
+    marginRight: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
 
 export default Product;
