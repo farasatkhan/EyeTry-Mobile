@@ -13,7 +13,7 @@ import Pressable from '../../wrapper_components/Pressable';
 
 import Icon from 'react-native-vector-icons/AntDesign';
 
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useFocusEffect} from '@react-navigation/native';
 
 import API_URL from '../../config/config';
 
@@ -34,6 +34,13 @@ const height = Dimensions.get('window').height;
 const Glasses = ({route}) => {
   const {glassesType, filteredGlasses} = route.params;
 
+  useFocusEffect(() => {
+    if (filteredGlasses) {
+      setGlasses(filteredGlasses);
+      console.log('Filtered Glasses are set');
+    }
+  });
+
   const navigation = useNavigation();
 
   const handleNavigation = (screen, options) => {
@@ -45,21 +52,16 @@ const Glasses = ({route}) => {
 
   const fetchGlassess = async () => {
     try {
-      if (glassesType) {
-        let fetchAllGlasses;
-        if (glassesType === 'Eyeglasses') {
-          fetchAllGlasses = await viewAllEyeGlassesList();
-        } else if (glassesType === 'Sunglasses') {
-          fetchAllGlasses = await viewAllSunGlassesList();
-        } else {
-          fetchAllGlasses = await viewAllGlasses();
-        }
-        setGlasses(fetchAllGlasses);
-        console.log('fetched Glasses are set');
+      let fetchAllGlasses;
+      if (glassesType === 'Eyeglasses') {
+        fetchAllGlasses = await viewAllEyeGlassesList();
+      } else if (glassesType === 'Sunglasses') {
+        fetchAllGlasses = await viewAllSunGlassesList();
       } else {
-        setGlasses(filteredGlasses);
-        console.log('Filtered Glasses are set');
+        fetchAllGlasses = await viewAllGlasses();
       }
+      setGlasses(fetchAllGlasses);
+      console.log('fetched Glasses are set');
     } catch (error) {
       console.error('Error fetching glasses', error);
     }

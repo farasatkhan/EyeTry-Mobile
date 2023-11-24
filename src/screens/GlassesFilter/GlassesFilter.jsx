@@ -130,7 +130,7 @@ const GlassesFilter = ({route}) => {
     });
 
     // setFilteredGlasses(filteredGlasses);
-    // console.log(filteredGlasses.length);
+    console.log(filteredGlasses.length);
     handleNavigation('Glasses', {filteredGlasses: filteredGlasses});
   };
 
