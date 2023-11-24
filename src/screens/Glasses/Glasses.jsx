@@ -94,10 +94,12 @@ const Glasses = ({route}) => {
     });
   }, []);
 
+  const [colorSelected, setColorSelected] = useState('');
   const [selectedVariants, setSelectedVariants] = useState({});
 
-  const handleVariantPress = (itemId, variantIndex) => {
+  const handleVariantPress = (itemId, variantIndex, color) => {
     setSelectedVariants({...selectedVariants, [itemId]: variantIndex});
+    setColorSelected(color);
   };
 
   return (
@@ -163,7 +165,9 @@ const Glasses = ({route}) => {
                         className="flex justify-center items-center w-10 h-10 border rounded-full">
                         <Pressable
                           key={index}
-                          onPress={() => handleVariantPress(item._id, index)}
+                          onPress={() =>
+                            handleVariantPress(item._id, index, variant.color)
+                          }
                           style={{backgroundColor: variant.color_code}}
                           className="w-7 h-7 rounded-full bg-black"></Pressable>
                       </View>

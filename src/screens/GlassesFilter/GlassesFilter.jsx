@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {View, Text, SafeAreaView, ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
@@ -33,49 +33,67 @@ const GlassesFilter = () => {
     fetchGlassess();
   }, []);
 
-  const [filters, setFilters] = useState({
-    categories: [],
-    colors: [],
-    materials: [],
-    frameShape: [],
-    faceShape: [],
-    gender: [],
-    rim: [],
-    size: [],
-  });
+  const filteredItemsRef = useRef({});
 
-  const applyFilter = (filter, type) => {
-    switch (type) {
-      case 'Categories':
-        setFilters(prevFilters => ({...prevFilters, categories: filter}));
-        break;
-      case 'Colors':
-        setFilters(prevFilters => ({...prevFilters, colors: filter}));
-        break;
-      case 'Materials':
-        setFilters(prevFilters => ({...prevFilters, materials: filter}));
-        break;
-      case 'Frame Shape':
-        setFilters(prevFilters => ({...prevFilters, frameShape: filter}));
-        break;
-      case 'Face Shape':
-        setFilters(prevFilters => ({...prevFilters, faceShape: filter}));
-        break;
-      case 'Gender':
-        setFilters(prevFilters => ({...prevFilters, gender: filter}));
-        break;
-      case 'Rim':
-        setFilters(prevFilters => ({...prevFilters, rim: filter}));
-        break;
-      case 'Size':
-        setFilters(prevFilters => ({...prevFilters, size: filter}));
-        break;
-    }
+  const applyFilter = (filter, key) => {
+    filteredItemsRef.current = {
+      ...filteredItemsRef.current,
+      [key]: Array.from(filter),
+    };
   };
 
   const SearchFiltered = () => {
-    // apply filters and search it
-    console.log(filters);
+    const filteredGlasses = glasses.filter(glass => {
+      const filteredCategories =
+        filteredItemsRef.current.categories &&
+        glass.categories.some(category =>
+          filteredItemsRef.current.categories.includes(category),
+        );
+
+      const filteredFrameMaterials =
+        filteredItemsRef.current.materials &&
+        glass.frame_information.frame_material.some(material =>
+          filteredItemsRef.current.materials.includes(material),
+        );
+
+      const filteredfaceShape =
+        filteredItemsRef.current.faceShape &&
+        glass.person_information.face_shape.some(shape =>
+          filteredItemsRef.current.faceShape.includes(shape),
+        );
+
+      const filteredGenders =
+        filteredItemsRef.current.genders &&
+        glass.person_information.genders.some(gender =>
+          filteredItemsRef.current.genders.includes(gender),
+        );
+
+      const filteredSizes =
+        filteredItemsRef.current.sizes &&
+        glass.frame_information.frame_size.some(size =>
+          filteredItemsRef.current.sizes.includes(size),
+        );
+
+      const filteredFrameShape =
+        filteredItemsRef.current.frameShape &&
+        filteredItemsRef.current.frameShape.includes(glass.frame_shape);
+
+      const filteredRims =
+        filteredItemsRef.current.rims &&
+        filteredItemsRef.current.rims.includes(glass.rim_shape);
+
+      return (
+        filteredCategories ||
+        filteredFrameMaterials ||
+        filteredfaceShape ||
+        filteredGenders ||
+        filteredSizes ||
+        filteredFrameShape ||
+        filteredRims
+      );
+    });
+
+    console.log(filteredGlasses.length);
   };
 
   return (
@@ -85,42 +103,42 @@ const GlassesFilter = () => {
           <GlassesFilterItem
             title="Categories"
             property={properties.categories}
-            onFilterChange={filter => applyFilter(filter, 'Categories')}
+            onFilterChange={filter => applyFilter(filter, 'categories')}
           />
-          <GlassesFilterItem
+          {/* <GlassesFilterItem
             title="Colors"
             property={properties.colors}
-            onFilterChange={filter => applyFilter(filter, 'Colors')}
-          />
+            onFilterChange={filter => applyFilter(filter, 'colors')}
+          /> */}
           <GlassesFilterItem
             title="Materials"
             property={properties.material}
-            onFilterChange={filter => applyFilter(filter, 'Materials')}
+            onFilterChange={filter => applyFilter(filter, 'materials')}
           />
           <GlassesFilterItem
             title="Frame Shape"
             property={properties.frame_shape}
-            onFilterChange={filter => applyFilter(filter, 'Frame Shape')}
+            onFilterChange={filter => applyFilter(filter, 'frameShape')}
           />
           <GlassesFilterItem
             title="Face Shape"
             property={properties.face_shape}
-            onFilterChange={filter => applyFilter(filter, 'Face Shape')}
+            onFilterChange={filter => applyFilter(filter, 'faceShape')}
           />
           <GlassesFilterItem
             title="Gender"
             property={properties.gender}
-            onFilterChange={filter => applyFilter(filter, 'Gender')}
+            onFilterChange={filter => applyFilter(filter, 'genders')}
           />
           <GlassesFilterItem
             title="Rim"
             property={properties.rim}
-            onFilterChange={filter => applyFilter(filter, 'Rim')}
+            onFilterChange={filter => applyFilter(filter, 'rims')}
           />
           <GlassesFilterItem
             title="Size"
             property={properties.size}
-            onFilterChange={filter => applyFilter(filter, 'Size')}
+            onFilterChange={filter => applyFilter(filter, 'sizes')}
           />
         </View>
         <View className="my-10">
