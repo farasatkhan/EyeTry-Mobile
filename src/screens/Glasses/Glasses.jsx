@@ -32,7 +32,7 @@ const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
 const Glasses = ({route}) => {
-  const {glassesType} = route.params;
+  const {glassesType, filteredGlasses} = route.params;
 
   const navigation = useNavigation();
 
@@ -45,15 +45,21 @@ const Glasses = ({route}) => {
 
   const fetchGlassess = async () => {
     try {
-      let fetchAllGlasses;
-      if (glassesType === 'Eyeglasses') {
-        fetchAllGlasses = await viewAllEyeGlassesList();
-      } else if (glassesType === 'Sunglasses') {
-        fetchAllGlasses = await viewAllSunGlassesList();
+      if (glassesType) {
+        let fetchAllGlasses;
+        if (glassesType === 'Eyeglasses') {
+          fetchAllGlasses = await viewAllEyeGlassesList();
+        } else if (glassesType === 'Sunglasses') {
+          fetchAllGlasses = await viewAllSunGlassesList();
+        } else {
+          fetchAllGlasses = await viewAllGlasses();
+        }
+        setGlasses(fetchAllGlasses);
+        console.log('fetched Glasses are set');
       } else {
-        fetchAllGlasses = await viewAllGlasses();
+        setGlasses(filteredGlasses);
+        console.log('Filtered Glasses are set');
       }
-      setGlasses(fetchAllGlasses);
     } catch (error) {
       console.error('Error fetching glasses', error);
     }
@@ -107,7 +113,7 @@ const Glasses = ({route}) => {
       {glasses.length > 0 ? (
         <FlatList
           data={glasses}
-          keyExtractor={item => item.key}
+          keyExtractor={item => item._id}
           renderItem={({item}) => {
             const selectedVariantIndex = selectedVariants[item._id] || 0;
             const selectedVariant =
@@ -157,6 +163,7 @@ const Glasses = ({route}) => {
                   {item.frame_information.frame_variants.map(
                     (variant, index) => (
                       <View
+                        key={index}
                         style={
                           selectedVariantIndex === index
                             ? {borderColor: variant.color_code}
@@ -164,7 +171,6 @@ const Glasses = ({route}) => {
                         }
                         className="flex justify-center items-center w-10 h-10 border rounded-full">
                         <Pressable
-                          key={index}
                           onPress={() =>
                             handleVariantPress(item._id, index, variant.color)
                           }

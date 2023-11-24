@@ -75,6 +75,7 @@ const Wishlist = () => {
         </View>
       ) : (
         <FlatList
+          className=""
           data={wishlistGlasses}
           keyExtractor={item => item._id}
           renderItem={({item}) => {
@@ -112,6 +113,7 @@ const Wishlist = () => {
                   {item.frame_information.frame_variants.map(
                     (variant, index) => (
                       <View
+                        key={index}
                         style={
                           selectedVariantIndex === index
                             ? {borderColor: variant.color_code}

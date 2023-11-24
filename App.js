@@ -40,7 +40,7 @@ import GlassesHeader from './src/components/ui/GlassesHeader';
 const Stack = createNativeStackNavigator();
 
 function App() {
-  const [initialRouteName, setInitialRouteName] = React.useState('GlassesFilter')
+  const [initialRouteName, setInitialRouteName] = React.useState('SignIn')
   const [loading, setIsLoading] = React.useState(false)
 
   React.useEffect(() => {
@@ -80,9 +80,9 @@ function App() {
           <Stack.Screen name="ResetLink" component={ResetLinkScreen} options={{ headerShown: false }}/>
           <Stack.Screen name="HomeTabScreen" component={HomeTabScreen} options={{ headerShown: false }}/>
           
-          <Stack.Screen name="Glasses" component={Glasses} options={{
-          headerRight: () => <GlassesHeader />,
-          }}/>
+          <Stack.Screen name="Glasses" component={Glasses} options={({ route }) => ({
+            headerRight: () => <GlassesHeader/>,
+          })}/>
           <Stack.Screen name='GlassesSearch' component={GlassesSearch} options={{headerShown: false}}/>
           <Stack.Screen name='GlassesFilter' component={GlassesFilter}/>
           <Stack.Screen name='Product' component={Product}/>

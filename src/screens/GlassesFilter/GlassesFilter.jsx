@@ -10,7 +10,11 @@ import GlassesFilterItem from '../../components/ui/GlassesFilterItem';
 
 import properties from '../../data/GlassesFilterProperties';
 
-const GlassesFilter = () => {
+const GlassesFilter = ({route}) => {
+  // const {glassesType} = route.params;
+
+  // const [glassesType, setGlassesType] = useState('Eyeglasses');
+
   const navigation = useNavigation();
 
   const handleNavigation = (screen, options) => {
@@ -18,7 +22,7 @@ const GlassesFilter = () => {
   };
 
   const [glasses, setGlasses] = useState([]);
-  const [filteredGlasses, setFilteredGlasses] = useState([]);
+  // const [filteredGlasses, setFilteredGlasses] = useState([]);
 
   const fetchGlassess = async () => {
     try {
@@ -48,12 +52,12 @@ const GlassesFilter = () => {
       ...filteredItemsRef.current,
       [key]: Array.from(filter),
     };
-
-    console.log(filteredItemsRef);
   };
 
   const SearchFiltered = () => {
     const filteredGlasses = glasses.filter(glass => {
+      // const filteredGlassesType = glass.type === glassesType;
+
       const filteredCategories =
         filteredItemsRef.current.categories &&
         filteredItemsRef.current.categories.includes('All')
@@ -114,6 +118,7 @@ const GlassesFilter = () => {
             filteredItemsRef.current.rims.includes(glass.rim_shape);
 
       return (
+        // filteredGlassesType &&
         filteredCategories &&
         filteredFrameMaterials &&
         filteredfaceShape &&
@@ -124,7 +129,9 @@ const GlassesFilter = () => {
       );
     });
 
-    console.log(filteredGlasses.length);
+    // setFilteredGlasses(filteredGlasses);
+    // console.log(filteredGlasses.length);
+    handleNavigation('Glasses', {filteredGlasses: filteredGlasses});
   };
 
   return (

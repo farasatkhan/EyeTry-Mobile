@@ -9,8 +9,8 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 const GlassesHeader = () => {
   const navigation = useNavigation();
 
-  const handleNavigation = screen => {
-    navigation.navigate(screen);
+  const handleNavigation = (screen, option) => {
+    navigation.navigate(screen, option);
   };
 
   return (
