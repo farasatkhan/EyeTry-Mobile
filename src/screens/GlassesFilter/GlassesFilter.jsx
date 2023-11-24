@@ -33,62 +33,93 @@ const GlassesFilter = () => {
     fetchGlassess();
   }, []);
 
-  const filteredItemsRef = useRef({});
+  const filteredItemsRef = useRef({
+    categories: ['All'],
+    materials: ['All'],
+    faceShape: ['All'],
+    genders: ['All'],
+    sizes: ['All'],
+    frameShape: ['All'],
+    rims: ['All'],
+  });
 
   const applyFilter = (filter, key) => {
     filteredItemsRef.current = {
       ...filteredItemsRef.current,
       [key]: Array.from(filter),
     };
+
+    console.log(filteredItemsRef);
   };
 
   const SearchFiltered = () => {
     const filteredGlasses = glasses.filter(glass => {
       const filteredCategories =
         filteredItemsRef.current.categories &&
-        glass.categories.some(category =>
-          filteredItemsRef.current.categories.includes(category),
-        );
+        filteredItemsRef.current.categories.includes('All')
+          ? glass
+          : filteredItemsRef.current.categories &&
+            glass.categories.some(category =>
+              filteredItemsRef.current.categories.includes(category),
+            );
 
       const filteredFrameMaterials =
         filteredItemsRef.current.materials &&
-        glass.frame_information.frame_material.some(material =>
-          filteredItemsRef.current.materials.includes(material),
-        );
+        filteredItemsRef.current.materials.includes('All')
+          ? glass
+          : filteredItemsRef.current.materials &&
+            glass.frame_information.frame_material.some(material =>
+              filteredItemsRef.current.materials.includes(material),
+            );
 
       const filteredfaceShape =
         filteredItemsRef.current.faceShape &&
-        glass.person_information.face_shape.some(shape =>
-          filteredItemsRef.current.faceShape.includes(shape),
-        );
+        filteredItemsRef.current.faceShape.includes('All')
+          ? glass
+          : filteredItemsRef.current.faceShape &&
+            glass.person_information.face_shape.some(shape =>
+              filteredItemsRef.current.faceShape.includes(shape),
+            );
 
       const filteredGenders =
         filteredItemsRef.current.genders &&
-        glass.person_information.genders.some(gender =>
-          filteredItemsRef.current.genders.includes(gender),
-        );
+        filteredItemsRef.current.genders.includes('All')
+          ? glass
+          : filteredItemsRef.current.genders &&
+            glass.person_information.genders.some(gender =>
+              filteredItemsRef.current.genders.includes(gender),
+            );
 
       const filteredSizes =
         filteredItemsRef.current.sizes &&
-        glass.frame_information.frame_size.some(size =>
-          filteredItemsRef.current.sizes.includes(size),
-        );
+        filteredItemsRef.current.sizes.includes('All')
+          ? glass
+          : filteredItemsRef.current.sizes &&
+            glass.frame_information.frame_size.some(size =>
+              filteredItemsRef.current.sizes.includes(size),
+            );
 
       const filteredFrameShape =
         filteredItemsRef.current.frameShape &&
-        filteredItemsRef.current.frameShape.includes(glass.frame_shape);
+        filteredItemsRef.current.frameShape.includes('All')
+          ? glass
+          : filteredItemsRef.current.frameShape &&
+            filteredItemsRef.current.frameShape.includes(glass.frame_shape);
 
       const filteredRims =
         filteredItemsRef.current.rims &&
-        filteredItemsRef.current.rims.includes(glass.rim_shape);
+        filteredItemsRef.current.rims.includes('All')
+          ? glass
+          : filteredItemsRef.current.rims &&
+            filteredItemsRef.current.rims.includes(glass.rim_shape);
 
       return (
-        filteredCategories ||
-        filteredFrameMaterials ||
-        filteredfaceShape ||
-        filteredGenders ||
-        filteredSizes ||
-        filteredFrameShape ||
+        filteredCategories &&
+        filteredFrameMaterials &&
+        filteredfaceShape &&
+        filteredGenders &&
+        filteredSizes &&
+        filteredFrameShape &&
         filteredRims
       );
     });

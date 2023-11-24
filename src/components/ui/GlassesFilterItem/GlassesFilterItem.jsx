@@ -5,20 +5,26 @@ import {useNavigation} from '@react-navigation/native';
 import Pressable from '../../../wrapper_components/Pressable';
 
 const GlassesFilterItem = ({title, property, onFilterChange}) => {
-  const [filteredItem, setFilteredItem] = useState([]);
+  const [filteredItem, setFilteredItem] = useState(['All']);
 
   const toggleFilteredItem = item => {
     const itemIndex = filteredItem.indexOf(item);
-    let newfilteredItem = [...filteredItem];
+    let newFilteredItem;
 
     if (itemIndex === -1) {
-      newfilteredItem = [...newfilteredItem, item];
+      newFilteredItem = item === 'All' ? [item] : [...filteredItem, item];
     } else {
-      newfilteredItem.splice(itemIndex, 1);
+      newFilteredItem = [...filteredItem];
+      newFilteredItem.splice(itemIndex, 1);
     }
 
-    setFilteredItem(newfilteredItem);
-    onFilterChange(newfilteredItem);
+    if (newFilteredItem.length > 1 && newFilteredItem.includes('All')) {
+      const allIndex = newFilteredItem.indexOf('All');
+      newFilteredItem.splice(allIndex, 1);
+    }
+
+    setFilteredItem(newFilteredItem);
+    onFilterChange(newFilteredItem);
   };
 
   return (
