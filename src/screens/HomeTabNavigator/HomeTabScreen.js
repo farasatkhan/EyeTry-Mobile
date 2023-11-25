@@ -13,8 +13,6 @@ import HomeScreen from '../HomeScreen';
 import ShopScreen from '../ShopScreen';
 import Wishlist from '../WishList';
 
-import HomeHeader from '../../components/ui/HomeHeader';
-
 import {Button} from 'react-native-paper';
 
 const Tab = createBottomTabNavigator();
