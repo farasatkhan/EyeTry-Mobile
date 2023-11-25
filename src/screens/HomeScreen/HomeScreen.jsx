@@ -17,9 +17,9 @@ import Pressable from '../../wrapper_components/Pressable';
 import {
   raybanImages,
   oakleyImages,
-  exclusiveCollectionImage,
+  exclusiveCollectionImages,
   eyewearsCollectionImages,
-  headerCollection,
+  headerCollectionImages,
 } from '../../data/HomeScreenGlassesProperties';
 
 const width = Dimensions.get('window').width;
@@ -32,7 +32,7 @@ const HomeScreen = () => {
         <View className="">
           <View className="flex flex-row gap-10">
             <FlatList
-              data={headerCollection}
+              data={headerCollectionImages}
               horizontal
               pagingEnabled
               showsHorizontalScrollIndicator={false}
@@ -139,7 +139,7 @@ const HomeScreen = () => {
           </Text>
           <View className="flex flex-row gap-10">
             <FlatList
-              data={exclusiveCollectionImage}
+              data={exclusiveCollectionImages}
               horizontal
               pagingEnabled
               showsHorizontalScrollIndicator={false}
