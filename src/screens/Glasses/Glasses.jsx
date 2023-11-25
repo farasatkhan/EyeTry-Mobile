@@ -151,7 +151,7 @@ const Glasses = ({route}) => {
                       }
                       className="flex flex-row justify-center items-center">
                       <Image
-                        style={{width: width}}
+                        style={{width: width - 100}}
                         className="h-60 object-cover"
                         resizeMode="contain"
                         source={{
