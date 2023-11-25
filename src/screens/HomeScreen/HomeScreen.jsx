@@ -72,6 +72,17 @@ const HomeScreen = () => {
     handleNavigation('Glasses', {filteredGlasses: filteredGlasses});
   };
 
+  const filterByExclusive = () => {
+    const filteredGlasses = glasses.filter(glass => {
+      return glass.type === 'Sunglasses';
+    });
+
+    // get the Product ID of the latest sunglasses added to the store
+    const productId = filteredGlasses[0]._id;
+
+    handleNavigation('Product', {productId: productId});
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView>
@@ -201,7 +212,8 @@ const HomeScreen = () => {
               keyExtractor={item => item.key}
               contentContainerStyle={{paddingLeft: 10, paddingRight: 10}}
               renderItem={({item}) => (
-                <View
+                <Pressable
+                  onPress={() => filterByExclusive()}
                   style={{width: width - 20}}
                   className="flex flex-col justify-center items-center rounded-lg mr-5 shadow-lg shadow-black/50">
                   {/* <Text className5"text-xl text-white pt-10">{item.text}</Text> */}
@@ -211,7 +223,7 @@ const HomeScreen = () => {
                     resizeMode="contain"
                     source={item.image}
                   />
-                </View>
+                </Pressable>
               )}
             />
           </View>
