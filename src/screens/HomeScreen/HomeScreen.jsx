@@ -236,7 +236,7 @@ const HomeScreen = () => {
           </View>
         </View> */}
         <View className="mt-5">
-          <Text className="text-black pl-5 mb-2 text-2xl font-semibold uppercase">
+          <Text className="text-black pl-5 mb-5 text-xl uppercase font-light">
             Raybans Collections
           </Text>
           <View className="flex flex-row gap-10">
@@ -259,7 +259,7 @@ const HomeScreen = () => {
           </View>
         </View>
         <View className="mt-5">
-          <Text className="text-black pl-5 mb-2 text-2xl font-semibold uppercase">
+          <Text className="text-black pl-5 mb-5 text-xl uppercase font-light">
             Exclusive
           </Text>
           <View className="flex flex-row gap-10">
@@ -274,7 +274,7 @@ const HomeScreen = () => {
                 <View
                   style={{width: width - 20}}
                   className="flex flex-col justify-center items-center rounded-lg mr-5 shadow-lg shadow-black/50">
-                  {/* <Text className="text-xl text-white pt-10">{item.text}</Text> */}
+                  {/* <Text className5"text-xl text-white pt-10">{item.text}</Text> */}
                   <Image
                     style={{width: width - 20}}
                     className="h-80 object-cover rounded-md"
@@ -287,7 +287,7 @@ const HomeScreen = () => {
           </View>
         </View>
         <View className="my-5">
-          <Text className="text-black pl-5 mb-2 text-2xl font-bold uppercase">
+          <Text className="text-black pl-5 mb-5 text-xl uppercase font-light">
             Eyewears Collections
           </Text>
           <View className="flex flex-row gap-10">
@@ -310,7 +310,7 @@ const HomeScreen = () => {
           </View>
         </View>
         <View className="my-5">
-          <Text className="text-black pl-5 mb-2 text-2xl font-bold uppercase">
+          <Text className="text-black pl-5 mb-5 text-xl uppercase font-light">
             Oakley Collections
           </Text>
           <View className="flex flex-row gap-10">
