@@ -110,32 +110,6 @@ const eyewearsCollectionImages = [
   },
 ];
 
-const homeScreenPeopleImages = [
-  {
-    key: 1,
-    image: require('../../assets/home_screen/person_7.png'),
-  },
-  {
-    key: 2,
-    image: require('../../assets/home_screen/person_8.png'),
-  },
-];
-
-const rimData = [
-  {
-    key: 1,
-    image: require('../../assets/home_screen/person_1.png'),
-  },
-  {
-    key: 2,
-    image: require('../../assets/home_screen/person_2.png'),
-  },
-  {
-    key: 3,
-    image: require('../../assets/home_screen/person_3.png'),
-  },
-];
-
 const headerCollection = [
   {
     key: 1,
