@@ -124,3 +124,32 @@ export const deleteAddress = async (id) => {
         throw error;
     }
 };
+
+export const checkout = async (orderData) => {
+    const data = orderData
+    try {
+        const accessToken = await getDataAsyncStorage("accessToken")
+        const response = await axios.post('products/v1/order/checkout', data, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            },
+        });
+        console.log("Response :", response)
+        return response;
+    }
+    catch (error) {
+        // Server is returning 403 for expired token
+        if (error.response && error.response.status == 403) {
+            try {
+                console.log("Error Catched")
+                await reGenerateAccessToken()
+                return checkout(data)
+            }
+            catch (e) {
+                console.error("Error while refreshing token", e)
+                throw e
+            }
+        }
+        throw error;
+    }
+};

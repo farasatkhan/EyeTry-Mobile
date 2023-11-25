@@ -39,10 +39,8 @@ const SelectLensTypeComponentProp = ({ selectedOptions, onConfirmSelection, rout
   const [product, setProduct] = useState({});
 
   const handleAddToCart = async () => {
-    console.log("Added to cart");
-  
     dispatch(updateSelectedOptions({
-      id: customizedProductId
+      id: customizedProductId,
     }));
   
     try {
@@ -67,9 +65,9 @@ const SelectLensTypeComponentProp = ({ selectedOptions, onConfirmSelection, rout
         // Use await when calling asynchronous functions
         const existingCartString = JSON.stringify(existingCart)
         await storeDataAsyncStorage('cart', existingCartString);
-  
-        // console.log("Updated cart data in local storage:", JSON.stringify(existingCart, null, 2));
         
+        console.log("Added to cart");
+        // console.log("Updated cart data in local storage:", JSON.stringify(existingCart, null, 2));
         // console.log("test cart: " ,await AsyncStorage.getItem('cart'))
       }
     } catch (error) {

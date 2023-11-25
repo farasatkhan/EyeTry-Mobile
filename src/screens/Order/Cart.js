@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Button, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 // import { CardField, useStripe } from '@stripe/stripe-react-native'; // Make sure to install the correct package
-import { getUserData, deleteAddress } from '../../services/Orders/orderApi';
+import { getUserData, deleteAddress, checkout } from '../../services/Orders/orderApi';
 import { getDataAsyncStorage } from '../../utils/AsynchronusStorage/asyncStorage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import API_URL from '../../config/config';
@@ -118,7 +118,7 @@ const Cart = () => {
             variant.color === item.orderSelections.selectedOptions.frameProperties.frameColor
         )._id;
   
-        initialProductQuantities[`${item.productData._id}_${variantId}`] = 1;
+        initialProductQuantities[`${item.productData._id}_${variantId}_${item.orderSelections.selectedOptions.cartItemId}`] = 1;
       }
       setProductQuantities(initialProductQuantities);
     }, [cartItems]);
@@ -128,7 +128,7 @@ const Cart = () => {
     const placeOrder = async (event) => {
   
       // Handling payment
-      event.preventDefault();
+      // event.preventDefault();
   
       // Assuming 'stripe' and 'elements' are properly set up
   
@@ -227,7 +227,8 @@ const Cart = () => {
           user: uid,
           items: items,
           totalPrice: (calculateTotalPrice() + 4.99).toFixed(2),
-          paymentMethod: payments[0]._id,
+          paymentMethod: "6560b7973b71da193967480d",
+          // paymentMethod: payments[0]._id,
           shippingAddress: {
             name: addresses[0].firstName,
             phone: addresses[0].phone,
@@ -281,14 +282,15 @@ const Cart = () => {
   
   
     // Function to handle incrementing the quantity
-    const handleIncrementQuantity = (productId, variantId) => {
+    const handleIncrementQuantity = (productId, variantId, cartItemId) => {
       const updatedQuantities = { ...productQuantities };
       const product = cartItems.find(
         (item) =>
           item.productData._id === productId &&
           item.productData.frame_information.frame_variants.some(
             (variant) => variant._id === variantId
-          )
+          ) &&
+          item.orderSelections.selectedOptions.cartItemId
       );
   
       if (product) {
@@ -300,11 +302,11 @@ const Cart = () => {
           const availableQuantity = selectedVariant.quantity;
   
           console.log(
-            `Product: ${productId}, Variant: ${variantId}, Available Quantity: ${availableQuantity}`
+            `Product: ${productId}, Variant: ${variantId}, cartItemId: ${cartItemId}, Available Quantity: ${availableQuantity}`
           );
   
-          if (updatedQuantities[`${productId}_${variantId}`] < availableQuantity) {
-            updatedQuantities[`${productId}_${variantId}`]++;
+          if (updatedQuantities[`${productId}_${variantId}_${cartItemId}`] < availableQuantity) {
+            updatedQuantities[`${productId}_${variantId}_${cartItemId}`]++;
             setProductQuantities(updatedQuantities); // Update the state
           } else {
             // Show an alert if quantity exceeds available quantity
@@ -316,10 +318,10 @@ const Cart = () => {
   
   
     // Function to handle decrementing the quantity
-    const handleDecrementQuantity = (productId, variantId) => {
+    const handleDecrementQuantity = (productId, variantId, cartItemId) => {
       const updatedQuantities = { ...productQuantities };
-      if (updatedQuantities[`${productId}_${variantId}`] > 1) {
-        updatedQuantities[`${productId}_${variantId}`]--;
+      if (updatedQuantities[`${productId}_${variantId}_${cartItemId}`] > 1) {
+        updatedQuantities[`${productId}_${variantId}_${cartItemId}`]--;
         setProductQuantities(updatedQuantities); // Update the state
       }
     };
@@ -330,13 +332,14 @@ const Cart = () => {
   
       for (const productId in productQuantities) {
         const keyParts = productId.split('_');
-        if (keyParts.length === 2) {
+        if (keyParts.length === 3) {
           const product = cartItems.find(
             (item) =>
               item.productData._id === keyParts[0] &&
               item.productData.frame_information.frame_variants.some(
                 (variant) => variant._id === keyParts[1]
-              )
+              ) &&
+              item.orderSelections.selectedOptions.cartItemId == keyParts[2]
           );
   
           if (product) {
@@ -349,14 +352,15 @@ const Cart = () => {
       return totalCalculatedPrice;
     };
   
-    const removeFromCart = async (productId, variantId) => {
+    const removeFromCart = async (productId, variantId, cartItemId) => {
       // Filter out the item to be removed from the cartItems state
       const updatedCartItems = cartItems.filter((item) => {
         const sameProductId = item.productData._id === productId;
         const sameVariantId = item.productData.frame_information.frame_variants.some(
           (variant) => variant._id === variantId
         );
-        return !(sameProductId && sameVariantId);
+        const sameCartItemId = item.orderSelections.selectedOptions.cartItemId === cartItemId
+        return !(sameProductId && sameVariantId && sameCartItemId);
       });
   
       // Updating the cartItems state
@@ -388,16 +392,16 @@ const Cart = () => {
                 <View style={styles.quantityContainer}>
                   {/* Quantity controls */}
                   <TouchableOpacity
-                    onPress={() => handleDecrementQuantity(item.productData._id, item.productData.frame_information.frame_variants[0]._id)}
+                    onPress={() => handleDecrementQuantity(item.productData._id, item.productData.frame_information.frame_variants[0]._id, item.orderSelections.selectedOptions.cartItemId)}
                     style={styles.quantityButton}
                   >
                     <Text>-</Text>
                   </TouchableOpacity>
 
-                  <Text style={styles.quantityText}>{productQuantities[`${item.productData._id}_${item.productData.frame_information.frame_variants[0]._id}`]}</Text>
+                  <Text className="pl-3 pr-3 mr-1" style={styles.quantityText}>{productQuantities[`${item.productData._id}_${item.productData.frame_information.frame_variants[0]._id}_${item.orderSelections.selectedOptions.cartItemId}`]}</Text>
 
                   <TouchableOpacity
-                    onPress={() => handleIncrementQuantity(item.productData._id, item.productData.frame_information.frame_variants[0]._id)}
+                    onPress={() => handleIncrementQuantity(item.productData._id, item.productData.frame_information.frame_variants[0]._id, item.orderSelections.selectedOptions.cartItemId)}
                     style={styles.quantityButton}
                   >
                     <Text>+</Text>
@@ -405,7 +409,7 @@ const Cart = () => {
                 </View>
 
                 {/* Remove from cart button */}
-                <TouchableOpacity onPress={() => removeFromCart(item.productData._id, item.productData.frame_information.frame_variants[0]._id)}>
+                <TouchableOpacity onPress={() => removeFromCart(item.productData._id, item.productData.frame_information.frame_variants[0]._id, item.orderSelections.selectedOptions.cartItemId)}>
                   <Text style={styles.removeButton}>Remove</Text>
                 </TouchableOpacity>
               </View>
