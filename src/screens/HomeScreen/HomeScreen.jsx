@@ -8,11 +8,10 @@ import {
   SafeAreaView,
   ScrollView,
   FlatList,
+  Pressable,
 } from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
-
-import Pressable from '../../wrapper_components/Pressable';
 
 import {
   raybanImages,
@@ -22,10 +21,41 @@ import {
   headerCollectionImages,
 } from '../../data/HomeScreenGlassesProperties';
 
+import {viewAllGlasses} from '../../services/Glasses/Glasses';
+
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
+
+  const handleNavigation = (screen, options) => {
+    navigation.navigate(screen, options);
+  };
+
+  const [glasses, setGlasses] = useState([]);
+
+  const fetchGlassess = async () => {
+    try {
+      const fetchAllGlasses = await viewAllGlasses();
+      setGlasses(fetchAllGlasses);
+    } catch (error) {
+      console.error('Error fetching glasses', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchGlassess();
+  }, []);
+
+  const filterByGender = gender => {
+    const filteredGlasses = glasses.filter(glass => {
+      return glass.person_information.genders.includes(gender);
+    });
+
+    handleNavigation('Glasses', {filteredGlasses: filteredGlasses});
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView>
@@ -38,7 +68,7 @@ const HomeScreen = () => {
               showsHorizontalScrollIndicator={false}
               keyExtractor={item => item.key}
               renderItem={({item}) => (
-                <View
+                <Pressable
                   style={{width: width}}
                   className="flex flex-col justify-center items-center bg-white h-52">
                   {/* <Text className="text-xl text-white pt-10">{item.text}</Text> */}
@@ -48,19 +78,25 @@ const HomeScreen = () => {
                     resizeMode="contain"
                     source={item.image}
                   />
-                </View>
+                </Pressable>
               )}
             />
           </View>
         </View>
         <View className="flex flex-row justify-evenly items-center mt-5">
-          <Pressable className="flex flex-row justify-center items-center border px-10 py-3 rounded-lg">
+          <Pressable
+            onPress={() => filterByGender('Male')}
+            className="flex flex-row justify-center items-center border px-10 py-3 rounded-lg">
             <Text className="text-black">Men</Text>
           </Pressable>
-          <Pressable className="flex flex-row justify-center items-center border px-10 py-3 rounded-lg">
+          <Pressable
+            onPress={() => filterByGender('Female')}
+            className="flex flex-row justify-center items-center border px-10 py-3 rounded-lg">
             <Text className="text-black">Women</Text>
           </Pressable>
-          <Pressable className="flex flex-row justify-center items-center border px-10 py-3 rounded-lg">
+          <Pressable
+            onPress={() => filterByGender('Kids')}
+            className="flex flex-row justify-center items-center border px-10 py-3 rounded-lg">
             <Text className="text-black">Kids</Text>
           </Pressable>
         </View>

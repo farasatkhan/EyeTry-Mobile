@@ -52,7 +52,7 @@ export const oakleyImages = [
   },
 ];
 
-export const exclusiveCollectionImage = [
+export const exclusiveCollectionImages = [
   {
     key: 1,
     image: require('../assets/home_screen/exclusive/image_1.webp'),
@@ -94,7 +94,7 @@ export const eyewearsCollectionImages = [
   },
 ];
 
-export const headerCollection = [
+export const headerCollectionImages = [
   {
     key: 1,
     image: require('../assets/home_screen/header/image_1.webp'),
