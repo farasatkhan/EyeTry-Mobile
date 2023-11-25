@@ -8,7 +8,7 @@ import { useParams } from '@react-navigation/native';
 import API_URL from '../../config/config';
 
 // import SunglassesLensPreview from '../OrderComponets/SunglassesLensPreview/SunglassesLensPreview';
-// import TransitionLensPreview from '../OrderComponets/TransitionLensPreview/TransitionLensPreview';
+import TransitionLensPreview from '../Order/TransitionLensPreview/TransitionLensPreview';
 import SelectGlassesType from "./SelectGlassesType";
 import SelectPrescriptionOption from "./SelectPrescriptionOption";
 import SelectPrescriptionType from "../Order/SelectPrescriptionType"
@@ -19,7 +19,7 @@ import SelectLensType from "../Order/SelectLensType"
 import AvailableCoatings from "../Order/AvailableCoatings"
 import ReviewSelections from "../Order/ReviewSelections"
 // import SunglassesLensSelection from "../OrderComponets/SunglassesLensSelection"
-// import TransitionLensSelection from "../OrderComponets/TransitionLensSelection"
+import TransitionLensSelection from "../Order/TransitionLensSelection"
 import graysvg from '../../assets/svg/Order/gray.svg'
 import { viewParticularProduct } from '../../services/Orders/orderApi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -118,7 +118,7 @@ export default function SelectLensTypeScreen({ route }) {
 
   const [customization, setCustomization] = useState({
     image: graysvg,
-    name: 'Gray Polarized',
+    name: 'Transition Gray',
   });
 
   // Update the Lens customization state based on user input
@@ -255,12 +255,11 @@ return (
               {'<'} <Text style={{ textDecorationLine: 'underline' }}>Back to frame</Text>
             </Text>
           </TouchableOpacity> */}
+          {currentStep !== 8 && currentStep !== 9 && (
+            <>
           <View className="mt-4">
           {productImage(product)}
           </View>
-
-          {currentStep !== 8 && currentStep !== 9 && (
-            <>
               <View className="pl-4 pr-4 mt-2 flex flex-row h-[]">
                 <View className="w-[80%] ">
                 <Text style={{ fontFamily: 'sans-serif', fontSize: 13, fontWeight: 'bold'}} numberOfLines={1} ellipsizeMode='tail'>{product.name}</Text>
@@ -282,6 +281,18 @@ return (
               </View> */}
             </>
           )}
+          
+          {currentStep === 8 && (
+                <>
+                  <TransitionLensPreview customization={customization} />
+                </>
+              )}
+{/* 
+              {currentStep === 9 && (
+                <>
+                  <SunglassesLensPreview customization={customization} />
+                </>
+              )} */}
         </View>
 
         {/* section 2 */}
