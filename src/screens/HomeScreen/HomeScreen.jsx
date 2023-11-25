@@ -87,6 +87,29 @@ const exclusiveCollectionImage = [
   },
 ];
 
+const eyewearsCollectionImages = [
+  {
+    key: 1,
+    image: require('../../assets/home_screen/eyewears/image_1.webp'),
+  },
+  {
+    key: 2,
+    image: require('../../assets/home_screen/eyewears/image_2.webp'),
+  },
+  {
+    key: 3,
+    image: require('../../assets/home_screen/eyewears/image_3.webp'),
+  },
+  {
+    key: 4,
+    image: require('../../assets/home_screen/eyewears/image_4.webp'),
+  },
+  {
+    key: 5,
+    image: require('../../assets/home_screen/eyewears/image_5.webp'),
+  },
+];
+
 const homeScreenPeopleImages = [
   {
     key: 1,
@@ -256,6 +279,29 @@ const HomeScreen = () => {
                     style={{width: width - 20}}
                     className="h-80 object-cover rounded-md"
                     resizeMode="contain"
+                    source={item.image}
+                  />
+                </View>
+              )}
+            />
+          </View>
+        </View>
+        <View className="my-5">
+          <Text className="text-black pl-5 mb-2 text-2xl font-bold uppercase">
+            Eyewears Collections
+          </Text>
+          <View className="flex flex-row gap-10">
+            <FlatList
+              data={eyewearsCollectionImages}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={item => item.key}
+              contentContainerStyle={{paddingLeft: 10, paddingRight: 10}}
+              renderItem={({item}) => (
+                <View className="flex flex-col justify-center items-center w-52 h-64 mr-5 rounded-lg shadow-lg shadow-black/50">
+                  <Image
+                    className="w-52 h-64 object-cover rounded-md"
+                    resizeMode="cover"
                     source={item.image}
                   />
                 </View>
