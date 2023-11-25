@@ -49,25 +49,8 @@ const ProductView = ({ customization }) => {
           
         {/* <Image source={customization.image} style={{width: 50, height: 50}} /> */}
 
-        <Text className='text-center text-sm font-semibold '>{customization.name}</Text>
+        <Text className='text-center text-sm font-semibold mb-1'>{customization.name}</Text>
         <View className='flex flex-row items-center justify-center mr-10 ml-10'>
-          
-          <View className='w-full flex items-center justify-between flex-row mx-auto'>
-            <Text className='text-sm font-sans font-bold text-gray-500 mr-2'>Indoor</Text>
-            <View className='w-16 border-t border-gray-300 h-0 my-0 mx-2' />
-            <View style={{ paddingHorizontal: 6, alignItems: 'center', justifyContent: 'center' }}>
-            <Animated.Image
-              source={isLight ? moonIcon : sunIcon}
-              style={{
-                width: 35,
-                height: 35,
-                opacity: fadeAnim, // Bind opacity to the animated value
-              }}
-            />
-          </View>
-            <View className='w-16 border-t border-gray-300 h-0 my-0 mx-2' />
-            <Text className='ml-2 text-sm font-sans font-bold text-gray-500'>Outdoor</Text>
-          </View>
         </View>
       </View>
     </View>

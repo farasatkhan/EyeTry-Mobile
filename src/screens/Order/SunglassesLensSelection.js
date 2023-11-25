@@ -22,64 +22,69 @@ import { useDispatch } from 'react-redux';
 import { updateSelectedOptions } from '../../redux/actions/orderSelectionAction';
 
 const SelectLensTypeComponent = ({ onUpdate, onNextStep, onPreviousState }) => {
-    const [selectedColor, setSelectedColor] = useState("Transition Gray");
+    const [selectedColor, setSelectedColor] = useState("Gray Polarized");
+
+    // Handle user input and update the product
+    const handleFrameColorChange = (color) => {
+        onUpdate(color);
+        setSelectedColor(color.name)
+    };
+
+    // navigation
+    const handleNext = (step) => {
+        onNextStep(step)
+    }
+
+    // handling data, sending from child to parent
+    // handling sunglasses type
+
     const dispatch = useDispatch();
 
-    const handleTransitionTypeAndColor = (transitionType, transitionColor) => {
+    const handleSunglassesTypeAndColor = (sunglassesType, color) => {
         dispatch(updateSelectedOptions({
             "lensProperties": {
-                "transitionLens": {
-                    "transitionType": transitionType,
-                    "transitionColor": transitionColor
+                "sunglassesLens": {
+                    "sunglassesType": sunglassesType,
+                    "color": color
                 }
             }
         }));
     };
 
-    const handleFrameColorChange = (color) => {
-        onUpdate(color);
-        setSelectedColor(color.name);
-    };
-
-    const handleNext = (step) => {
-        onNextStep(step);
-    };
-
-    const handleChildToParentPrevState = (state) => {
-        onPreviousState(state);
-    };
-
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Transition Lens Selection</Text>
+            <Text style={styles.title}>Sunglasses Lens Selection</Text>
 
             {/* Transitions™ Signature® GEN 8™" */}
             <View style={styles.rowContainer}>
                 <View style={styles.leftContainer}>
                     <View style={styles.iconRow}>
-                        <Image source={transitions} className="w-[85px] h-[25px] object-contain " />
-                        <Image source={signature} resizeMode="contain" className="w-[80px] h-[17px] mt-[3px] ml-1"  />
-                        <Image source={gen8} resizeMode="contain" className="w-[40px] h-[20px] mt-[2px] ml-1" />
+                        <View className='flex-row items-center'>
+                            <Text className='text-black font-bold font-sans text-lg'>Polarized (</Text> 
+                            <Text className="font-bold text-green-700 font-sans"> +$99 </Text>
+                            <Text className='line-through font-bold text-red-700 font-sans'> +$49.50</Text>
+                            <Text className='font-bold text-black font-sans text-lg'> )</Text>
+                        </View>
                     </View>
-                    <Text style={styles.description}>Rapid light-adaptive technology.</Text>
+                    <Text style={styles.description}>Reduce glare and haze for clearer vision.</Text>
                 </View>
                 <View className="space-x-4" style={styles.rightContainer}>
-                    <TouchableOpacity style={selectedColor === "Transition Gray" ? styles.selectedColor : {}}>
+                    <TouchableOpacity style={selectedColor === "Gray Polarized" ? styles.selectedColor : {}}>
                         <TouchableOpacity
                             onPress={() => {
-                                handleFrameColorChange({ image: graysvg, color: "Gray", name: "Transition Gray" })
-                                handleTransitionTypeAndColor("Transitions Signature Gen8", "Gray")
+                                handleFrameColorChange({ image: graysvg, name: "Gray Polarized" });
+                                handleSunglassesTypeAndColor("Polarized", "Gray");
                             }}
-                            style={[styles.colorButton, {backgroundColor: 'gray'}]}
+                            style={[styles.colorButton, { backgroundColor: 'gray' }]}
                         ></TouchableOpacity>
                     </TouchableOpacity>
-                    <TouchableOpacity style={selectedColor === "Transition Blue" ? styles.selectedColor : {}}>
+                    <TouchableOpacity style={selectedColor === "Blue Polarized" ? styles.selectedColor : {}}>
                         <TouchableOpacity
                             onPress={() => {
-                                handleFrameColorChange({ image: bluesvg, name: "Transition Blue" })
-                                handleTransitionTypeAndColor("Transitions Signature Gen8", "Blue")
+                                handleFrameColorChange({ image: bluesvg, name: "Blue Polarized" })
+                                handleSunglassesTypeAndColor("Polarized", "Blue");
                             }}
-                            style={[styles.colorButton, {backgroundColor: '#1E40AF'}]}
+                            style={[styles.colorButton, { backgroundColor: '#1E40AF' }]}
                         ></TouchableOpacity>
                     </TouchableOpacity>
                 </View>
@@ -89,122 +94,129 @@ const SelectLensTypeComponent = ({ onUpdate, onNextStep, onPreviousState }) => {
             <View style={styles.rowContainer}>
                 <View style={styles.leftContainer}>
                     <View style={styles.iconRow}>
-                        <Image source={transitions} className="w-[85px] h-[25px] object-contain " />
-                        <Image source={xtractive} resizeMode="contain" className="w-[85px] h-[20px] mt-[3px] ml-1"  />
+                    <View className='flex-row items-center'>
+                            <Text className='text-black font-bold font-sans text-lg'>Color Tint (</Text> 
+                            <Text className="font-bold text-green-700 font-sans"> +$29 </Text>
+                            <Text className='line-through font-bold text-red-700 font-sans'> +$14.50</Text>
+                            <Text className='font-bold text-black font-sans text-lg'> )</Text>
+                        </View>
                     </View>
-                    <Text style={styles.description}>Ultimate adaptability in varying light conditions.</Text>
+                    <Text style={styles.description}>Sun protection basic lenses</Text>
                 </View>
                 <View className="space-x-4" style={styles.rightContainer}>
                     <TouchableOpacity style={selectedColor === "Gray Tint" ? styles.selectedColor : {}}>
                         <TouchableOpacity
                             onPress={() => {
                                 handleFrameColorChange({ image: graysvg, name: "Gray Tint" })
-                                handleTransitionTypeAndColor("Transitions Xtractive", "Gray")
+                                handleSunglassesTypeAndColor("Tint", "Gray");
                             }}
-                            style={[styles.colorButton, {backgroundColor: 'gray'}]}
+                            style={[styles.colorButton, { backgroundColor: 'gray' }]}
                         ></TouchableOpacity>
                     </TouchableOpacity>
                     <TouchableOpacity style={selectedColor === "Brown Tint" ? styles.selectedColor : {}}>
                         <TouchableOpacity
                             onPress={() => {
                                 handleFrameColorChange({ image: brownsvg, name: "Brown Tint" })
-                                handleTransitionTypeAndColor("Transitions Xtractive", "Brown")
+                                handleSunglassesTypeAndColor("Tint", "Brown");
                             }}
-                            style={[styles.colorButton, {backgroundColor: 'brown'}]}
+                            style={[styles.colorButton, { backgroundColor: 'brown' }]}
                         ></TouchableOpacity>
                     </TouchableOpacity>
                     <TouchableOpacity style={selectedColor === "Green Tint" ? styles.selectedColor : {}}>
                         <TouchableOpacity
                             onPress={() => {
                                 handleFrameColorChange({ image: greensvg, name: "Green Tint" })
-                                handleTransitionTypeAndColor("Transitions Xtractive", "Green")
+                                handleSunglassesTypeAndColor("Tint", "Green");
                             }}
-                            style={[styles.colorButton, {backgroundColor: 'green'}]}
+                            style={[styles.colorButton, { backgroundColor: 'green' }]}
                         ></TouchableOpacity>
                     </TouchableOpacity>
                     <TouchableOpacity style={selectedColor === "Blue Tint" ? styles.selectedColor : {}}>
                         <TouchableOpacity
                             onPress={() => {
                                 handleFrameColorChange({ image: bluesvg, name: "Blue Tint" })
-                                handleTransitionTypeAndColor("Transitions Xtractive", "Blue")
+                                handleSunglassesTypeAndColor("Tint", "Blue");
                             }}
-                            style={[styles.colorButton, {backgroundColor: '#1E40AF'}]}
+                            style={[styles.colorButton, { backgroundColor: '#1E40AF' }]}
                         ></TouchableOpacity>
                     </TouchableOpacity>
                     <TouchableOpacity style={selectedColor === "Yellow Tint" ? styles.selectedColor : {}}>
                         <TouchableOpacity
                             onPress={() => {
                                 handleFrameColorChange({ image: yellowsvg, name: "Yellow Tint" })
-                                handleTransitionTypeAndColor("Transitions Xtractive", "Yellow")
+                                handleSunglassesTypeAndColor("Tint", "Yellow");
                             }}
-                            style={[styles.colorButton, {backgroundColor: '#FACC15'}]}
+                            style={[styles.colorButton, { backgroundColor: '#FACC15' }]}
                         ></TouchableOpacity>
                     </TouchableOpacity>
                 </View>
             </View>
-            
+
             {/* Transition Xtractive Polarized*/}
             <View style={styles.rowContainer}>
                 <View style={styles.leftContainer}>
                     <View style={styles.iconRow}>
-                        <Image source={transitions} className="w-[85px] h-[25px] object-contain " />
-                        <Image source={xtractive} resizeMode="contain" className="w-[85px] h-[20px] mt-[3px] ml-1"  />
-                        <Image source={polarized} resizeMode="contain" className="w-[85px] h-[20px] mt-[2.5px] ml-1"  />
+                    <View className='flex-row items-center'>
+                            <Text className='text-black font-bold font-sans text-lg'>Mirrored (</Text> 
+                            <Text className="font-bold text-green-700 font-sans"> +$49 </Text>
+                            <Text className='line-through font-bold text-red-700 font-sans'> +$24.50</Text>
+                            <Text className='font-bold text-black font-sans text-lg'> )</Text>
+                        </View>
                     </View>
-                    <Text style={styles.description}>Versatile protection with polarization.</Text>
+                    <Text style={styles.description}>High fashionable reflective color</Text>
                 </View>
                 <View className="space-x-4" style={styles.rightContainer}>
                     <TouchableOpacity style={selectedColor === "Red Mirrored" ? styles.selectedColor : {}}>
                         <TouchableOpacity
                             onPress={() => {
                                 handleFrameColorChange({ image: redMirroredSvg, name: "Red Mirrored" })
-                                handleTransitionTypeAndColor("Transitions Xtractive Polarized", "Red")
+                                handleSunglassesTypeAndColor("Mirrored", "Red");
                             }}
-                            style={[styles.colorButton, {backgroundColor: '#B91C1C'}]}
+                            style={[styles.colorButton, { backgroundColor: '#B91C1C' }]}
                         ></TouchableOpacity>
                     </TouchableOpacity>
                     <TouchableOpacity style={selectedColor === "Blue Mirrored" ? styles.selectedColor : {}}>
                         <TouchableOpacity
                             onPress={() => {
                                 handleFrameColorChange({ image: blueMirroredSvg, name: "Blue Mirrored" })
-                                handleTransitionTypeAndColor("Transitions Xtractive Polarized", "Blue")
+                                handleSunglassesTypeAndColor("Mirrored", "Blue");
                             }}
-                            style={[styles.colorButton, {backgroundColor: '#1E40AF'}]}
+                            style={[styles.colorButton, { backgroundColor: '#1E40AF' }]}
                         ></TouchableOpacity>
                     </TouchableOpacity>
                     <TouchableOpacity style={selectedColor === "Gold Mirrored" ? styles.selectedColor : {}}>
                         <TouchableOpacity
                             onPress={() => {
                                 handleFrameColorChange({ image: goldMirroredSvg, name: "Gold Mirrored" })
-                                handleTransitionTypeAndColor("Transitions Xtractive Polarized", "Gold")
+                                handleSunglassesTypeAndColor("Mirrored", "Gold");
                             }}
-                            style={[styles.colorButton, {backgroundColor: '#A16207'}]}
+                            style={[styles.colorButton, { backgroundColor: '#A16207' }]}
                         ></TouchableOpacity>
                     </TouchableOpacity>
                     <TouchableOpacity style={selectedColor === "Green Mirrored" ? styles.selectedColor : {}}>
                         <TouchableOpacity
                             onPress={() => {
                                 handleFrameColorChange({ image: greenMirroredSvg, name: "Green Mirrored" })
-                                handleTransitionTypeAndColor("Transitions Xtractive Polarized", "Green")
+                                handleSunglassesTypeAndColor("Mirrored", "Green");
                             }}
-                            style={[styles.colorButton, {backgroundColor: 'green'}]}
+                            style={[styles.colorButton, { backgroundColor: 'green' }]}
                         ></TouchableOpacity>
                     </TouchableOpacity>
                     <TouchableOpacity style={selectedColor === "Silver Mirrored" ? styles.selectedColor : {}}>
                         <TouchableOpacity
                             onPress={() => {
                                 handleFrameColorChange({ image: SilverMirroredSvg, name: "Silver Mirrored" })
-                                handleTransitionTypeAndColor("Transitions Xtractive Polarized", "Silver")
+                                handleSunglassesTypeAndColor("Mirrored", "Silver");
                             }}
-                            style={[styles.colorButton, {backgroundColor: '#9CA3AF'}]}
+                            style={[styles.colorButton, { backgroundColor: '#9CA3AF' }]}
                         ></TouchableOpacity>
                     </TouchableOpacity>
                 </View>
             </View>
 
-            
+
             <View style={styles.buttonContainer}>
-                <TouchableOpacity onPress={() => { handleNext(10); handleChildToParentPrevState(8); }} style={styles.selectButton}>
+                <TouchableOpacity onPress={() => { handleNext(10) }} style={styles.selectButton}>
                     <Text style={styles.selectButtonText}>Select</Text>
                 </TouchableOpacity>
             </View>

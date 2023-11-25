@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useParams } from '@react-navigation/native';
 import API_URL from '../../config/config';
 
-// import SunglassesLensPreview from '../OrderComponets/SunglassesLensPreview/SunglassesLensPreview';
+import SunglassesLensPreview from '../Order/TransitionLensPreview/SunglassesLensPreview';
 import TransitionLensPreview from '../Order/TransitionLensPreview/TransitionLensPreview';
 import SelectGlassesType from "./SelectGlassesType";
 import SelectPrescriptionOption from "./SelectPrescriptionOption";
@@ -18,9 +18,9 @@ import ChooseLensPackage from "../Order/ChooseLensPackage"
 import SelectLensType from "../Order/SelectLensType"
 import AvailableCoatings from "../Order/AvailableCoatings"
 import ReviewSelections from "../Order/ReviewSelections"
-// import SunglassesLensSelection from "../OrderComponets/SunglassesLensSelection"
+import SunglassesLensSelection from "../Order/SunglassesLensSelection"
 import TransitionLensSelection from "../Order/TransitionLensSelection"
-import graysvg from '../../assets/svg/Order/gray.svg'
+import graysvg from '../../assets/images/orders/lensSvgs/gray.png'
 import { viewParticularProduct } from '../../services/Orders/orderApi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { storeDataAsyncStorage } from '../../utils/AsynchronusStorage/asyncStorage';
@@ -234,6 +234,7 @@ const productImage = (product) => {
         <Image
           className="w-[60%] mx-auto object-contain h-[120px]" // Adjust the dimensions as needed
           source={{ uri: completePath }}
+          resizeMode='contain'
           // alt="product"
         />
           {/* <Image
@@ -287,12 +288,12 @@ return (
                   <TransitionLensPreview customization={customization} />
                 </>
               )}
-{/* 
+
               {currentStep === 9 && (
                 <>
                   <SunglassesLensPreview customization={customization} />
                 </>
-              )} */}
+              )}
         </View>
 
         {/* section 2 */}

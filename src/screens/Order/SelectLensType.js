@@ -35,7 +35,7 @@ export default function SelectLensTypeComponent({ onNextStep }) {
                 style={styles.optionContainer}
             >
                 <View style={styles.imageContainer}>
-                    <Image source={clear} style={styles.image} />
+                    <Image source={clear} resizeMode="contain" style={styles.image} />
                  
 
                 </View>
@@ -53,7 +53,7 @@ export default function SelectLensTypeComponent({ onNextStep }) {
                 style={styles.optionContainer}
             >
                 <View style={styles.imageContainer}>
-                    <Image source={bluelight} style={styles.image} />
+                    <Image source={bluelight} resizeMode="contain" style={styles.image} />
                 </View>
                 <View style={styles.textContainer}>
                     <Text style={styles.optionTitle}>Blue Light Lenses (+$39 +$19.50)</Text>
@@ -69,7 +69,7 @@ export default function SelectLensTypeComponent({ onNextStep }) {
                 style={styles.optionContainer}
             >
                 <View style={styles.imageContainer}>
-                    <Image source={transition} style={styles.image} />
+                    <Image source={transition} resizeMode="contain" style={styles.image} />
                 </View>
                 <View style={styles.textContainer}>
                     <Text style={styles.optionTitle}>Transition / Photochromic (From +$69 +$34.50)</Text>
@@ -85,7 +85,7 @@ export default function SelectLensTypeComponent({ onNextStep }) {
                 style={styles.optionContainer}
             >
                 <View style={styles.imageContainer}>
-                    <Image source={sunglasses} style={styles.image} />
+                    <Image source={sunglasses} resizeMode="contain" style={styles.image} />
                 </View>
                 <View style={styles.textContainer}>
                     <Text style={styles.optionTitle}>Sunglasses (From +$29 +$14.50)</Text>
