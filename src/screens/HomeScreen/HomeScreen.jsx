@@ -56,6 +56,22 @@ const HomeScreen = () => {
     handleNavigation('Glasses', {filteredGlasses: filteredGlasses});
   };
 
+  const filterByManufacturer = manufacturer => {
+    const filteredGlasses = glasses.filter(glass => {
+      return glass.manufacturer === manufacturer;
+    });
+
+    handleNavigation('Glasses', {filteredGlasses: filteredGlasses});
+  };
+
+  const filterByType = type => {
+    const filteredGlasses = glasses.filter(glass => {
+      return glass.type === type;
+    });
+
+    handleNavigation('Glasses', {filteredGlasses: filteredGlasses});
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView>
@@ -69,6 +85,7 @@ const HomeScreen = () => {
               keyExtractor={item => item.key}
               renderItem={({item}) => (
                 <Pressable
+                  onPress={() => filterByManufacturer('Ray-Ban')}
                   style={{width: width}}
                   className="flex flex-col justify-center items-center bg-white h-52">
                   {/* <Text className="text-xl text-white pt-10">{item.text}</Text> */}
@@ -158,13 +175,15 @@ const HomeScreen = () => {
               keyExtractor={item => item.key}
               contentContainerStyle={{paddingLeft: 10, paddingRight: 10}}
               renderItem={({item}) => (
-                <View className="flex flex-col justify-center items-center w-52 h-64 mr-5 rounded-lg shadow-lg shadow-black/50">
+                <Pressable
+                  onPress={() => filterByManufacturer('Ray-Ban')}
+                  className="flex flex-col justify-center items-center w-52 h-64 mr-5 rounded-lg shadow-lg shadow-black/50">
                   <Image
                     className="w-52 h-64 object-cover rounded-md"
                     resizeMode="cover"
                     source={item.image}
                   />
-                </View>
+                </Pressable>
               )}
             />
           </View>
@@ -209,20 +228,22 @@ const HomeScreen = () => {
               keyExtractor={item => item.key}
               contentContainerStyle={{paddingLeft: 10, paddingRight: 10}}
               renderItem={({item}) => (
-                <View className="flex flex-col justify-center items-center w-52 h-64 mr-5 rounded-lg shadow-lg shadow-black/50">
+                <Pressable
+                  onPress={() => filterByType('Eyewears')}
+                  className="flex flex-col justify-center items-center w-52 h-64 mr-5 rounded-lg shadow-lg shadow-black/50">
                   <Image
                     className="w-52 h-64 object-cover rounded-md"
                     resizeMode="cover"
                     source={item.image}
                   />
-                </View>
+                </Pressable>
               )}
             />
           </View>
         </View>
         <View className="my-5">
           <Text className="text-black pl-5 mb-5 text-xl uppercase font-light">
-            Oakley Collections
+            Gucci Collections
           </Text>
           <View className="flex flex-row gap-10">
             <FlatList
@@ -232,13 +253,15 @@ const HomeScreen = () => {
               keyExtractor={item => item.key}
               contentContainerStyle={{paddingLeft: 10, paddingRight: 10}}
               renderItem={({item}) => (
-                <View className="flex flex-col justify-center items-center w-52 h-64 mr-5 rounded-lg shadow-lg shadow-black/50">
+                <Pressable
+                  onPress={() => filterByManufacturer('Gucci')}
+                  className="flex flex-col justify-center items-center w-52 h-64 mr-5 rounded-lg shadow-lg shadow-black/50">
                   <Image
                     className="w-52 h-64 object-cover rounded-md"
                     resizeMode="cover"
                     source={item.image}
                   />
-                </View>
+                </Pressable>
               )}
             />
           </View>
