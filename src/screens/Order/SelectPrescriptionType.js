@@ -20,7 +20,7 @@ export default function SelectLensTypeComponent({ onNextStep }) {
   };
 
   return (
-    <View>
+    <View style={{flex:1, padding: 10}}>
       <Text style={styles.heading}>Select a prescription type</Text>
 
       <TouchableOpacity
@@ -56,14 +56,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 10,
-    textAlign:"center"
+    textAlign:"center",
+    color: "#4B5563"
   },
   optionContainer: {
     width: "100%",
     marginBottom: 10,
     backgroundColor: "white",
     borderWidth: 2,
-    borderColor: "gray",
+    borderColor: "#4B5563",
     borderRadius: 8,
     padding: 16,
   },
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 5,
-    color: "#333", // Adjust color as needed
+    color: "#4B5563", // Adjust color as needed
   },
   optionText: {
     fontSize: 16,

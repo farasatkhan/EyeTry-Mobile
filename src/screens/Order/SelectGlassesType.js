@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
+    color:"#4B5563"
   },
   optionContainer: {
     width: '100%',
@@ -76,6 +77,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 5,
+    color: "#4B5563"
   },
   optionText: {
     fontSize: 16,

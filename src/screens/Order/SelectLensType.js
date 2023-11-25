@@ -24,9 +24,8 @@ export default function SelectLensTypeComponent({ onNextStep }) {
     };
 
     return (
-        <View>
+        <View style={{flex:1, padding:10}}>
             <Text style={styles.header}>Select Glasses Type</Text>
-
             <TouchableOpacity
                 onPress={() => {
                     handleNext(10);
@@ -98,19 +97,20 @@ export default function SelectLensTypeComponent({ onNextStep }) {
 
 const styles = StyleSheet.create({
     header: {
-        fontSize: 24,
+        fontSize: 20,
         fontWeight: "bold",
         textAlign: "center",
         marginVertical: 10,
+        color: "#4B5563",
     },
     optionContainer: {
-        marginVertical: 10,
         padding: 20,
         backgroundColor: "#fff",
         borderWidth: 2,
         borderColor: "#ccc",
         borderRadius: 10,
         flexDirection: "row",
+        marginBottom: 10
     },
     imageContainer: {
         width: "20%",
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     optionTitle: {
         fontSize: 18,
         fontWeight: "bold",
-        marginBottom: 10,
+        color: "#4B5563"
     },
     optionDescription: {
         fontSize: 16,

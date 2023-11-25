@@ -40,10 +40,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   header: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 10,
+    color: "#4B5563"
   },
   optionContainer: {
     marginBottom: 20,
@@ -54,12 +55,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   secondOptionContainer: {
-    borderColor: "#fff", // Change color if needed
+    borderColor: "#ccc", // Change color if needed
   },
   optionTitle: {
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 10,
+    color: "#4B5563"
   },
   optionDescription: {
     fontSize: 16,

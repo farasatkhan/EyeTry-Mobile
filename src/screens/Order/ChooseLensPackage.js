@@ -28,7 +28,7 @@ export default function ChooseLensPackage({ onNextStep }) {
   return (
     <ScrollView style={{ flex: 1, padding: 10 }}>
         {/* <Text>jsdbfh</Text> */}
-      <Text style={{ fontSize: 20, fontWeight: 'bold', marginVertical: 5 }}>Choose Lens Package</Text>
+      <Text className="mx-auto mb-3 text-gray-600" style={{ fontSize: 20, fontWeight: 'bold', marginVertical: 5 }}>Choose Lens Package</Text>
       <View style={{ flex: 1, flexDirection: 'column' }}>
         <TouchableOpacity
           onPress={() => {

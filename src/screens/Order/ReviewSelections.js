@@ -134,7 +134,7 @@ const SelectLensTypeComponentProp = ({ selectedOptions, onConfirmSelection, rout
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => { }}
-            style={[styles.button, { backgroundColor: '#444' }]}>
+            style={[styles.button, { backgroundColor: '#4B5563' }]}>
             <Text style={styles.buttonText}>Buy Now</Text>
           </TouchableOpacity>
         </View>
@@ -153,7 +153,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginVertical: 5,
     alignSelf:'center',
-    marginBottom: 5
+    marginBottom: 5,
+    color: "#4B5563"
   },
   subtitle: {
     fontFamily: 'sans-serif',
@@ -228,7 +229,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 5,
     borderRadius: 4,
-    height: 30
+    height: 35
   },
   buttonText: {
     color: 'white',

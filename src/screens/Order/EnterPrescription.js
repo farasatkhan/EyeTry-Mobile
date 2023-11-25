@@ -106,13 +106,13 @@ export default function EnterPrescription({ onSelectedOptions, onNextStep }) {
               style={pdType === 'oneNumber' ? styles.radioButtonSelected : styles.radioButton}
               onPress={() => setPDType('oneNumber')}
             >
-              <Text>One Number</Text>
+              <Text style={pdType === 'oneNumber' ? {color:"white"} : {color:"black"}}>One Number</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={pdType === 'twoNumbers' ? styles.radioButtonSelected : styles.radioButton}
               onPress={() => setPDType('twoNumbers')}
             >
-              <Text>Two Numbers</Text>
+              <Text style={pdType === 'twoNumbers' ? {color:"white"} : {color:"black"}}>Two Numbers</Text>
             </TouchableOpacity>
           </View>
 
@@ -233,6 +233,7 @@ export default function EnterPrescription({ onSelectedOptions, onNextStep }) {
 
       <View style={styles.birthYearContainer}>
         <Text style={styles.birthYearLabel}>Select Your Birth Year</Text>
+        <View style={{borderColor: 'gray', borderWidth: 1, borderRadius: 5, marginTop: 5 }}>
         <Picker
           style={styles.picker}
           selectedValue={birthYear}
@@ -242,6 +243,7 @@ export default function EnterPrescription({ onSelectedOptions, onNextStep }) {
             <Picker.Item key={year} label={year.toString()} value={year} />
           ))}
         </Picker>
+        </View>
       </View>
     </View>
 
@@ -273,10 +275,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginVertical: 10,
     textAlign: 'center',
+    color: "#4B5563"
   },
   errorContainer: {
-    marginTop: 5,
-    marginBottom: 10,
+    marginTop: 3,
+    marginBottom: 3,
   },
   errorText: {
     color: 'red',
@@ -310,12 +313,12 @@ const styles = StyleSheet.create({
   },
   radioButtonSelected: {
     padding: 10,
-    backgroundColor: 'gray',
+    backgroundColor: '#4B5563',
     borderRadius: 5,
   },
   pdInputContainer: {
     marginTop: 5,
-    marginBottom: 15,
+    marginBottom: 5,
   },
   pdInputLabel: {
     fontSize: 14,
@@ -328,13 +331,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     paddingLeft: 10,
-    marginBottom: 10,
+    marginBottom: 5,
   },
   nextButton: {
-    backgroundColor: 'gray',
+    backgroundColor: '#4B5563',
     padding: 10,
     borderRadius: 8,
     alignSelf: 'center',
+    width: "95%",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 20,
+    marginBottom: 20,
   },
   nextButtonText: {
     color: 'white',
@@ -346,7 +354,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   eyeContainer: {
-    marginBottom: 20,
+    marginBottom: 5,
   },
   eyeLabel: {
     fontSize: 16,
@@ -368,17 +376,16 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   birthYearContainer: {
-    marginTop: 20,
+    // marginTop: 10,
   },
   birthYearLabel: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: 5,
   },
   picker: {
     height: 40,
     borderColor: 'gray',
-    borderWidth: 1,
+    borderWidth: 2,
     borderRadius: 5,
   },
 });
