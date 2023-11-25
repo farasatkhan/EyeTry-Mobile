@@ -25,30 +25,30 @@ export const raybanImages = [
   },
 ];
 
-export const oakleyImages = [
+export const gucciImages = [
   {
     key: 1,
-    image: require('../assets/home_screen/oakley/image_1.webp'),
+    image: require('../assets/home_screen/gucci/image_1.webp'),
   },
   {
     key: 2,
-    image: require('../assets/home_screen/oakley/image_2.webp'),
+    image: require('../assets/home_screen/gucci/image_2.webp'),
   },
   {
     key: 3,
-    image: require('../assets/home_screen/oakley/image_3.webp'),
+    image: require('../assets/home_screen/gucci/image_3.webp'),
   },
   {
     key: 4,
-    image: require('../assets/home_screen/oakley/image_4.webp'),
+    image: require('../assets/home_screen/gucci/image_4.webp'),
   },
   {
     key: 5,
-    image: require('../assets/home_screen/oakley/image_5.webp'),
+    image: require('../assets/home_screen/gucci/image_5.webp'),
   },
   {
     key: 6,
-    image: require('../assets/home_screen/oakley/image_6.webp'),
+    image: require('../assets/home_screen/gucci/image_6.webp'),
   },
 ];
 

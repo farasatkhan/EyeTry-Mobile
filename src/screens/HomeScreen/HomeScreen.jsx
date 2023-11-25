@@ -15,7 +15,7 @@ import {useNavigation} from '@react-navigation/native';
 
 import {
   raybanImages,
-  oakleyImages,
+  gucciImages,
   exclusiveCollectionImages,
   eyewearsCollectionImages,
   headerCollectionImages,
@@ -259,7 +259,7 @@ const HomeScreen = () => {
           </Text>
           <View className="flex flex-row gap-10">
             <FlatList
-              data={oakleyImages}
+              data={gucciImages}
               horizontal
               showsHorizontalScrollIndicator={false}
               keyExtractor={item => item.key}
