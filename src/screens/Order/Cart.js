@@ -95,10 +95,19 @@ const Cart = () => {
   
   
     const getLocalStorageCartItems = async () => {
-      const storedCartItems = await AsyncStorage.getItem('cart');
-      setCartItems(JSON.parse(storedCartItems));
-      console.log("cart screen data: ", storedCartItems);
-    }
+      try {
+        const storedCartItems = await AsyncStorage.getItem('cart');
+    
+        if (storedCartItems) {
+          setCartItems(JSON.parse(storedCartItems));
+          console.log("Cart screen data:", JSON.parse(storedCartItems, null, 2));
+        } else {
+          console.log("No cart data found in AsyncStorage");
+        }
+      } catch (error) {
+        console.error("Error retrieving cart data:", error);
+      }
+    };
   
     useEffect(() => {
       const initialProductQuantities = {};
@@ -113,6 +122,7 @@ const Cart = () => {
       }
       setProductQuantities(initialProductQuantities);
     }, [cartItems]);
+    
   
   
     const placeOrder = async (event) => {
@@ -339,7 +349,7 @@ const Cart = () => {
       return totalCalculatedPrice;
     };
   
-    const removeFromCart = (productId, variantId) => {
+    const removeFromCart = async (productId, variantId) => {
       // Filter out the item to be removed from the cartItems state
       const updatedCartItems = cartItems.filter((item) => {
         const sameProductId = item.productData._id === productId;
@@ -349,11 +359,11 @@ const Cart = () => {
         return !(sameProductId && sameVariantId);
       });
   
-      // Update the cartItems state
+      // Updating the cartItems state
       setCartItems(updatedCartItems);
   
-      // Update the local storage to reflect the changes
-      localStorage.setItem('cart', JSON.stringify(updatedCartItems));
+      // Updating the async storage to reflect the changes
+      await AsyncStorage.setItem('cart', JSON.stringify(updatedCartItems));
     };
 
   return (
@@ -367,7 +377,7 @@ const Cart = () => {
               <Image
                 source={{ uri: API_URL + item.productData.frame_information.frame_variants[0].images[0] }}
                 style={styles.productImage}
-                resizeMode="cover"
+                resizeMode="contain"
               />
 
               <View style={styles.itemDetailsContainer}>
@@ -395,9 +405,9 @@ const Cart = () => {
                 </View>
 
                 {/* Remove from cart button */}
-                {/* <TouchableOpacity onPress={() => removeFromCart(item.productData._id, item.productData.frame_information.frame_variants[0]._id)}>
+                <TouchableOpacity onPress={() => removeFromCart(item.productData._id, item.productData.frame_information.frame_variants[0]._id)}>
                   <Text style={styles.removeButton}>Remove</Text>
-                </TouchableOpacity> */}
+                </TouchableOpacity>
               </View>
             </View>
           ))
@@ -497,6 +507,9 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 5,
         marginRight: 5,
+        width: 50,
+        justifyContent:'center',
+        alignItems:'center'
       },
       quantityText: {
         fontSize: 16,

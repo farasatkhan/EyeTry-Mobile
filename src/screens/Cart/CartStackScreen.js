@@ -1,15 +1,16 @@
 import * as React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text,StyleSheet,Alert,Image } from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function CartStackScreen({ navigation }) {
+import Cart from '../../../src/screens/Order/Cart';
 
-  const goToProfile = () => {
-    navigation.navigate('MyDetails');
+
+const ProductStack = createNativeStackNavigator();
+
+export default function ProductStackScreen() {
+    return (
+      <ProductStack.Navigator screenOptions={{ headerTitleAlign: 'center' }} initialRouteName='cart'>
+      <ProductStack.Screen name='Cart' component={Cart}/>
+    </ProductStack.Navigator>
+    );
   }
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>CartScreen!</Text>
-      <Button onPress={goToProfile} title="Go to Profile">Go to profile</Button>
-    </View>
-  );
-}

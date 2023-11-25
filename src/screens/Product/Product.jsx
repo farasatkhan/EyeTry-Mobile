@@ -1,4 +1,4 @@
-import React, { useState, useEffect,  } from 'react';
+import React, { useState, useEffect, } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -51,6 +51,16 @@ const Product = ({ route }) => {
       const fetchProduct = await viewSingleProduct(productId);
       setProduct(fetchProduct);
       navigation.setOptions({ title: fetchProduct.name });
+
+      // handling default color
+      const colors = fetchProduct.frame_information.frame_variants.map(
+        (variant) => variant.color
+      );
+      if (colors.length > 0) { 
+        const defaultColor = colors[0];
+        setFrameColor(defaultColor)
+        console.log("default color: " , defaultColor)
+      }
     } catch (error) {
       console.error('Error fetching glasses', error);
     }
@@ -123,7 +133,7 @@ const Product = ({ route }) => {
   }
 
   // Frame Color
-  const [frameColor, setFrameColor] = useState('black');
+  const [frameColor, setFrameColor] = useState('');
   const handleColorSelect = (color) => {
     setFrameColor(color);
   }
