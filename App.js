@@ -80,9 +80,9 @@ function App() {
           <Stack.Screen name="ResetLink" component={ResetLinkScreen} options={{ headerShown: false }}/>
           <Stack.Screen name="HomeTabScreen" component={HomeTabScreen} options={{ headerShown: false }}/>
           
-          <Stack.Screen name="Glasses" component={Glasses} options={({ route }) => ({
+          <Stack.Screen name="Glasses" component={Glasses} options={{
             headerRight: () => <GlassesHeader/>,
-          })}/>
+          }}/>
           <Stack.Screen name='GlassesSearch' component={GlassesSearch} options={{headerShown: false}}/>
           <Stack.Screen name='GlassesFilter' component={GlassesFilter} options={{title: "Filters"}}/>
           <Stack.Screen name='Product' component={Product}/>
