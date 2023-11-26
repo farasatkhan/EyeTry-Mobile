@@ -43,8 +43,8 @@ export default properties = {
       'Diamond',
       'Rectangle/Long',
     ],
-    gender: ['Male', 'Female', 'Kids'],
-    rim: ['All Rims', 'Full Rim', 'Rim Less', 'Semi Rim'],
+    gender: ['All', 'Male', 'Female', 'Kids'],
+    rim: ['All', 'Full Rim', 'Rim Less', 'Semi Rim'],
     size: ['All', 'Small', 'Medium', 'Large', 'Extra Large'],
-    categories: ['All', 'Eyeglasses', 'Sunglasses', 'Men', 'Women', 'Kids'],
+    categories: ['All', 'Men', 'Women', 'Kids'],
 };

@@ -83,10 +83,10 @@ function App() {
           <Stack.Screen name="HomeTabScreen" component={HomeTabScreen} options={{ headerShown: false }}/>
           
           <Stack.Screen name="Glasses" component={Glasses} options={{
-          headerRight: () => <GlassesHeader />,
+            headerRight: () => <GlassesHeader/>,
           }}/>
           <Stack.Screen name='GlassesSearch' component={GlassesSearch} options={{headerShown: false}}/>
-          <Stack.Screen name='GlassesFilter' component={GlassesFilter}/>
+          <Stack.Screen name='GlassesFilter' component={GlassesFilter} options={{title: "Filters"}}/>
           <Stack.Screen name='Product' component={Product}/>
           
         </Stack.Navigator>

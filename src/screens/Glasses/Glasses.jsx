@@ -13,7 +13,7 @@ import Pressable from '../../wrapper_components/Pressable';
 
 import Icon from 'react-native-vector-icons/AntDesign';
 
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useFocusEffect} from '@react-navigation/native';
 
 import API_URL from '../../config/config';
 
@@ -32,7 +32,14 @@ const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
 const Glasses = ({route}) => {
-  const {glassesType} = route.params;
+  const {glassesType, filteredGlasses} = route.params;
+
+  useFocusEffect(() => {
+    if (filteredGlasses) {
+      setGlasses(filteredGlasses);
+      console.log('Filtered Glasses are set');
+    }
+  });
 
   const navigation = useNavigation();
 
@@ -54,6 +61,7 @@ const Glasses = ({route}) => {
         fetchAllGlasses = await viewAllGlasses();
       }
       setGlasses(fetchAllGlasses);
+      console.log('fetched Glasses are set');
     } catch (error) {
       console.error('Error fetching glasses', error);
     }
@@ -94,10 +102,12 @@ const Glasses = ({route}) => {
     });
   }, []);
 
+  const [colorSelected, setColorSelected] = useState('');
   const [selectedVariants, setSelectedVariants] = useState({});
 
-  const handleVariantPress = (itemId, variantIndex) => {
+  const handleVariantPress = (itemId, variantIndex, color) => {
     setSelectedVariants({...selectedVariants, [itemId]: variantIndex});
+    setColorSelected(color);
   };
 
   return (
@@ -105,7 +115,7 @@ const Glasses = ({route}) => {
       {glasses.length > 0 ? (
         <FlatList
           data={glasses}
-          keyExtractor={item => item.key}
+          keyExtractor={item => item._id}
           renderItem={({item}) => {
             const selectedVariantIndex = selectedVariants[item._id] || 0;
             const selectedVariant =
@@ -141,7 +151,7 @@ const Glasses = ({route}) => {
                       }
                       className="flex flex-row justify-center items-center">
                       <Image
-                        style={{width: width}}
+                        style={{width: width - 100}}
                         className="h-60 object-cover"
                         resizeMode="contain"
                         source={{
@@ -155,6 +165,7 @@ const Glasses = ({route}) => {
                   {item.frame_information.frame_variants.map(
                     (variant, index) => (
                       <View
+                        key={index}
                         style={
                           selectedVariantIndex === index
                             ? {borderColor: variant.color_code}
@@ -162,8 +173,9 @@ const Glasses = ({route}) => {
                         }
                         className="flex justify-center items-center w-10 h-10 border rounded-full">
                         <Pressable
-                          key={index}
-                          onPress={() => handleVariantPress(item._id, index)}
+                          onPress={() =>
+                            handleVariantPress(item._id, index, variant.color)
+                          }
                           style={{backgroundColor: variant.color_code}}
                           className="w-7 h-7 rounded-full bg-black"></Pressable>
                       </View>

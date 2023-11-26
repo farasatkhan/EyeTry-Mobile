@@ -19,7 +19,7 @@ const Tab = createBottomTabNavigator();
 const HomeTabScreen = () => {
   return (
     <Tab.Navigator
-      initialRouteName="ProfileStackScreen"
+      initialRouteName="HomeStackScreen"
       screenOptions={({route}) => ({
         headerTitleAlign: 'center',
         headerShown: false,
