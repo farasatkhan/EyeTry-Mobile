@@ -19,8 +19,8 @@ const ProductView = ({ customization }) => {
         duration: 2000,
         useNativeDriver: true,
       }).start();
-
-      setIsLight(!isLight); // Toggle the state for the next iteration
+      // Toggle the state for the next iteration
+      setIsLight(!isLight);
     }, 2000);
 
     return () => {

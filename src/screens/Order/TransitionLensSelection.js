@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    // ... Add styles for other components
+ 
     buttonContainer: {
         flex: 1,
         justifyContent: "center",

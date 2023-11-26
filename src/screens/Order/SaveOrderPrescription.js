@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   secondOptionContainer: {
-    borderColor: "#ccc", // Change color if needed
+    borderColor: "#ccc", 
   },
   optionTitle: {
     fontSize: 18,

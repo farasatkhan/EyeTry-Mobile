@@ -48,8 +48,8 @@ const SelectLensTypeComponentProp = ({ selectedOptions, onConfirmSelection, rout
         // Use await when calling asynchronous functions
         // const existingCartString = await AsyncStorage.getItem('cart');
         // const existingCart = existingCartString ? JSON.parse(existingCartString) : [];
-        const existingCartJson = await AsyncStorage.getItem('cart') || '[]'; // Provide a default string value
-        const existingCart = JSON.parse(existingCartJson); // Parse the JSON string
+        const existingCartJson = await AsyncStorage.getItem('cart') || '[]'; 
+        const existingCart = JSON.parse(existingCartJson);
 
         const combinedObject = {
           orderSelections: orderSelections,
@@ -67,11 +67,10 @@ const SelectLensTypeComponentProp = ({ selectedOptions, onConfirmSelection, rout
         // console.log("test cart: " ,await AsyncStorage.getItem('cart'))
       }
     } catch (error) {
-      // Handle the error more gracefully (e.g., show an alert)
       console.error("Error adding to cart:", error);
     }
   
-    navigation.navigate('Cart'); // Replace 'Cart' with the name of your Cart screen
+    navigation.navigate('Cart'); 
   };
   
 
@@ -81,7 +80,6 @@ const SelectLensTypeComponentProp = ({ selectedOptions, onConfirmSelection, rout
 
       <View style={styles.mainContainer}>
         <View style={styles.cardContainer}>
-          {/* ... Other content ... */}
 
           <View style={styles.rowContainer}>
             <View style={styles.iconContainer}>

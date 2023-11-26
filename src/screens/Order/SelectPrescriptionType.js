@@ -72,11 +72,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 5,
-    color: "#4B5563", // Adjust color as needed
+    color: "#4B5563", 
   },
   optionText: {
     fontSize: 16,
     fontFamily: "sans-serif",
-    color: "#555", // Adjust color as needed
+    color: "#555", 
   },
 });
