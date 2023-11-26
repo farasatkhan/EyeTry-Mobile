@@ -12,7 +12,7 @@ const ProductView = ({ customization }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       // Toggle between light and dark transitions
-      const toValue = isLight ? 0.6 : 1;
+      const toValue = isLight ? 0.4 : 1;
 
       Animated.timing(fadeAnim, {
         toValue,

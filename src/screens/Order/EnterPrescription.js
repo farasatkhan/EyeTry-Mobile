@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, TextInput, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, StyleSheet, Alert } from "react-native";
 import { useDispatch } from "react-redux";
 import { updateSelectedOptions } from "../../redux/actions/orderSelectionAction";
 import { Picker } from "@react-native-picker/picker";
@@ -250,12 +250,15 @@ export default function EnterPrescription({ onSelectedOptions, onNextStep }) {
         <TouchableOpacity
           style={styles.nextButton}
           onPress={() => {
-            // if (!validateForm()) {
-            //   return;
-            // } else {
+            if (!validateForm()) {
+              if(errorMsg){
+                Alert.alert(errorMsg)
+              }
+              return;
+            } else {
               handleSelections();
               handleNext();
-            // }
+            }
           }}
         >
           <Text style={styles.nextButtonText}>Next</Text>
@@ -278,8 +281,7 @@ const styles = StyleSheet.create({
     color: "#4B5563"
   },
   errorContainer: {
-    marginTop: 3,
-    marginBottom: 3,
+    alignSelf: "center"
   },
   errorText: {
     color: 'red',

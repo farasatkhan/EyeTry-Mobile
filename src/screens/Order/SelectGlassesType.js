@@ -19,15 +19,6 @@ export default function SelectGlassesType({ onNextStep }) {
   const handleNext = () => {
     onNextStep();
   };
-  // cart clear
-  const handleCartClear = async () => {
-    try {
-      await AsyncStorage.removeItem('cart'); // Replace 'yourKey' with the key you used to store the item
-      console.log('cart deleted successfully');
-    } catch (error) {
-      console.error('Error deleting item:', error);
-    }
-  }
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Select a prescription type</Text>
@@ -55,7 +46,6 @@ export default function SelectGlassesType({ onNextStep }) {
         <Text style={styles.optionHeading}>Readers</Text>
         <Text style={styles.optionText}>One magnification field for reading. No prescription necessary.</Text>
       </TouchableOpacity>
-      <Button title="clear cart" onPress={() => handleCartClear()}></Button>
     </View>
   );
 }

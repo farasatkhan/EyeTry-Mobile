@@ -66,15 +66,15 @@ function App() {
       <NavigationContainer>
         <Stack.Navigator initialRouteName={'HomeTabScreen'}>
           {/* Vission Assessments */}
-          <Stack.Screen name="VisionAssessmentsHome" component={VisionAssessmentHome} options={{ headerShown: false }}/>
-          <Stack.Screen name="VisionAcuityInfo" component={VisionAcuityInfo} options={{ headerShown: false }}/>
-          <Stack.Screen name="VisionAcuityTest" component={VisionAcuityTest} options={{ headerShown: false }}/>
-          <Stack.Screen name="ColorBlindInfo" component={ColorBlindInfo} options={{ headerShown: false }}/>
-          <Stack.Screen name="ColorBlindTest" component={ColorBlindTest} options={{ headerShown: false }}/>
-          <Stack.Screen name="ContrastSensitivityInfo" component={ContrastSensitivityInfo} options={{ headerShown: false }}/>
-          <Stack.Screen name="ContrastSensitivityTest" component={ContrastSensitivityTest} options={{ headerShown: false }}/>
-          <Stack.Screen name="AstigmatismInfo" component={AstigmatismInfo} options={{ headerShown: false }}/>
-          <Stack.Screen name="AstigmatismTest" component={AstigmatismTest} options={{ headerShown: false }}/>
+          <Stack.Screen name="VisionAssessmentsHome" component={VisionAssessmentHome} options={{ title: "Vision Assessments" }}/>
+          <Stack.Screen name="VisionAcuityInfo" component={VisionAcuityInfo} options={{ title: "Vision Acuity Test" }}/>
+          <Stack.Screen name="VisionAcuityTest" component={VisionAcuityTest} options={{ title: "Vision Acuity Test" }}/>
+          <Stack.Screen name="ColorBlindInfo" component={ColorBlindInfo} options={{ title: "Color Blind Test" }}/>
+          <Stack.Screen name="ColorBlindTest" component={ColorBlindTest} options={{ title: "Color Blind Test" }}/>
+          <Stack.Screen name="ContrastSensitivityInfo" component={ContrastSensitivityInfo} options={{ title: "Contrast Sensitivity Test" }}/>
+          <Stack.Screen name="ContrastSensitivityTest" component={ContrastSensitivityTest} options={{ title: "Contrast Sensitivity Test" }}/>
+          <Stack.Screen name="AstigmatismInfo" component={AstigmatismInfo} options={{ title: "Astigmatism Test" }}/>
+          <Stack.Screen name="AstigmatismTest" component={AstigmatismTest} options={{ title: "Astigmatism Test" }}/>
           
           <Stack.Screen name="SignIn" component={SignInScreen} options={{ headerShown: false }}/>
           <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }}/>

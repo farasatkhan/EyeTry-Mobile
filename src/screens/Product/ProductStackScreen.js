@@ -18,7 +18,7 @@ export default function ProductStackScreen() {
       <ProductStack.Navigator screenOptions={{ headerTitleAlign: 'center' }} initialRouteName='ShopScreen'>
       <ProductStack.Screen name='ShopScreen' component={ShopScreen} />
       <ProductStack.Screen name='WebView' component={WebView}/>
-      <ProductStack.Screen name='LensCustomizationMain' component={LensCustomizationMain}/>
+      <ProductStack.Screen name='LensCustomizationMain' component={LensCustomizationMain} options={{title: "Lens Selection"}}/>
       <ProductStack.Screen name='SelectGlassesType' component={SelectGlassesType}/>
       <ProductStack.Screen name='Cart' component={Cart}/>
     </ProductStack.Navigator>

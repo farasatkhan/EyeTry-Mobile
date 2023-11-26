@@ -22,10 +22,6 @@ const SelectLensTypeComponentProp = ({ selectedOptions, onConfirmSelection, rout
       try {
         const id = await getDataAsyncStorage("customizedProductId");
         setCustomizedProductId(id);
-
-        // testing cart
-        await AsyncStorage.setItem('cart', JSON.stringify([]));
-        console.log('Cart initialized with an empty array');
       } catch (error) {
         console.error("Error retrieving data:", error);
       }

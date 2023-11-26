@@ -233,7 +233,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "bold",
         marginBottom: 10,
-        textAlign: "center"
+        textAlign: "center",
+        marginTop:5
     },
     rowContainer: {
         flexDirection: "column",
