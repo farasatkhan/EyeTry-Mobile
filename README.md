@@ -46,7 +46,7 @@ map the ports`adb -s emulator-5554 reverse tcp:3000 tcp:3000`
 
 ```
 adb -s 2681572e reverse tcp:3000 tcp:3000
-adb -s 2681572e reverse tcp:<flask_server_port> tcp:flask_server_port
+adb -s 2681572e reverse tcp:<flask_server_port> tcp:<flask_server_port>
 ```
 
 > can replace 2681572e with the id of the device you want to run your application on
