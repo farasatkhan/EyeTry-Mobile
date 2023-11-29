@@ -15,6 +15,9 @@ const GlassesFilter = ({route}) => {
 
   // const [glassesType, setGlassesType] = useState('Eyeglasses');
 
+  // face shape detection
+  const faceShape = route.params?.faceShape;
+
   const navigation = useNavigation();
 
   const handleNavigation = (screen, options) => {
@@ -33,10 +36,6 @@ const GlassesFilter = ({route}) => {
     }
   };
 
-  useEffect(() => {
-    fetchGlassess();
-  }, []);
-
   const filteredItemsRef = useRef({
     categories: ['All'],
     materials: ['All'],
@@ -53,6 +52,10 @@ const GlassesFilter = ({route}) => {
       [key]: Array.from(filter),
     };
   };
+
+  useEffect(() => {
+    fetchGlassess();
+  }, []);
 
   const SearchFiltered = () => {
     const filteredGlasses = glasses.filter(glass => {
@@ -162,6 +165,7 @@ const GlassesFilter = ({route}) => {
             title="Face Shape"
             property={properties.face_shape}
             onFilterChange={filter => applyFilter(filter, 'faceShape')}
+            addNewFilteredItem={faceShape}
           />
           <GlassesFilterItem
             title="Gender"

@@ -4,7 +4,12 @@ import {useNavigation} from '@react-navigation/native';
 
 import Pressable from '../../../wrapper_components/Pressable';
 
-const GlassesFilterItem = ({title, property, onFilterChange}) => {
+const GlassesFilterItem = ({
+  title,
+  property,
+  onFilterChange,
+  addNewFilteredItem,
+}) => {
   const [filteredItem, setFilteredItem] = useState(['All']);
 
   const toggleFilteredItem = item => {
@@ -26,6 +31,12 @@ const GlassesFilterItem = ({title, property, onFilterChange}) => {
     setFilteredItem(newFilteredItem);
     onFilterChange(newFilteredItem);
   };
+
+  useEffect(() => {
+    if (addNewFilteredItem) {
+      toggleFilteredItem(addNewFilteredItem);
+    }
+  }, [addNewFilteredItem]);
 
   return (
     <View>
