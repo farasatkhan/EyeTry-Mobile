@@ -10,7 +10,8 @@ import Container from '../../components/ui/Container';
 import ProfileItem from '../../components/ui/ProfileItem';
 import ImageWithText from '../../components/ui/ImageWithText';
 import { ScrollView, } from 'react-native';
-import { storeDataAsyncStorage } from '../../utils/AsynchronusStorage/asyncStorage';
+import { clearAsyncStorage} from '../../utils/AsynchronusStorage/asyncStorage';
+
 
 import API_URL from '../../config/config';
 
@@ -34,7 +35,8 @@ export default function ProfileScreenMain({ navigation }) {
 
   const logout = async () => {
     try {
-      await logoutUser()
+      await logoutUser() // wait for the logout to complete
+      await clearAsyncStorage() // clear the async storage
       navigation.dispatch(
         CommonActions.reset({
           index: 0,
@@ -42,7 +44,7 @@ export default function ProfileScreenMain({ navigation }) {
         })
       );
     } catch (e) {
-      console.error("Some Error Occured while loggin user out ")
+      console.error("Some Error Occured while logging user out ")
     }
   }
 
