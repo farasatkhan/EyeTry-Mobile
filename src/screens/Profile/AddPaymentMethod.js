@@ -75,7 +75,7 @@ export default function AddPaymentMethod({ navigation }) {
                 <InputField style={styles.input} name='Card Number' value={cardNo} onChangeText={setCardNo} />
                 <View style={styles.row}>
                     <InputField style={styles.input2} name='CVV' value={cvv} onChangeText={setCVV} />
-                    <InputField style={styles.input2} name='Expiry Date' value={expDate} onChangeText={setExpDate} />
+                    <InputField style={styles.input2} name='Exp Date MM-YY' value={expDate} onChangeText={setExpDate} />
                 </View>
                 <PrimaryButtonOutline title="Next" onPress={next} color={'#3056D3'} style={styles.btn} />
             </ScrollView>
