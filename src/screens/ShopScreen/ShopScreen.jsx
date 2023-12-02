@@ -1,15 +1,70 @@
-import React, {useState} from 'react';
-import {View, Text, Image, SafeAreaView, ScrollView} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  View,
+  Text,
+  Image,
+  SafeAreaView,
+  ScrollView,
+  Alert,
+  Platform,
+} from 'react-native';
+import {launchImageLibrary} from 'react-native-image-picker';
 
 import {useNavigation} from '@react-navigation/native';
 
 import Pressable from '../../wrapper_components/Pressable';
+
+import {frameFinderPrediction} from '../../services/FrameFinder/FrameFinder';
 
 const ShopScreen = () => {
   const navigation = useNavigation();
 
   const handleNavigation = (screen, options) => {
     navigation.navigate(screen, options);
+  };
+
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const selectAndUploadImage = () => {
+    launchImageLibrary({mediaType: 'photo'}, response => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else {
+        setSelectedImage(response);
+        uploadImage(response);
+      }
+    });
+  };
+
+  const uploadImage = async photo => {
+    try {
+      const formData = new FormData();
+
+      const image = photo.assets[0];
+
+      formData.append('file', {
+        uri:
+          Platform.OS === 'ios' ? image.uri.replace('file://', '') : image.uri,
+        name: image.fileName,
+        type: image.type,
+      });
+
+      const response = await frameFinderPrediction(formData);
+
+      if (response.status !== 200) {
+        throw new Error('Failed to upload image!');
+      }
+
+      const faceShape = response.data.prediction;
+
+      Alert.alert('Your Face Shape is: ', faceShape);
+
+      handleNavigation('GlassesFilterFaceShape', {faceShape: faceShape});
+    } catch (error) {
+      Alert.alert('Error Occured while uploading image', error.message);
+    }
   };
 
   return (
@@ -65,7 +120,9 @@ const ShopScreen = () => {
             source={require('../../assets/shop_screen/ipd.png')}
           />
         </Pressable>
-        <Pressable className="flex flex-row justify-between items-center mx-5 mt-5 mb-5 bg-sky-500 rounded-lg shadow-lg shadow-black/40">
+        <Pressable
+          onPress={selectAndUploadImage}
+          className="flex flex-row justify-between items-center mx-5 mt-5 mb-5 bg-sky-500 rounded-lg shadow-lg shadow-black/40">
           <View className="pl-5">
             <Text className="text-black text-xl">Frame Finder</Text>
           </View>

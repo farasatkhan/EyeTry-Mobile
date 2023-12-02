@@ -29,6 +29,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import Glasses from './src/screens/Glasses';
 import GlassesSearch from './src/screens/GlassesSearch';
 import GlassesFilter from './src/screens/GlassesFilter';
+import GlassesFilterFaceShape from './src/screens/GlassesFilterFaceShape';
 import Product from './src/screens/Product';
 import { reGenerateAccessToken } from './src/services/Authentication/authapi'; // use it for validating refresh token
 import GlassesHeader from './src/components/ui/GlassesHeader';
@@ -106,6 +107,7 @@ function App() {
           }}/>
           <Stack.Screen name='GlassesSearch' component={GlassesSearch} options={{headerShown: false}}/>
           <Stack.Screen name='GlassesFilter' component={GlassesFilter} options={{title: "Filters"}}/>
+          <Stack.Screen name='GlassesFilterFaceShape' component={GlassesFilterFaceShape} options={{title: "Face Shape Detected"}}/>
           <Stack.Screen name='Product' component={Product}/>
           
         </Stack.Navigator>

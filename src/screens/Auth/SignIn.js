@@ -18,8 +18,8 @@ import MyCheckBox from '../../components/forms/CheckBox';
 
 const SignInScreen = () => {
     const navigation = useNavigation();
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
+    const [email, setEmail] = React.useState('farasat@gmail.com');
+    const [password, setPassword] = React.useState('pass123');
     const [errorVisible, setErrorVisible] = React.useState(false)
     const [errorMsg, setErrorMsg] = React.useState('')
 
