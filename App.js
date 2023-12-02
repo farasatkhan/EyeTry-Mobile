@@ -1,14 +1,10 @@
 
 import * as React from 'react';
-import { View } from 'react-native';
-
-
-
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ActivityIndicator } from 'react-native';
 
-import { getDataAsyncStorage } from './src/utils/AsynchronusStorage/asyncStorage';
+import { getDataAsyncStorage,storeDataAsyncStorage } from './src/utils/AsynchronusStorage/asyncStorage';
 
 // Importing Screens
 import SignInScreen from './src/screens/Auth/SignIn';
@@ -34,7 +30,7 @@ import Glasses from './src/screens/Glasses';
 import GlassesSearch from './src/screens/GlassesSearch';
 import GlassesFilter from './src/screens/GlassesFilter';
 import Product from './src/screens/Product';
-
+import { reGenerateAccessToken } from './src/services/Authentication/authapi'; // use it for validating refresh token
 import GlassesHeader from './src/components/ui/GlassesHeader';
 
 
@@ -42,20 +38,42 @@ import GlassesHeader from './src/components/ui/GlassesHeader';
 const Stack = createNativeStackNavigator();
 
 function App() {
-  const [initialRouteName, setInitialRouteName] = React.useState('SignIn')
-  const [loading, setIsLoading] = React.useState(false)
 
+
+  const [initialRouteName, setInitialRouteName] = React.useState('')
+  const [loading, setIsLoading] = React.useState(true)
+
+  /*
+    regenerateAccessToken() return newly generated access token if the provided refresh token is valid,
+    but in case of invalid refresh token it would return 403 error, 
+  */
   React.useEffect(() => {
     const checkToken = async () => {
-      const token = await getDataAsyncStorage("refreshToken")
-      if (token === null) {
+      try{
+        const token = await getDataAsyncStorage("refreshToken")
+        console.log(token)
+        if (token){
+          const accesTokenNew = await reGenerateAccessToken()
+          if(accesTokenNew) {
+            await storeDataAsyncStorage('accessToken',accesTokenNew)
+          }
+          setInitialRouteName('HomeTabScreen')
+          setIsLoading(false)
+        }
+        else {
         setInitialRouteName('SignIn')
         setIsLoading(false)
+        }
       }
-      else {
-        setInitialRouteName('HomeTabScreen')
-        setIsLoading(false)
+      catch(e)
+      {
+        console.log("Refresh Token Expired ... Back to Login")
+        if (e.response.status === 403){  // means refresh token is expired 
+          setInitialRouteName('SignIn')
+          setIsLoading(false)
+        }
       }
+
     }
     checkToken()
   }, [])
@@ -64,8 +82,9 @@ function App() {
   return (
     loading ? <ActivityIndicator size="large" /> : (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName={'HomeTabScreen'}>
+        <Stack.Navigator initialRouteName={initialRouteName}>
           {/* Vission Assessments */}
+
           <Stack.Screen name="VisionAssessmentsHome" component={VisionAssessmentHome} options={{ title: "Vision Assessments" }}/>
           <Stack.Screen name="VisionAcuityInfo" component={VisionAcuityInfo} options={{ title: "Vision Acuity Test" }}/>
           <Stack.Screen name="VisionAcuityTest" component={VisionAcuityTest} options={{ title: "Vision Acuity Test" }}/>
