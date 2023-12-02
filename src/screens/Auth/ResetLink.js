@@ -52,7 +52,7 @@ const reset_link_styles = StyleSheet.create({
         color: '#637381',
         paddingHorizontal: 7,
         fontStyle: 'normal',
-        fontWeight: 500,
+        fontWeight: "500",
         fontSize: 16,
         lineHeight: 24,
         textAlign: 'center',

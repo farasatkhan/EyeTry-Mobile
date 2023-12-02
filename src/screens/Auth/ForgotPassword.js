@@ -8,6 +8,7 @@ import PrimaryButton from '../../components/ui/PrimaryButton';
 import Container from '../../components/ui/Container';
 
 const ForgotPasswordScreen = () => {
+    console.log("Forg")
     const navigation = useNavigation();
 
     // Methods
@@ -26,7 +27,7 @@ const ForgotPasswordScreen = () => {
                     Forgot Password
                 </Text>
                 <Text style={forgot_password_styles.subtitle_txt}>
-                    Enter the email associated with your account.We’ll send an email with instructions to reset your password
+                    Enter the email associated with your account.We'll send an email with instructions to reset your password
                 </Text>
                 <InputField name={'Email'} style={forgot_password_styles.input} />
                 <PrimaryButton title={'Send Password Reset Link'} onPress={() => sendResetLink()} />
@@ -57,7 +58,7 @@ const forgot_password_styles = StyleSheet.create({
         color: "#637381",
         paddingHorizontal: 7,
         fontStyle: 'normal',
-        fontWeight: 500,
+        fontWeight: "500",
         fontSize: 16,
         lineHeight: 24,
         textAlign: 'center',
