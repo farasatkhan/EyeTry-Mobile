@@ -57,6 +57,11 @@ const SignUpScreen = () => {
             setErrorMsg('Please agree to terms and conditions');
             return false;
         }
+        if(password.length < 6 ){
+            setErrorVisible(true)
+            setErrorMsg('Password must be atleast 6 characters long ... ');
+            return false;
+        }
         return true
     }
 
@@ -75,10 +80,6 @@ const SignUpScreen = () => {
             await AsyncStorage.setItem('user', JSON.stringify(user))
             await AsyncStorage.setItem('accessToken', accessToken)
             await AsyncStorage.setItem('refreshToken', refreshToken)
-
-            console.log("User ", user)
-            console.log("Access Token ", accessToken)
-            console.log("Refresh Token", refreshToken)
             navigation.navigate('HomeTabScreen');
         }
         catch (error) {
@@ -97,7 +98,7 @@ const SignUpScreen = () => {
 
     return (
         <Container >
-            <ScrollView contentContainerStyle={sign_up_styles.sec_container} onFocus={() => setErrorVisible(false)}>
+            <ScrollView contentContainerStyle={sign_up_styles.sec_container} onFocus={() => {setErrorVisible(false),setErrorMsg('')}}>
                 <Text style={sign_up_styles.title_txt}>
                     SignUp
                 </Text>
@@ -122,13 +123,13 @@ const SignUpScreen = () => {
 
                 <PrimaryButton title={'Sign Up'} onPress={handleSignUp} />
 
-                <Divider text="SIGN UP WITH" style={sign_up_styles.divider_style} />
+                {/* <Divider text="SIGN UP WITH" style={sign_up_styles.divider_style} />
 
                 <SocialSignIn
                     onFacebookPress={() => Alert.alert("FB")}
                     onTwitterPress={() => Alert.alert("TWT")}
                     onGooglePress={() => Alert.alert("G")}
-                />
+                /> */}
                 <Text style={sign_up_styles.account_txt}>Already a member? <Text style={sign_up_styles.signin_txt} onPress={() => goToSignIn()}>Sign In</Text></Text>
 
             </ScrollView>
@@ -141,6 +142,7 @@ const sign_up_styles = StyleSheet.create({
     sec_container: {
         alignItems: 'center',
         paddingHorizontal: '4%',
+        paddingVertical:'10%'
     },
     title_txt: {
         marginVertical: Dimensions.get('window').height * 2.5 / 100,
@@ -150,7 +152,7 @@ const sign_up_styles = StyleSheet.create({
         fontFamily: 'sans-serif'
     },
     text_input: {
-        marginBottom: Dimensions.get('window').height * 2.5 / 100,
+        marginBottom: "6%",
         width: '100%'
     },
     divider_style: {

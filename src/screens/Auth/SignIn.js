@@ -74,17 +74,15 @@ const SignInScreen = () => {
 
         }
         catch (error) {
-            console.log(error.response.data.message);
             setErrorVisible(true);
             setErrorMsg(error.response.data.message);
-            // throw error
         }
 
 
     }
 
     return (
-        <Container>
+        <Container >
             <ScrollView contentContainerStyle={sign_in_styles.sec_container} onFocus={() => setErrorVisible(false)}>
                 <Text style={sign_in_styles.title_txt}>
                     Welcome to<Text style={sign_in_styles.title_txt1}> Eye</Text>Try
@@ -106,17 +104,17 @@ const SignInScreen = () => {
                     onChange={handleCheckBoxChange}
                     style={sign_in_styles.checkbox}
                 />
+                <Text style={sign_in_styles.forgot_pass_txt} onPress={() => goToForgotPassword()}>Forgot Password?</Text>
 
                 <PrimaryButton title={'Sign In'} onPress={() => handleSignIn()} />
 
-                <Text style={sign_in_styles.forgot_pass_txt} onPress={() => goToForgotPassword()}>Forgot Password?</Text>
 
-                <Divider text="SIGN IN WITH" style={sign_in_styles.divider_style} />
-                <SocialSignIn
+                {/* <Divider text="SIGN IN WITH" style={sign_in_styles.divider_style} /> */}
+                {/* <SocialSignIn
                     onFacebookPress={() => Alert.alert("FB")}
                     onTwitterPress={() => Alert.alert("TWT")}
                     onGooglePress={() => Alert.alert("G")}
-                />
+                /> */}
                 <Text style={sign_in_styles.account_txt}>Don't have an account? <Text style={sign_in_styles.sigup_txt} onPress={() => goToSignUp()}>Sign Up</Text></Text>
 
             </ScrollView>
@@ -129,7 +127,9 @@ const sign_in_styles = StyleSheet.create({
     sec_container: {
         alignItems: 'center',
         paddingHorizontal: '4%',
-        backgroundColor: "#fff"
+        backgroundColor: "#fff",
+        paddingVertical:'18%', // comment this out incase of unhiding social signins
+
     },
     title_txt: {
         marginTop: Dimensions.get('window').height * 0.03,
@@ -155,7 +155,7 @@ const sign_in_styles = StyleSheet.create({
     forgot_pass_txt: {
         alignSelf: 'flex-end',
         paddingRight: 14,
-        marginTop: Dimensions.get('window').height * 0.04,
+        marginBottom: '7%',
         fontSize: 16,
         fontWeight: '500',
         color: '#000'
@@ -173,7 +173,7 @@ const sign_in_styles = StyleSheet.create({
         fontSize: 16
     },
     checkbox: {
-        marginBottom: Dimensions.get('window').height * 0.04,
+        marginBottom: '7%',
     }
 
 })
