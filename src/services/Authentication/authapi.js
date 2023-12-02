@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { getDataAsyncStorage, remvoveItemAsyncStorage } from '../../utils/AsynchronusStorage/asyncStorage';
 import { storeDataAsyncStorage } from '../../utils/AsynchronusStorage/asyncStorage';
+import API_URL from '../../config/config';
 
-const baseURL = 'http://localhost:3000'
 
 // Re Generating Access Token
 export const reGenerateAccessToken = async () => {
   try {
     const refreshToken = await getDataAsyncStorage("refreshToken")
-    const response = await axios.post(`${baseURL}/auth/token`, {
+    const response = await axios.post(`${API_URL}/auth/token`, {
       token: refreshToken,
     });
 
@@ -26,7 +26,7 @@ export const reGenerateAccessToken = async () => {
 
 export const registerUser = async (firstName, lastName, email, password, confirmPassword) => {
   try {
-    const response = await axios.post(`${baseURL}/auth/register`, {
+    const response = await axios.post(`${API_URL}/auth/register`, {
       firstname: firstName,
       lastname: lastName,
       email: email,
@@ -43,7 +43,7 @@ export const registerUser = async (firstName, lastName, email, password, confirm
 
 export const signInUser = async (email, password) => {
   try {
-    const response = await axios.post(`${baseURL}/auth/login`, {
+    const response = await axios.post(`${API_URL}/auth/login`, {
       email: email,
       password: password
     });
@@ -59,7 +59,7 @@ export const signInUser = async (email, password) => {
 export const logoutUser = async () => {
   try {
     const refreshToken = await getDataAsyncStorage("refreshToken")
-    const response = await axios.delete(`${baseURL}/auth/logout`, {
+    const response = await axios.delete(`${API_URL}/auth/logout`, {
       token: refreshToken
     });
     remvoveItemAsyncStorage("refreshToken")
@@ -71,3 +71,4 @@ export const logoutUser = async () => {
     throw error
   }
 }
+
