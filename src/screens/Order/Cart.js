@@ -6,6 +6,7 @@ import { getDataAsyncStorage } from '../../utils/AsynchronusStorage/asyncStorage
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import API_URL from '../../config/config';
 import DeleteIcon from 'react-native-vector-icons/FontAwesome';
+import {useNavigation} from '@react-navigation/native';
 
 
 const Cart = () => {
@@ -16,6 +17,7 @@ const Cart = () => {
   // const handleSubmit = async (event) => {
 
   // };
+  const navigation = useNavigation();
 
 
   // getting payment and address data
@@ -476,6 +478,15 @@ const Cart = () => {
           style={[styles.checkoutButton, { backgroundColor: cartItems && cartItems.length < 1 ? '#ccc' : '#3498db' }]}
         >
           <Text style={styles.checkoutButtonText}>Check out</Text>
+        </TouchableOpacity>
+
+        {/* Stripe  button */}
+        <TouchableOpacity
+          onPress={() => navigation.navigate('StripeTest')}
+          disabled={cartItems && cartItems.length < 1}
+          style={[styles.checkoutButton, { backgroundColor: cartItems && cartItems.length < 1 ? '#ccc' : '#3498db' }]}
+        >
+          <Text style={styles.checkoutButtonText}>Stripe</Text>
         </TouchableOpacity>
       </View>
 

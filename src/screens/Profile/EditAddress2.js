@@ -37,9 +37,9 @@ export default function EditAddress2({ navigation, route }) {
     }
 
     const update = async () => {
-        if (!validateForm()) {
-            return
-        }
+        // if (!validateForm()) {
+        //     return
+        // }
         const addressData = {
             firstName: route.params.firstName,
             lastname: route.params.lastName,

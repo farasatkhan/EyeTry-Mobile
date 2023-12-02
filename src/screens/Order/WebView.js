@@ -8,7 +8,8 @@ const App = ({ navigation, route }) => {
 
 
       <WebView
-        source={{ uri: 'https://eyetry-web.vercel.app/' }}
+        source={{ uri: 'https://www.google.com' }}
+        // source={{ uri: 'https://eyetry-web.vercel.app/' }}
 
         style={styles.webview}
       />

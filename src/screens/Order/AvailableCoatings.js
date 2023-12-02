@@ -16,7 +16,6 @@ export default function SelectLensTypeComponent({ onNextStep, onSelectedOptions 
     const [check1, setCheck1] = useState(false);
 
 
-    // Function to programmatically click the checkbox
     const handleClickOtherElement = () => {
         if (checkboxRef.current) {
             checkboxRef.current.toggle();
