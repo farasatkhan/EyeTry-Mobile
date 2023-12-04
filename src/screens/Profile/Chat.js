@@ -1,4 +1,4 @@
-import { GiftedChat, } from 'react-native-gifted-chat';
+
 import {io} from 'socket.io-client'
 import React, { useState,useRef,useEffect} from 'react';
 import { View,ActivityIndicator, ScrollView } from 'react-native';
