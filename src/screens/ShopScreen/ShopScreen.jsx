@@ -67,6 +67,19 @@ const ShopScreen = () => {
     }
   };
 
+  const handleIPDMeasurement = () => {
+    Alert.alert(
+      'IPD Measurement',
+      'Please take a picture of your face with a card or ruler placed on your forehead. Make sure that the card or ruler is parallel to the ground.',
+      [
+        {
+          text: 'OK',
+          onPress: () => navigation.navigate('CheckIPD'),
+        },
+      ],
+    );
+  }
+
   return (
     <SafeAreaView className="bg-white">
       <ScrollView>
@@ -110,7 +123,7 @@ const ShopScreen = () => {
             source={require('../../assets/shop_screen/vision_assessment_2.png')}
           />
         </Pressable>
-        <Pressable className="flex flex-row justify-between items-center mx-5 mt-5 bg-sky-400 rounded-lg shadow-lg shadow-black/40">
+        <Pressable onPress={handleIPDMeasurement} className="flex flex-row justify-between items-center mx-5 mt-5 bg-sky-400 rounded-lg shadow-lg shadow-black/40">
           <View className="pl-5">
             <Text className="text-black text-xl">IPD</Text>
           </View>
