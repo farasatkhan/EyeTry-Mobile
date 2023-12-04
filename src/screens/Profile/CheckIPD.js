@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {
-    ScrollView, Image, View, Text, StyleSheet, Alert, TouchableOpacity,
+    ScrollView, Image, View, Text, StyleSheet, Alert, TouchableOpacity,BackHandler
 } from 'react-native';
+
 
 
 import { captureImage } from '../../utils/Camera/imageCapture';
@@ -97,6 +98,28 @@ const CheckIPD = ({ navigation }) => {
             setErrorVisible(true)
         }
     }
+
+    // on back Press
+    React.useEffect(() => {
+        const backAction = () => {
+            Alert.alert("Hold on!", "Are you sure you want to go back?", [
+                {
+                    text: "Cancel",
+                    onPress: () => null,
+                    style: "cancel"
+                },
+                { text: "YES", onPress: () => navigation.goBack() }
+            ]);
+            return true;
+        };
+
+        const backHandler = BackHandler.addEventListener(  
+            "hardwareBackPress",
+            backAction
+        );
+
+        return () => backHandler.remove();
+    }, []);
 
     return (
         <Container >
