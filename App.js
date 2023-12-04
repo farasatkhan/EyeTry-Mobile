@@ -81,7 +81,7 @@ function App() {
 
 
   return (
-    loading ? <ActivityIndicator size="large" /> : (
+    loading ? <ActivityIndicator size="large"  style={{marginTop:50}}/> : (
       <NavigationContainer>
         <Stack.Navigator initialRouteName={initialRouteName}>
           {/* Vission Assessments */}
