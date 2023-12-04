@@ -39,9 +39,9 @@ export default function AddAddress2({ navigation, route }) {
 
 
     const saveAddress = async () => {
-        if (!validateForm()) {
-            return
-        }
+        // if (!validateForm()) {
+        //     return
+        // }
         const addressData = {
             firstName: firstName,
             lastname: lastName,
