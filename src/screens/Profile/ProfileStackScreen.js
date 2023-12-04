@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { createNativeStackNavigator, HeaderBackButton } from '@react-navigation/native-stack';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 // Importing Profile Screens
 import ProfileScreenMain from './ProfileScreenMain';
 import MyDetails from './MyDetails';
@@ -41,11 +42,34 @@ import UserImage from './UserImage';
 import GiftCard from './GiftCard';
 import BuyGiftCard from './BuyGiftCard';
 import ManageGiftCard from './ManageGiftCard';
+
+// IPD
 import CheckIPD from './CheckIPD';
+
+// Support Tickets
+import TicketsList from './TicketsList';
+import CreateTicket from './CreateTicket';
+import TicketDetails from './TicketDetails';
+
+// Chat
+import Chat from './Chat';
 
 const ProfileStack = createNativeStackNavigator();
 
-export default function ProfileStackScreen() {
+export default function ProfileStackScreen({navigation,route}) {
+
+  // Hide Tab Navigator .. 
+  React.useLayoutEffect(() => {
+    const routeName = getFocusedRouteNameFromRoute(route);
+    console.log(routeName)
+    if (routeName === "Chat"){
+        navigation.setOptions({tabBarVisible: false});
+        console.log("Done")
+    }else {
+        navigation.setOptions({tabBarVisible: true});
+    }
+  }, [navigation, route]);
+
   return (
     <ProfileStack.Navigator screenOptions={{ headerTitleAlign: 'center' }} initialRouteName='ProfileScreenMain'>
       <ProfileStack.Screen name='ProfileScreenMain' component={ProfileScreenMain} options={{ headerShown: false }} />
@@ -88,6 +112,13 @@ export default function ProfileStackScreen() {
       <ProfileStack.Screen name='ManageGiftCard' component={ManageGiftCard} options={{ title: "Buy Gift Cards" }} />
 
       <ProfileStack.Screen name='CheckIPD' component={CheckIPD} options={{ title: "Check Your IPD" }} />
+
+      <ProfileStack.Screen name='TicketsList' component={TicketsList} options={{ title: "Support Tickets" }} />
+      <ProfileStack.Screen name='CreateTicket' component={CreateTicket} options={{ title: "Create Ticket" }} />
+      <ProfileStack.Screen name='TicketDetails' component={TicketDetails} options={{ title: "Ticket Details" }} />
+
+      <ProfileStack.Screen name='Chat' component={Chat} options={{ title: "Chat",headerShown:false }} />
+
     </ProfileStack.Navigator>
   );
 }
