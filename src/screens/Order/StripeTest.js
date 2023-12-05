@@ -5,7 +5,6 @@ import { getDataAsyncStorage } from "../../utils/AsynchronusStorage/asyncStorage
 import { reGenerateAccessToken } from "../../services/Authentication/authapi";
 
 const Payment = () => {
-  const [name, setName] = useState("");
   const stripe = useStripe();
 
   const subscribe = async () => {
@@ -21,10 +20,10 @@ const Payment = () => {
       });
       const data = await response.json();
       if (!response.ok) return Alert.alert(data.message);
-      const clientSecret = data.clientSecret;
+      const clientSecret = data.client_secret;
       const initSheet = await stripe.initPaymentSheet({
         paymentIntentClientSecret: clientSecret,
-        merchantDisplayName: 'Alliyan'
+        merchantDisplayName: 'Merchant Name',
       });
       if (initSheet.error) return Alert.alert(initSheet.error.message);
       const presentSheet = await stripe.presentPaymentSheet({

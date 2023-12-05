@@ -250,15 +250,15 @@ export default function EnterPrescription({ onSelectedOptions, onNextStep }) {
         <TouchableOpacity
           style={styles.nextButton}
           onPress={() => {
-            if (!validateForm()) {
-              if(errorMsg){
-                Alert.alert(errorMsg)
-              }
-              return;
-            } else {
+            // if (!validateForm()) {
+            //   if(errorMsg){
+            //     Alert.alert(errorMsg)
+            //   }
+            //   return;
+            // } else {
               handleSelections();
               handleNext();
-            }
+            // }
           }}
         >
           <Text style={styles.nextButtonText}>Next</Text>

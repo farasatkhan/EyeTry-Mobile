@@ -163,7 +163,7 @@ export const getStripeApiKey = async () => {
                 Authorization: `Bearer ${accessToken}`
             },
         });
-        console.log("Response :", response.data)
+        // console.log("Response :", response.data)
         return response;
     }
     catch (error) {
