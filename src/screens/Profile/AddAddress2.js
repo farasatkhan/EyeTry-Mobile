@@ -17,7 +17,7 @@ export default function AddAddress2({ navigation, route }) {
     const [postalCode, setPostalCode] = React.useState('')
     const [phone, setPhone] = React.useState('')
 
-    const [selectedCountry, setSelectedCountry] = React.useState(null)
+    const [selectedCountry, setSelectedCountry] = React.useState('Pakistan')
 
     const countries = ['Pakistan', 'Afghanistan', 'UAE', 'USA', 'India', 'Bangladesh', 'Saudi-Arabia']
 
@@ -39,9 +39,9 @@ export default function AddAddress2({ navigation, route }) {
 
 
     const saveAddress = async () => {
-        // if (!validateForm()) {
-        //     return
-        // }
+        if (!validateForm()) {
+            return
+        }
         const addressData = {
             firstName: firstName,
             lastname: lastName,

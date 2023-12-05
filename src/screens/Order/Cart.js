@@ -24,6 +24,7 @@ const Cart = () => {
   const [productQuantities, setProductQuantities] = useState({});
   const [productData, setProductData] = useState({});
   const [shippingPrice, setShippingPrice] = useState(4.99);
+  const [userName, setUserName] = useState('');
 
 
   // getting address book
@@ -55,7 +56,7 @@ const Cart = () => {
       setAddresses(response.addressBook)
       setUid(response._id)
       setHasShippingAddress(response.addressBook.length > 0);
-
+      setUserName(`${response.firstName}, ${response.lastName}`)
     }
     catch (e) {
       throw e
@@ -104,29 +105,6 @@ const Cart = () => {
       console.error("Error retrieving cart data:", error);
     }
   };
-  
-
-  // useEffect(() => {
-  //   const clearCart = async () => {
-  //     try {
-  //       // Get the current cart from AsyncStorage
-  //       const currentCart = await AsyncStorage.getItem('cart');
-
-  //       // Check if the cart is not empty
-  //       if (currentCart) {
-  //         // Clear the cart by setting it to an empty array or object
-  //         await AsyncStorage.setItem('cart', JSON.stringify([])); // or JSON.stringify({}) for an empty object
-
-  //         console.log('Cart cleared successfully');
-  //       }
-  //     } catch (error) {
-  //       console.error('Error clearing cart from AsyncStorage:', error);
-  //     }
-  //   };
-
-  //   // Call the function to clear the cart when the component mounts
-  //   clearCart();
-  // }, []);
 
   useEffect(() => {
     const initialProductQuantities = {};
