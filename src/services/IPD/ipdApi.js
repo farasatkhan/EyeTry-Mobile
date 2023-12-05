@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { Platform } from 'react-native';
 
-
-const flaskAPIURL = 'http://localhost:5001'
+import { IPD_FLASK_API_URL } from '../../config/config';
+const flaskAPIURL = IPD_FLASK_API_URL
 // Send User Image to IPD Measurement EndPoint
 
 export const sendImageToIPDServer = async (file) => {

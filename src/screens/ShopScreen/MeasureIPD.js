@@ -19,7 +19,7 @@ import { getArucoMarkerPdf } from '../../services/IPD/ipdApi';
 
 import PrimaryButtonOutline from '../../components/ui/PrimaryButtonOutline';
 
-const CheckIPD = ({ navigation }) => {
+const MeasureIPD = ({ navigation }) => {
 
 
     const [guidlineShown, SetGuidelinesShow] = React.useState(false)
@@ -220,4 +220,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default CheckIPD;
+export default MeasureIPD;

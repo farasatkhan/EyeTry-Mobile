@@ -32,6 +32,7 @@ export default function ProfileScreenMain({ navigation }) {
   const goToPaymentMethods = () => { navigation.navigate('PaymentMethods') }
   const goToTryOnImages = () => { navigation.navigate("TryOnImages") }
   const goToGiftCard = () => { navigation.navigate("GiftCard") }
+  const goToTickets = () => { navigation.navigate("TicketsList") }
 
   const logout = async () => {
     try {
@@ -93,7 +94,7 @@ export default function ProfileScreenMain({ navigation }) {
         <ProfileItem iconName={'cash-outline'} name={'Payment Methods'} iconSize={24} onPress={goToPaymentMethods} />
         <ProfileItem iconName={'image-outline'} name={'Try On Images'} iconSize={24} onPress={goToTryOnImages} />
         <ProfileItem iconName={'gift-outline'} name={'Gift Cards'} iconSize={24} onPress={goToGiftCard} />
-        <ProfileItem iconName={'help'} name={'Help Center'} iconSize={24} />
+        <ProfileItem iconName={'help'} name={'Help Center'} iconSize={24} onPress={goToTickets}/>
         <ProfileItem iconName={'log-out-outline'} name={'Logout'} iconSize={24} onPress={logout} />
       </ScrollView>
     </Container>)

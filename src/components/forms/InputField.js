@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 
-export const InputField = ({ name,value,onChangeText, style ,secureTextEntry ,keyboardType}) => {
+export const InputField = ({ name,value,onChangeText, style ,secureTextEntry ,keyboardType,isMultiline,noOfLines}) => {
   const inputStyle = {
     height: 48,
     width: 325,
@@ -24,6 +24,9 @@ export const InputField = ({ name,value,onChangeText, style ,secureTextEntry ,ke
       onChangeText={onChangeText}
       secureTextEntry={secureTextEntry}
       keyboardType={keyboardType}
+      multiline={isMultiline}
+      numberOfLines={noOfLines}
+      
     />
   );
 };
