@@ -192,9 +192,11 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 14,
     fontWeight: 'bold',
+    color: "#4B5563"
   },
   description: {
     fontSize: 12,
+    color: "rgb(100 116 139)"
   },
   strikeThrough: {
     textDecorationLine: 'line-through',
@@ -202,6 +204,7 @@ const styles = StyleSheet.create({
   detail: {
     fontSize: 12,
     fontWeight: 'bold',
+    color: "rgb(100 116 139)"
   },
   bold: {
     fontWeight: 'bold',

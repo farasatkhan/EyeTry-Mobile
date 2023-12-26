@@ -46,8 +46,8 @@ export default function ChooseLensPackage({ onNextStep }) {
             <Image source={silverLens} style={{ height: 80, width: "100%", resizeMode: 'cover', borderRadius: 8 }} />
           </View>
           <View style={{ width: '75%', padding: 10 }}>
-            <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 5 }}>Silver (Free)</Text>
-            <Text style={{ fontSize: 14, fontFamily: 'sans-serif' }}>1.5 index ClearViz©️ Lenses</Text>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 5, color: "#4B5563" }}>Silver (Free)</Text>
+            <Text style={{ fontSize: 14, fontFamily: 'sans-serif', color: "rgb(100 116 139)" }}>1.5 index ClearViz©️ Lenses</Text>
           </View>
         </TouchableOpacity>
 
@@ -70,11 +70,11 @@ export default function ChooseLensPackage({ onNextStep }) {
             <Image source={goldLens} style={{ height: 80, width: "100%", resizeMode: 'cover', borderRadius: 8 }} />
           </View>
           <View style={{ width: '75%', padding: 10 }}>
-            <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 5 }}>Gold</Text>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 5, color: "#4B5563" }}>Gold</Text>
             <View style={{ flexDirection: 'row', marginBottom: 5 }}>
               <Text style={{ fontSize: 12, color: 'blue', fontWeight: 'bold', marginRight: 5 }}>Lens Protective</Text>
             </View>
-            <Text style={{ fontSize: 14, fontFamily: 'sans-serif' }}>
+            <Text style={{ fontSize: 14, fontFamily: 'sans-serif', color: "rgb(100 116 139)" }}>
               1.5 index ClearViz©️ Lenses, Anti-scratch coating, 100% UV-Block coating, Anti-reflective coating
             </Text>
           </View>
@@ -99,12 +99,12 @@ export default function ChooseLensPackage({ onNextStep }) {
             <Image source={platinumLens} style={{ height: 80, width: "100%", resizeMode: 'cover', borderRadius: 8 }} />
           </View>
           <View style={{ width: '75%', padding: 10 }}>
-            <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 5 }}>Platinum</Text>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 5, color: "#4B5563" }}>Platinum</Text>
             <View style={{ flexDirection: 'row', marginBottom: 5 }}>
               <Text style={{ fontSize: 12, color: 'blue', fontWeight: 'bold', marginRight: 5 }}>Lens Protective</Text>
               <Text style={{ fontSize: 12, color: 'green', fontWeight: 'bold', marginRight: 5 }}>Super Thin Lenses</Text>
             </View>
-            <Text style={{ fontSize: 14, fontFamily: 'sans-serif' }}>
+            <Text style={{ fontSize: 14, fontFamily: 'sans-serif', color: "rgb(100 116 139)" }}>
               1.61 index featherweight G-vision©️ Lenses, up to 30% thinner, Anti-scratch coating, 100% UV-block coating, Anti-reflective coating
             </Text>
           </View>
@@ -129,13 +129,13 @@ export default function ChooseLensPackage({ onNextStep }) {
             <Image source={diamondLens} style={{ height: 80, width: "100%", resizeMode: 'cover', borderRadius: 8 }} />
           </View>
           <View style={{ width: '75%', padding: 10 }}>
-            <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 5 }}>Diamond</Text>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 5,  color: "#4B5563"}}>Diamond</Text>
             <View style={{ flexDirection: 'row', marginBottom: 5 }}>
               <Text style={{ fontSize: 12, color: 'blue', fontWeight: 'bold', marginRight: 5 }}>Lens Protective</Text>
               <Text style={{ fontSize: 12, color: 'green', fontWeight: 'bold', marginRight: 5 }}>Super Thin Lenses</Text>
               <Text style={{ fontSize: 12, color: 'yellow', fontWeight: 'bold' }}>Premium coatings</Text>
             </View>
-            <Text style={{ fontSize: 14, fontFamily: 'sans-serif' }}>
+            <Text style={{ fontSize: 14, fontFamily: 'sans-serif', color: "rgb(100 116 139)" }}>
               1.67 index G-vision©️ ultra-thin lenses, up to 40% thinner, Anti-scratch coating, 100% UV-Block coating (UVA + UVB), Enhanced Anti-reflective coating, Free Prescription Card (15% off your next purchase)
             </Text>
           </View>

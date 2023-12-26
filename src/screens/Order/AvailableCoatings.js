@@ -93,11 +93,12 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         textAlign: "center",
         marginBottom: 2,
+        color: "#4B5563"
     },
     description: {
         marginBottom: 10,
         fontSize: 14,
-        color: "#666",
+        color: "rgb(100 116 139)",
         textAlign: "center",
     },
     optionContainer: {
@@ -130,6 +131,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: "bold",
         marginBottom: 10,
+        color: "#4B5563"
     },
     optionDescription: {
         fontSize: 14,

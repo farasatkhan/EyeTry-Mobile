@@ -82,5 +82,6 @@ const styles = StyleSheet.create({
   optionText: {
     fontSize: 16,
     fontFamily: 'sans-serif',
+    color: "rgb(100 116 139)"
   },
 });

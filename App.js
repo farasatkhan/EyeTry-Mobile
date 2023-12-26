@@ -36,6 +36,7 @@ import GlassesHeader from './src/components/ui/GlassesHeader';
 
 // stripe import
 import StripeTest from './src/screens/Order/StripeTest'
+import CheckIPD from './src/screens/Profile/CheckIPD';
 
 const Stack = createNativeStackNavigator();
 
@@ -111,6 +112,7 @@ function App() {
           <Stack.Screen name='GlassesFilterFaceShape' component={GlassesFilterFaceShape} options={{title: "Face Shape Detected"}}/>
           <Stack.Screen name='Product' component={Product}/>
           <Stack.Screen name='StripeTest' component={StripeTest}/>
+          <Stack.Screen name='CheckIPD' component={CheckIPD}/>
           
         </Stack.Navigator>
       </NavigationContainer>

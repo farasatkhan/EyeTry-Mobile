@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         padding: 20,
         backgroundColor: "#fff",
         borderWidth: 2,
-        borderColor: "#ccc",
+        borderColor: "#4B5563",
         borderRadius: 10,
         flexDirection: "row",
         marginBottom: 10
@@ -134,6 +134,6 @@ const styles = StyleSheet.create({
     },
     optionDescription: {
         fontSize: 16,
-        color: "#666",
+    color: "rgb(100 116 139)"
     },
 });

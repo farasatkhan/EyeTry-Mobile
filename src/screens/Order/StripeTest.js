@@ -10,7 +10,7 @@ const Payment = () => {
   const subscribe = async () => {
     try {
       const accessToken = await getDataAsyncStorage("accessToken")
-      const response = await fetch("http://localhost:3000/payment/process_payment", {
+      const response = await fetch("http://localhost:3000/process_payment", {
         method: "POST",
         body: JSON.stringify({ amount: 200 }),
         headers: {

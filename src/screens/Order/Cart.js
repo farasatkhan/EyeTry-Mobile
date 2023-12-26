@@ -397,7 +397,7 @@ const Cart = () => {
                     onPress={() => handleDecrementQuantity(item.productData._id, item.productData.frame_information.frame_variants[0]._id, item.orderSelections.selectedOptions.cartItemId)}
                     style={styles.quantityButton}
                   >
-                    <Text>-</Text>
+                    <Text style={styles.incrementBtn}>-</Text>
                   </TouchableOpacity>
 
                   <Text className="pl-3 pr-3 mr-1" style={styles.quantityText}>{productQuantities[`${item.productData._id}_${item.productData.frame_information.frame_variants[0]._id}_${item.orderSelections.selectedOptions.cartItemId}`]}</Text>
@@ -406,7 +406,7 @@ const Cart = () => {
                     onPress={() => handleIncrementQuantity(item.productData._id, item.productData.frame_information.frame_variants[0]._id, item.orderSelections.selectedOptions.cartItemId)}
                     style={styles.quantityButton}
                   >
-                    <Text>+</Text>
+                    <Text style={styles.incrementBtn}>+</Text>
                   </TouchableOpacity>
 
                   <TouchableOpacity className="ml-auto mr-1" onPress={() => removeFromCart(item.productData._id, item.productData.frame_information.frame_variants[0]._id, item.orderSelections.selectedOptions.cartItemId)}>
@@ -429,14 +429,14 @@ const Cart = () => {
       <View style={styles.summaryContainer}>
         {/* Subtotal */}
         <View style={styles.summaryRow}>
-          <Text>Subtotal</Text>
-          <Text>${calculateTotalPrice().toFixed(2)}</Text>
+          <Text style={{color: "#4B5563"}}>Subtotal</Text>
+          <Text style={{color: "#4B5563"}}>${calculateTotalPrice().toFixed(2)}</Text>
         </View>
 
         {/* Shipping */}
         <View style={styles.summaryRow}>
-          <Text>Shipping</Text>
-          <Text>${shippingPrice}</Text>
+          <Text style={{color: "#4B5563"}}>Shipping</Text>
+          <Text style={{color: "#4B5563"}}>${shippingPrice}</Text>
         </View>
 
         <View style={styles.separator} />
@@ -477,23 +477,6 @@ const Cart = () => {
         ) : (
           <Text>No Shipping Address Added!</Text>
         )}
-
-        {/* <View style={{ paddingVertical: 4, flexDirection: 'row', justifyContent: 'flex-end' }}>
-          <TouchableOpacity onPress={() => console.log('Edit button pressed')}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text style={{ marginRight: 2 }}>Edit</Text>
-            </View>
-          </TouchableOpacity>
-
-          {addresses.length > 0 && (
-            <TouchableOpacity onPress={() => deleteSpecificAddress(addresses[0]._id)}>
-              <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 5 }}>
-                <Text style={{ marginRight: 2 }}>Delete</Text>
-              </View>
-            </TouchableOpacity>
-          )}
-        </View> */}
-
       </View>
     </ScrollView>
   );
@@ -539,9 +522,11 @@ const styles = StyleSheet.create({
   productName: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: "#4B5563"
   },
   price: {
     fontSize: 14,
+    color: "#4B5563"
   },
   quantityContainer: {
     flexDirection: 'row',
@@ -555,10 +540,12 @@ const styles = StyleSheet.create({
     marginRight: 5,
     width: 50,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    color: "#4B5563"
   },
   quantityText: {
     fontSize: 16,
+    color: "#4B5563"
   },
   removeButton: {
     color: 'red',
@@ -567,6 +554,7 @@ const styles = StyleSheet.create({
   emptyCartText: {
     textAlign: 'center',
     fontSize: 16,
+    color: "#4B5563"
   },
   summaryContainer: {
     marginTop: 20,
@@ -603,14 +591,17 @@ const styles = StyleSheet.create({
   totalLabel: {
     fontSize: 18,
     fontWeight: 'bold',
+    color: "#4B5563"
   },
   totalAmount: {
     fontSize: 18,
     fontWeight: 'bold',
+    color: "#4B5563"
   },
   totalNote: {
     fontSize: 12,
     color: 'gray',
+    color: "#4B5563"
   },
   checkoutButton: {
     marginTop: 20,
@@ -623,6 +614,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  incrementBtn: {
+    color: "#4B5563",
+    fontSize: 16,
+    fontWeight: 'bold',
+  }
 
 });
 

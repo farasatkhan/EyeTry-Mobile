@@ -60,7 +60,7 @@ const SelectLensTypeComponent = ({ onUpdate, onNextStep, onPreviousState }) => {
                 <View style={styles.leftContainer}>
                     <View style={styles.iconRow}>
                         <View className='flex-row items-center'>
-                            <Text className='text-black font-bold font-sans text-lg'>Polarized (</Text> 
+                            <Text className='text-black font-bold font-sans text-lg ' >Polarized (</Text> 
                             <Text className="font-bold text-green-700 font-sans"> +$99 </Text>
                             <Text className='line-through font-bold text-red-700 font-sans'> +$49.50</Text>
                             <Text className='font-bold text-black font-sans text-lg'> )</Text>
@@ -263,7 +263,8 @@ const styles = StyleSheet.create({
     description: {
         fontSize: 12,
         fontFamily: 'sans-serif',
-        marginTop: -5
+        marginTop: -5,
+        color: "rgb(100 116 139)"
     },
     rightContainer: {
         flexDirection: "row",

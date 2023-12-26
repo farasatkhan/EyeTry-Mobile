@@ -251,7 +251,8 @@ const styles = StyleSheet.create({
     description: {
         fontSize: 12,
         fontFamily: 'sans-serif',
-        marginTop: -5
+        marginTop: -5,
+        color: "rgb(100 116 139)"
     },
     rightContainer: {
         flexDirection: "row",

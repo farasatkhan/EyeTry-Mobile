@@ -156,6 +156,7 @@ export default function EnterPrescription({ onSelectedOptions, onNextStep }) {
             style={styles.textInput}
             placeholder="SPH"
             keyboardType="numeric"
+            placeholderTextColor="gray"
             value={rightEye.SPH}
             onChangeText={(value) => handleRightEyeChange("SPH", value)}
           />
@@ -163,6 +164,7 @@ export default function EnterPrescription({ onSelectedOptions, onNextStep }) {
             style={styles.textInput}
             placeholder="CYL"
             keyboardType="numeric"
+            placeholderTextColor="gray"
             value={rightEye.CYL}
             onChangeText={(value) => handleRightEyeChange("CYL", value)}
           />
@@ -170,6 +172,7 @@ export default function EnterPrescription({ onSelectedOptions, onNextStep }) {
             style={styles.textInput}
             placeholder="Axis"
             keyboardType="numeric"
+            placeholderTextColor="gray"
             value={rightEye.Axis}
             onChangeText={(value) => handleRightEyeChange("Axis", value)}
           />
@@ -178,12 +181,14 @@ export default function EnterPrescription({ onSelectedOptions, onNextStep }) {
             placeholder="Prism"
             keyboardType="numeric"
             value={rightEye.Prism}
+            placeholderTextColor="gray"
             onChangeText={(value) => handleRightEyeChange("Prism", value)}
           />
           <TextInput
             style={styles.textInput}
             placeholder="Base"
             keyboardType="numeric"
+            placeholderTextColor="gray"
             value={rightEye.Base}
             onChangeText={(value) => handleRightEyeChange("Base", value)}
           />
@@ -196,6 +201,7 @@ export default function EnterPrescription({ onSelectedOptions, onNextStep }) {
           <TextInput
             style={styles.textInput}
             placeholder="SPH"
+            placeholderTextColor="gray"
             keyboardType="numeric"
             value={leftEye.SPH}
             onChangeText={(value) => handleLeftEyeChange("SPH", value)}
@@ -205,12 +211,14 @@ export default function EnterPrescription({ onSelectedOptions, onNextStep }) {
             placeholder="CYL"
             keyboardType="numeric"
             value={leftEye.CYL}
+            placeholderTextColor="gray"
             onChangeText={(value) => handleLeftEyeChange("CYL", value)}
           />
           <TextInput
             style={styles.textInput}
             placeholder="Axis"
             keyboardType="numeric"
+            placeholderTextColor="gray"
             value={leftEye.Axis}
             onChangeText={(value) => handleLeftEyeChange("Axis", value)}
           />
@@ -218,6 +226,7 @@ export default function EnterPrescription({ onSelectedOptions, onNextStep }) {
             style={styles.textInput}
             placeholder="Prism"
             keyboardType="numeric"
+            placeholderTextColor="gray"
             value={leftEye.Prism}
             onChangeText={(value) => handleLeftEyeChange("Prism", value)}
           />
@@ -225,6 +234,7 @@ export default function EnterPrescription({ onSelectedOptions, onNextStep }) {
             style={styles.textInput}
             placeholder="Base"
             keyboardType="numeric"
+            placeholderTextColor="gray"
             value={leftEye.Base}
             onChangeText={(value) => handleLeftEyeChange("Base", value)}
           />
@@ -238,6 +248,7 @@ export default function EnterPrescription({ onSelectedOptions, onNextStep }) {
           style={styles.picker}
           selectedValue={birthYear}
           onValueChange={(value) => setBirthYear(parseInt(value))}
+          placeholderTextColor="gray"
         >
           {Array.from({ length: 100 }, (_, index) => new Date().getFullYear() - index).map((year) => (
             <Picker.Item key={year} label={year.toString()} value={year} />
@@ -302,6 +313,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 10,
     marginBottom: 5,
+    color:"#4B5563"
   },
   radioContainer: {
     flexDirection: 'row',
@@ -326,6 +338,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     marginBottom: 5,
+    color:"#4B5563"
   },
   pdInput: {
     height: 40,
@@ -363,6 +376,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 10,
     marginBottom: 5,
+    color:"#4B5563"
   },
   textInputContainer: {
     flexDirection: 'row',
@@ -383,6 +397,7 @@ const styles = StyleSheet.create({
   birthYearLabel: {
     fontSize: 16,
     fontWeight: 'bold',
+    color:"#4B5563"
   },
   picker: {
     height: 40,
