@@ -24,12 +24,13 @@ import graysvg from '../../assets/images/orders/lensSvgs/gray.png'
 import { viewParticularProduct } from '../../services/Orders/orderApi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { storeDataAsyncStorage } from '../../utils/AsynchronusStorage/asyncStorage';
+import Icon from 'react-native-vector-icons/AntDesign';
 
-viewParticularProduct
+
 export default function SelectLensTypeScreen({ route }) {
   const navigation = useNavigation();
 
-  const {productId} = route.params;
+  const { productId } = route.params;
 
   const [product, setProduct] = useState({});
   const dispatch = useDispatch();
@@ -50,9 +51,9 @@ export default function SelectLensTypeScreen({ route }) {
       throw error;
     }
   }
-  
-//   const dispatch = useDispatch();
-//   const selectedOptions = useSelector((state) => state.selectedOptions);
+
+  //   const dispatch = useDispatch();
+  //   const selectedOptions = useSelector((state) => state.selectedOptions);
 
   const schema = {
     lensProperties: {
@@ -112,9 +113,9 @@ export default function SelectLensTypeScreen({ route }) {
     console.log("productId: " + productId)
   }, []);
 
-//   const imageAnimationClass = loaded ? 'translate-y-0 opacity-100 transition-transform ease-out duration-1000' : 'translate-y-20 opacity-0';
-//   const textAnimationClass = loaded ? 'translate-y-0 opacity-100 transition-transform ease-out duration-1000 delay-500' : 'translate-y-20 opacity-0';
-//   const rightComponentAnimationClass = loaded ? 'translate-x-0 opacity-100 transition-transform ease-out duration-1000' : 'translate-x-20 opacity-0';
+  //   const imageAnimationClass = loaded ? 'translate-y-0 opacity-100 transition-transform ease-out duration-1000' : 'translate-y-20 opacity-0';
+  //   const textAnimationClass = loaded ? 'translate-y-0 opacity-100 transition-transform ease-out duration-1000 delay-500' : 'translate-y-20 opacity-0';
+  //   const rightComponentAnimationClass = loaded ? 'translate-x-0 opacity-100 transition-transform ease-out duration-1000' : 'translate-x-20 opacity-0';
 
   const [customization, setCustomization] = useState({
     image: graysvg,
@@ -214,39 +215,39 @@ export default function SelectLensTypeScreen({ route }) {
   };
 
   // fetching product image
-// Modify your productImage function to include CSS styles for the image
-const productImage = (product) => {
-  if (
-    product &&
-    product.frame_information &&
-    product.frame_information.frame_variants &&
-    product.frame_information.frame_variants[0] &&
-    product.frame_information.frame_variants[0].images &&
-    product.frame_information.frame_variants[0].images[0]
-  ) {
-    const path = product.frame_information.frame_variants[0].images[0];
+  // Modify your productImage function to include CSS styles for the image
+  const productImage = (product) => {
+    if (
+      product &&
+      product.frame_information &&
+      product.frame_information.frame_variants &&
+      product.frame_information.frame_variants[0] &&
+      product.frame_information.frame_variants[0].images &&
+      product.frame_information.frame_variants[0].images[0]
+    ) {
+      const path = product.frame_information.frame_variants[0].images[0];
 
-    const completePath = API_URL + path;
-    console.log("Image path is: " + completePath);
+      const completePath = API_URL + path;
+      console.log("Image path is: " + completePath);
 
-    return (
-      <View className="">
-        <Image
-          className="w-[60%] mx-auto object-contain h-[120px]" // Adjust the dimensions as needed
-          source={{ uri: completePath }}
-          resizeMode='contain'
+      return (
+        <View className="">
+          <Image
+            className="w-[60%] mx-auto object-contain h-[120px]" // Adjust the dimensions as needed
+            source={{ uri: completePath }}
+            resizeMode='contain'
           // alt="product"
-        />
+          />
           {/* <Image
           style={{ width: '80%', height: 100, alignSelf: 'center', resizeMode: 'contain' }}
           source={{ uri: "http://localhost:3000/uploads/products/glasses/e678463bb99d2ac2032cc43b18fb9163.webp" }}
         /> */}
-      </View>
-    );
-  }
-};
+        </View>
+      );
+    }
+  };
 
-return (
+  return (
     <>
       <View style={{ flex: 1, flexDirection: 'column' }}>
         {/* section 1 */}
@@ -258,13 +259,13 @@ return (
           </TouchableOpacity> */}
           {currentStep !== 8 && currentStep !== 9 && (
             <>
-          <View className="mt-4">
-          {productImage(product)}
-          </View>
+              <View className="mt-4">
+                {productImage(product)}
+              </View>
               <View className="pl-4 pr-4 mt-2 flex flex-row h-[]">
                 <View className="w-[80%] ">
-                <Text style={{ fontFamily: 'sans-serif', fontSize: 13, fontWeight: 'bold'}} numberOfLines={1} ellipsizeMode='tail'>{product.name}</Text>
-                  <Text style={{ fontFamily: 'sans-serif', fontSize: 12, fontWeight: '600'}}>{product.manufacturer}</Text>
+                  <Text style={{ fontFamily: 'sans-serif', fontSize: 13, fontWeight: 'bold' }} numberOfLines={1} ellipsizeMode='tail'>{product.name}</Text>
+                  <Text style={{ fontFamily: 'sans-serif', fontSize: 12, fontWeight: '600' }}>{product.manufacturer}</Text>
                 </View>
                 <View className="w-[20%]">
                   {product && product.priceInfo ? (
@@ -282,29 +283,28 @@ return (
               </View> */}
             </>
           )}
-          
-          {currentStep === 8 && (
-                <>
-                  <TransitionLensPreview customization={customization} />
-                </>
-              )}
 
-              {currentStep === 9 && (
-                <>
-                  <SunglassesLensPreview customization={customization} />
-                </>
-              )}
+          {currentStep === 8 && (
+            <>
+              <TransitionLensPreview customization={customization} />
+            </>
+          )}
+
+          {currentStep === 9 && (
+            <>
+              <SunglassesLensPreview customization={customization} />
+            </>
+          )}
         </View>
 
         {/* section 2 */}
         <View className="rounded-t-2xl mt-[-5] h-[70%] bg-gray-100">
-          <View style={{ flexDirection: 'row', marginTop: 10 }}>
+          <View style={{ flexDirection: 'row', marginTop: 10, marginLeft:16 }}>
             <TouchableOpacity onPress={handlePreviousStep} disabled={currentStep === 1}>
-              <Text className="font-sans font-bold color-blue-800 ml-8">{'<'}<Text style={{ textDecorationLine: 'underline' }}>Back</Text>
-              </Text>
+              <Icon size={28}  color="black" name="back" />
             </TouchableOpacity>
           </View>
-          <ScrollView style={{ flex: 1, marginRight:8, marginLeft:8}}>
+          <ScrollView style={{ flex: 1, marginRight: 8, marginLeft: 8 }}>
             {rightSideComponent}
           </ScrollView>
         </View>

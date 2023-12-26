@@ -347,6 +347,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingLeft: 10,
     marginBottom: 5,
+    color:"#4B5563"
   },
   nextButton: {
     backgroundColor: '#4B5563',
@@ -389,7 +390,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     width: '18%',
-    paddingLeft: 10,
+    paddingLeft: 10,    
+    color:"#4B5563"
   },
   birthYearContainer: {
     // marginTop: 10,
@@ -404,5 +406,6 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 2,
     borderRadius: 5,
+    color:"#4B5563"
   },
 });
